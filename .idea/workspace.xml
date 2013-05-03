@@ -7,6 +7,7 @@
     <file path="/Gemfile" changelist="fbd38852-54a2-4c9e-8d13-ce734758dace" time="1367592290284" ignored="false" />
     <file path="/database.yml" changelist="fbd38852-54a2-4c9e-8d13-ce734758dace" time="1367610245098" ignored="false" />
     <file path="/a.rxml" changelist="fbd38852-54a2-4c9e-8d13-ce734758dace" time="1367610463745" ignored="false" />
+    <file path="/README.rdoc" changelist="fbd38852-54a2-4c9e-8d13-ce734758dace" time="1367613371427" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,10 +27,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="database.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="database.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/database.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="22" selection-start="881" selection-end="881" vertical-scroll-proportion="0.7035794">
+            <state line="37" column="22" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.rdoc" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.rdoc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="100" selection-start="148" selection-end="148" vertical-scroll-proportion="0.03803132">
               <folding />
             </state>
           </provider>
@@ -56,6 +66,7 @@
       <list>
         <option value="$PROJECT_DIR$/Gemfile" />
         <option value="$PROJECT_DIR$/config/database.yml" />
+        <option value="$PROJECT_DIR$/README.rdoc" />
       </list>
     </option>
   </component>
@@ -393,7 +404,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/database.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="22" selection-start="881" selection-end="881" vertical-scroll-proportion="0.7035794">
+        <state line="37" column="22" selection-start="881" selection-end="881" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.rdoc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="100" selection-start="148" selection-end="148" vertical-scroll-proportion="0.03803132">
           <folding />
         </state>
       </provider>
