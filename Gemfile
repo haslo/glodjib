@@ -2,12 +2,13 @@ source 'https://rubygems.org'
 
 # core
 gem 'rails', '4.0.0.beta1'
-gem 'mysql2', '~> 0.3.11'
+gem 'mysql2'
 
 # libraries
 gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'simple_form', '~> 1.4.1'
 gem 'country_select', '~> 1.1.3'
+gem 'ruby-akismet', :require => 'akismet'
 
 #defaults
 gem 'jquery-rails'
