@@ -6,6 +6,7 @@ gem 'mysql2'
 
 # libraries
 gem 'bootstrap-sass', '~> 2.3.1.0'
+gem 'simple_form', '~> 1.4.1'
 
 #defaults
 gem 'jquery-rails'
