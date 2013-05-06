@@ -10,6 +10,12 @@ gem 'simple_form', '~> 1.4.1'
 gem 'country_select', '~> 1.1.3'
 gem 'ruby-akismet', :require => 'akismet'
 
+group :test, :development do
+  gem 'rspec-rails', '~> 2.0'
+  gem 'cucumber-rails', :require => false
+  gem 'database_cleaner'
+end
+
 #defaults
 gem 'jquery-rails'
 gem 'turbolinks'
