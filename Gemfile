@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # core
-gem 'rails', '4.0.0.beta1'
-gem 'mysql2'
+gem 'rails', '4.0.0.rc1'
+gem 'mysql2', '>= 0.3.11'
 
 # libraries
 gem 'bootstrap-sass', '~> 2.3.1.0'
