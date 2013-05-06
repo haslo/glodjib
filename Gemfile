@@ -9,6 +9,7 @@ gem 'bootstrap-sass', '~> 2.3.1.0'
 gem 'simple_form', '~> 1.4.1'
 gem 'country_select', '~> 1.1.3'
 gem 'ruby-akismet', :require => 'akismet'
+gem 'mini_magick'
 
 # testing frameworks
 group :test, :development do
