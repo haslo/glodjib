@@ -74,7 +74,7 @@ GEM
       subexec (~> 0.2.1)
     minitest (4.7.4)
     multi_json (1.7.3)
-    mysql2 (0.3.11-x86-mingw32)
+    mysql2 (0.3.11)
     nokogiri (1.5.9-x86-mingw32)
     polyglot (0.3.3)
     rack (1.5.2)
@@ -150,7 +150,7 @@ DEPENDENCIES
   database_cleaner
   jquery-rails
   mini_magick
-  mysql2 (>= 0.3.11)
+  mysql2 (= 0.3.11)
   rails (= 4.0.0.rc1)
   rspec-rails (~> 2.0)
   ruby-akismet
