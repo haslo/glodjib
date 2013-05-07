@@ -16,6 +16,7 @@ group :test, :development do
   gem 'rspec-rails', '~> 2.0'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
+  gem 'webrat'
 end
 
 #defaults
