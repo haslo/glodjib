@@ -1,7 +1,9 @@
 Glodjib::Application.routes.draw do
+  get "flickr_images/index"
+
   root to: 'posts#index'
 
-  resources :posts
+  resources :posts, :flickr_images
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

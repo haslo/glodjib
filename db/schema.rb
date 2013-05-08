@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130508001504) do
+ActiveRecord::Schema.define(:version => 20130508192403) do
+
+  create_table "flickr_images", :force => true do |t|
+    t.string   "flickr_username"
+    t.string   "flickr_id"
+    t.string   "image_title"
+    t.text     "image_description"
+    t.string   "aperture"
+    t.string   "shutter"
+    t.string   "iso"
+    t.string   "focal_length"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
   create_table "posts", :force => true do |t|
     t.string   "title"
