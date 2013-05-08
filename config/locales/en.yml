@@ -9,11 +9,12 @@ en:
 
   links:
     post:
-      new: Create Post
+      new: New Post
 
   notices:
     post:
-      created: New Post Created
+      created: New post created
+      invalid: Invalid post
 
   activerecord:
     attributes:

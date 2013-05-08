@@ -8,8 +8,13 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create!(params[:post])
-    flash[:notice] = I18n.t('notices.post.created')
-    redirect_to posts_path
+    @post = Post.create(params[:post])
+    if @post.valid? && @post.save
+      flash[:notice] = I18n.t('notices.post.created')
+      redirect_to posts_path
+    else
+      flash[:error] = I18n.t('notices.post.invalid')
+      render 'new'
+    end
   end
 end
