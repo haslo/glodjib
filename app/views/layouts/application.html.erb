@@ -24,7 +24,7 @@
     <div class="content">
       <div class="row">
         <div class="span12">
-          <h1><%= I18n.t("titles.#{controller.controller_name}.#{controller.action_name}") %></h1>
+          <h1><%= link_to I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", params) %></h1>
           <%= render 'layouts/messages' %>
           <%= yield %>
         </div>
