@@ -1,28 +1,13 @@
 Feature: Manage Posts
   In order to make a blog
-  As an author
+  As an admin
   I want to create and manage posts
-
-  Scenario: Check for Title Link
-    Given I have no posts
-    And I am on the homepage
-    When I follow the title link
-    Then I should see that "Blog" is in a h1 tag
-
-  Scenario: Posts List
-    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    When I go to the homepage
-    Then I should see the page title as "glodjib.ch - Guido Gloor Modjib Photography"
-    And I should see that "Blog" is in a h1 tag
-    And I should see "Pizza"
-    And I should see "Breadsticks"
-    And I should see "Dummy Text"
 
   Scenario: Open New Post Form
     Given I have no posts
     And I am on the homepage
     When I follow "New Post"
-    Then I should see that "New Blog Post" is in a h1 tag
+    Then I should see that "New Blog Post" is in a h2 tag
     And I should see "Title"
     And I should see "Content"
 
@@ -35,7 +20,7 @@ Feature: Manage Posts
     And I press "Create Post"
     Then I should see "New post created"
     And I should see "Spuds"
-    And I should see that "Spuds" is in a h2 tag
+    And I should see that "Spuds" is in a h3 tag
     And I should see "Delicious potato wedges!"
     And I should have 1 post
 

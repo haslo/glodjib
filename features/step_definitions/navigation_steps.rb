@@ -6,8 +6,12 @@ When(/^I go to the homepage$/) do
   visit root_path
 end
 
-When(/^I follow the title link$/) do
+When(/^I follow the main title link$/) do
   find("h1:first a").click
+end
+
+When(/^I follow the page title link$/) do
+  find("h2:first a").click
 end
 
 When(/^I follow "(.*?)"$/) do |link_text|
