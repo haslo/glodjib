@@ -6,9 +6,18 @@ Feature: Manage Posts
   Scenario: Posts List
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     When I go to the homepage
-    Then I should see "Pizza"
+    Then I should see that "Blog" is in a h1 tag
+    And I should see "Pizza"
     And I should see "Breadsticks"
     And I should see "Dummy Text"
+
+  Scenario: Open New Post Form
+    Given I have no posts
+    And I am on the homepage
+    When I follow "New Post"
+    Then I should see that "New Blog Post" is in a h1 tag
+    And I should see "Title"
+    And I should see "Content"
 
   Scenario: Create Valid Post
     Given I have no posts
@@ -19,6 +28,7 @@ Feature: Manage Posts
     And I press "Create Post"
     Then I should see "New post created"
     And I should see "Spuds"
+    And I should see that "Spuds" is in a h2 tag
     And I should see "Delicious potato wedges!"
     And I should have 1 post
 

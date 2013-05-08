@@ -1,8 +1,9 @@
 en:
   titles:
-    post:
+    posts:
       index: Blog
       new: New Blog Post
+      create: New Blog Post
 
   navigation:
     home: Blog

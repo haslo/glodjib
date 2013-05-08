@@ -11,7 +11,7 @@ SimpleForm.setup do |config|
   # config.hint_class = :hint
 
   # CSS class used on errors.
-  # config.error_class = :error
+  config.error_class = 'field_error alert'
 
   # Default tag used on errors.
   # config.error_tag = :span
