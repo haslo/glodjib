@@ -2,11 +2,6 @@
 
 # Your secret key for verifying the integrity of signed cookies.
 # If you change this key, all old signed cookies will become invalid!
-
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-# You can use `rake secret` to generate a secure secret key.
-
-# Make sure your secret_key_base is kept private
-# if you're sharing your code publicly.
-Glodjib::Application.config.secret_key_base = '3ad4963b87036fd558d8eea9322be006c745d4d8595df1831f5d03a283b83e064378cdfec7f9025750f41e12de873b26b70835ce687562d7952730d91f1edcfd'
+Glodjib::Application.config.secret_token = '6c7ee645c9e8eeffca816bb4071860e0297e5e477de367028eb0b6d3ef6923041d0ae19b5db4a5441d1199c9f79ba482ae494b5fa2b69483da689c0ef4f5efdf'
