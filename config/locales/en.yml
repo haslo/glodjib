@@ -20,6 +20,8 @@ en:
     post:
       created: New post created
       invalid: Invalid post
+    flickr_images:
+      cache_updated: Flickr image cache updated, found %{count} images
 
   activerecord:
     attributes:

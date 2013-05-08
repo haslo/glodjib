@@ -29,3 +29,5 @@ Feature: Basic Visitor Functionality
     When I follow "Portfolio"
     Then I should see the page title as "Portfolio - Guido Gloor Modjib Photography"
     And I should see that "Portfolio" is in a h2 tag
+    And I should see "Flickr image cache updated"
+    And I should see at least 1 portfolio image thumbnail
