@@ -1,5 +1,5 @@
 Then(/^I should see the page title as "(.*?)"$/) do |title|
-  assert_equal title, page.find(:css, 'title').text
+  page.should have_title(title)
 end
 
 Then(/^I should see "(.*?)"$/) do |message|
