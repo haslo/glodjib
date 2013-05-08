@@ -1,5 +1,22 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  titles:
+    post:
+      index: Blog
+      new: New Blog Post
+
+  navigation:
+    home: Blog
+
+  links:
+    post:
+      new: Create Post
+
+  activerecord:
+    attributes:
+      post:
+        title:
+          one: Title
+          other: Titles
+        content:
+          one: Content
+          other: Contents

@@ -1,0 +1,5 @@
+<%= simple_form_for @post do |f| %>
+  <%= f.input :title, input_html: { class: 'input-block-level' } %>
+  <%= f.input :content, input_html: { class: 'input-block-level' } %>
+  <%= f.button :submit %>
+<% end %>

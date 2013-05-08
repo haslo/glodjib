@@ -1,6 +1,5 @@
-<%= flash[:notice] %>
 <% for post in @posts %>
     <p><%=h post.title %></p>
     <p><%=h post.content %></p>
 <% end %>
-<p><%= link_to "New Post", new_post_path %></p>
+<p><%= link_to I18n.t('links.posts.new'), new_post_path %></p>

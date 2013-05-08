@@ -21,7 +21,7 @@ When(/^I follow "(.*?)"$/) do |link_text|
 end
 
 When(/^I fill in "(.*?)" with "(.*?)"$/) do |field_name, field_text|
-  pending # express the regexp above with the code you wish you had
+  fill_in field_name, :with => field_text
 end
 
 When(/^I press "(.*?)"$/) do |button_text|

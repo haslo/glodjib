@@ -9,7 +9,7 @@ Feature: Manage Posts
     Then I should see "Pizza"
     And I should see "Breadsticks"
 
-  Scenario: Create Valid Article
+  Scenario: Create Valid Post
     Given I have no posts
     And I am on the homepage
     When I follow "New Post"

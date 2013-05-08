@@ -19,6 +19,11 @@ group :test, :development do
   gem 'webrat'
 end
 
+# server without content-length warning spam
+group :test, :development do
+  gem 'thin'
+end
+
 #defaults
 gem 'jquery-rails'
 group :assets do
