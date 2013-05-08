@@ -3,6 +3,12 @@ Feature: Manage Posts
   As an author
   I want to create and manage posts
 
+  Scenario: Check for Title Link
+    Given I have no posts
+    And I am on the homepage
+    When I follow the title link
+    Then I should see that "Blog" is in a h1 tag
+
   Scenario: Posts List
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     When I go to the homepage
