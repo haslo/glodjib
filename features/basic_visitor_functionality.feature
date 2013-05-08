@@ -7,7 +7,7 @@ Feature: Basic Visitor Functionality
     Given I have no posts
     And I am on the homepage
     When I follow the page title link
-    Then I should see the page title as "glodjib.ch - Guido Gloor Modjib Photography"
+    Then I should see the page title as "Blog - Guido Gloor Modjib Photography"
     And I should see that "Blog" is in a h2 tag
 
   Scenario: Posts List
@@ -16,6 +16,12 @@ Feature: Basic Visitor Functionality
     Then I should see "Pizza"
     And I should see "Breadsticks"
     And I should see "Dummy Text"
+
+  Scenario: View Post
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    When I go to the homepage
+    And I follow "Pizza"
+    Then I should see that "Pizza" is in a h2 tag
 
   Scenario: Visit Portfolio
     Given I have no posts

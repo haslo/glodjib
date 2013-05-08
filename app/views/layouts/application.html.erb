@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>glodjib.ch - <%= content_for?(:title) ? yield(:title) : "Guido Gloor Modjib Photography" %></title>
+  <title><%= I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter) %> - Guido Gloor Modjib Photography</title>
   <meta name="description" content="">
   <meta name="author" content="">
   <%= stylesheet_link_tag "application", :media => "all" %>
@@ -24,7 +24,7 @@
     <div class="content">
       <div class="row">
         <div class="span12">
-          <h2><%= link_to I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", params) %></h2>
+          <h2><%= link_to I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), params %></h2>
           <%= render 'layouts/messages' %>
           <%= yield %>
         </div>

@@ -1,5 +1,6 @@
 <% for post in @posts %>
-  <h3><%=h post.title %></h3>
+  <h3><%= link_to post.title, post %></h3>
+  <p class="post_date"><%= I18n.l post.created_at, :format => :short %></p>
   <p><%=h post.content %></p>
 <% end %>
 <p><%= link_to I18n.t('links.post.new'), new_post_path %></p>

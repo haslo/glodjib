@@ -3,6 +3,11 @@ class PostsController < ApplicationController
     @posts = Post.all
   end
 
+  def show
+    @post = Post.find(params[:id])
+    @title_parameter = @post.title
+  end
+
   def new
     @post = Post.new
   end

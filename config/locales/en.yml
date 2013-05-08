@@ -2,8 +2,11 @@ en:
   titles:
     posts:
       index: Blog
+      show: '%{title_parameter}'
       new: New Blog Post
       create: New Blog Post
+    flickr_images:
+      portfolio: Portfolio
 
   navigation:
     home: Blog
