@@ -11,6 +11,10 @@ en:
     post:
       new: Create Post
 
+  notices:
+    post:
+      created: New Post Created
+
   activerecord:
     attributes:
       post:
