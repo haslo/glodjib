@@ -6,7 +6,8 @@ Feature: Manage Posts
   Scenario: Posts List
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     When I go to the homepage
-    Then I should see that "Blog" is in a h1 tag
+    Then I should see the page title as "glodjib.ch - Guido Gloor Modjib Photography"
+    And I should see that "Blog" is in a h1 tag
     And I should see "Pizza"
     And I should see "Breadsticks"
     And I should see "Dummy Text"
