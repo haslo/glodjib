@@ -22,6 +22,7 @@ Feature: Basic Visitor Functionality
     When I go to the homepage
     And I follow "Pizza"
     Then I should see that "Pizza" is in a h2 tag
+    And I should see "Dummy Text"
 
   Scenario: Visit Portfolio
     Given I have no posts
