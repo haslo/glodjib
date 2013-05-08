@@ -5,14 +5,14 @@ Feature: Manage Posts
 
   Scenario: Posts List
     Given I have posts titled Pizza, Breadsticks
-    When I go to the list of posts
+    When I go to the homepage
     Then I should see "Pizza"
     And I should see "Breadsticks"
 
   Scenario: Create Valid Article
     Given I have no posts
-    And I am on the list of posts
-    When I follow "New Article"
+    And I am on the homepage
+    When I follow "New Post"
     And I fill in "Title" with "Spuds"
     And I fill in "Content" with "Delicious potato wedges!"
     And I press "Create"

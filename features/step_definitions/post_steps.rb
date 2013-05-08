@@ -8,28 +8,28 @@ Given /^I have no posts$/ do
   Post.delete_all
 end
 
-Given(/^I am on the list of posts$/) do
+Given(/^I am on the homepage$/) do
+  visit root_path
+end
+
+When(/^I go to the homepage$/) do
+  visit root_path
+end
+
+When(/^I follow "(.*?)"$/) do |link_text|
+  click_link link_text
+end
+
+When(/^I fill in "(.*?)" with "(.*?)"$/) do |field_name, field_text|
   pending # express the regexp above with the code you wish you had
 end
 
-When(/^I go to the list of posts$/) do
-  pending # express the regexp above with the code you wish you had
+When(/^I press "(.*?)"$/) do |button_text|
+  click_button button_text
 end
 
-When(/^I follow "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I fill in "(.*?)" with "(.*?)"$/) do |arg1, arg2|
-  pending # express the regexp above with the code you wish you had
-end
-
-When(/^I press "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
-end
-
-Then(/^I should see "(.*?)"$/) do |arg1|
-  pending # express the regexp above with the code you wish you had
+Then(/^I should see "(.*?)"$/) do |message|
+  page.should have_text(message)
 end
 
 Then /^I should have ([0-9]+) posts?$/ do |count|
