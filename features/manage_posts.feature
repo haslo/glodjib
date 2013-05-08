@@ -28,6 +28,7 @@ Feature: Manage Posts
     When I follow "New Post"
     And I press "Create Post"
     Then I should see "Invalid post"
-    And I should see "Title can not be empty"
-    And I should see "Content can not be empty"
+    And I should see "Title can't be blank"
+    And I should see "Content can't be blank"
+    And I should see 2 field error messages
     And I should have 0 posts

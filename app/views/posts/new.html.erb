@@ -1,7 +1,7 @@
-<%= simple_form_for @post do |f| %>
+<%= simple_form_for @post, defaults: { input_html: { class: 'input-block-level' }, error_html: { class: 'field_error alert' } } do |f| %>
   <%= f.error_notification %>
   <%= display_base_errors @post %>
-  <%= f.input :title, input_html: { class: 'input-block-level' } %>
-  <%= f.input :content, input_html: { class: 'input-block-level' } %>
+  <%= f.input :title, input_html: { class: 'input-block-level' }, error_html: { class: 'field_error alert' } %>
+  <%= f.input :content, input_html: { class: 'input-block-level' }, error_html: { class: 'field_error alert' } %>
   <%= f.button :submit %>
 <% end %>

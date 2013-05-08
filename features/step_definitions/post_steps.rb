@@ -32,6 +32,10 @@ Then(/^I should see "(.*?)"$/) do |message|
   page.should have_text(message)
 end
 
+Then(/^I should see ([0-9]+) field error messages$/) do |message_count|
+  page.should have_selector('.field_error', :count => message_count)
+end
+
 Then /^I should have ([0-9]+) posts?$/ do |count|
   Post.count.should == count.to_i
 end
