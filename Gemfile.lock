@@ -145,6 +145,8 @@ GEM
       rack (>= 1.0.0)
     thor (0.18.1)
     tilt (1.4.0)
+    tinymce-rails (3.5.8.2)
+      railties (>= 3.1.1)
     treetop (1.4.12)
       polyglot
       polyglot (>= 0.3.1)
@@ -178,5 +180,6 @@ DEPENDENCIES
   sass-rails (~> 3.2.3)
   simple_form (~> 1.4.1)
   thin
+  tinymce-rails
   uglifier (>= 1.0.3)
   webrat

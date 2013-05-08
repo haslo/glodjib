@@ -11,6 +11,7 @@ gem 'country_select', '~> 1.1.3'
 gem 'ruby-akismet', :require => 'akismet'
 gem 'mini_magick'
 gem 'flickraw'
+gem 'tinymce-rails'
 
 # testing frameworks
 group :test, :development do
