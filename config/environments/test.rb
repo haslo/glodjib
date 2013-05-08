@@ -33,4 +33,8 @@ Glodjib::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  config.gem "rspec-rails", :lib => false, :version => ">=2.13.1"
+  config.gem "webrat", :lib => false, :version => ">=0.7.3"
+  config.gem "cucumber-rails", :lib => false, :version => ">=1.3.0"
 end
