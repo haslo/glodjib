@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(:version => 20130508192403) do
     t.string   "shutter"
     t.string   "iso"
     t.string   "focal_length"
+    t.boolean  "is_in_portfolio"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
   end

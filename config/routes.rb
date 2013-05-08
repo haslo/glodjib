@@ -5,6 +5,8 @@ Glodjib::Application.routes.draw do
 
   resources :posts, :flickr_images
 
+  match 'portfolio' => 'flickr_images#portfolio', :as => :portfolio
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -11,6 +11,8 @@ class CreateFlickrImages < ActiveRecord::Migration
       t.string :iso
       t.string :focal_length
 
+      t.boolean :is_in_portfolio
+
       t.timestamps
     end
   end
