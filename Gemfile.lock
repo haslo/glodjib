@@ -81,6 +81,7 @@ GEM
     mini_magick (3.5.0)
       subexec (~> 0.2.1)
     multi_json (1.7.3)
+    mysql2 (0.3.11)
     mysql2 (0.3.11-x86-mingw32)
     nokogiri (1.5.9-x86-mingw32)
     polyglot (0.3.3)
