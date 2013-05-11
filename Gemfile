@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 # core
 gem 'rails', '~> 3.2.13'
-gem 'mysql2', '= 0.3.11'
+gem 'mysql2', '>= 0.3.11'
 
 # libraries
 gem 'bootstrap-sass', '~> 2.3.1.0'
