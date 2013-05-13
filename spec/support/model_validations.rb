@@ -4,7 +4,7 @@ shared_examples_for "a model that accepts text" do |property|
   it "accepts text input for #{property}" do
     record = new_valid_record
     record.send(:"#{property}=", text_input)
-    record.errors[property.to_sym].should have(0).errors
+    record.errors[:"#{property}"].should have(0).errors
   end
 
   it "returns the value that was set for #{property}" do
@@ -20,7 +20,7 @@ shared_examples_for "a model that accepts a boolean" do |property|
   it "accepts text input for #{property}" do
     record = new_valid_record
     record.send(:"#{property}=", boolean_input)
-    record.errors[property.to_sym].should have(0).errors
+    record.errors[:"#{property}"].should have(0).errors
   end
 
   it "returns the value that was set for #{property}" do
@@ -36,7 +36,7 @@ shared_examples_for "a model that accepts html with links and formatting" do |pr
   it "accepts html input for #{property}" do
     record = new_valid_record
     record.send(:"#{property}=", text_input)
-    record.errors[property.to_sym].should have(0).errors
+    record.errors[:"#{property}"].should have(0).errors
   end
 
   it "returns the value that was set for #{property}" do

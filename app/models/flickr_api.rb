@@ -13,9 +13,9 @@ class FlickrAPI
     end
     # defaults
     # @TODO move to storage somewhere
-    @api_key = '07c77887e7450e5d0d86781a7264c45c'
-    @shared_secret = 'f6e1a90eb6ab7755'
-    @user_id = '80288388@N00'
+    @api_key = '07c77887e7450e5d0d86781a7264c45c' unless @api_key
+    @shared_secret = 'f6e1a90eb6ab7755' unless @shared_secret
+    @user_id = '80288388@N00' unless @user_id
   end
 
   def get_images_with_tag(tags)
