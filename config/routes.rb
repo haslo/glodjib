@@ -1,7 +1,7 @@
 Glodjib::Application.routes.draw do
   get "flickr_images/index"
 
-  root to: 'posts#index'
+  root to: 'posts#frontpage'
 
   scope '/admin' do
     resources :posts, :only => [:index, :new, :create]

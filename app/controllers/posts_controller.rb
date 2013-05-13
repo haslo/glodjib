@@ -1,16 +1,24 @@
+require 'pp'
+
 class PostsController < ApplicationController
+  def frontpage
+    @posts = Post.all
+  end
+
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find_by_shorthand(params[:id])
-    @post = Post.find(params[:id]) unless @post
-    unless @post
+    redirect_to root_path and return
+    posts = Post.where("id = ? or shorthand = ?", params[:id], params[:id])
+    if posts.count > 0
+      @post = posts.first
+      @title_parameter = @post.title
+    else
       flash[:error] = I18n.t('notices.post.not_found')
-      redirect_to root_path and return
+      redirect_to root_path
     end
-    @title_parameter = @post.title
   end
 
   def new
