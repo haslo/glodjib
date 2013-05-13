@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513131257) do
+ActiveRecord::Schema.define(:version => 20130513140417) do
 
   create_table "flickr_images", :force => true do |t|
     t.string   "flickr_username"
@@ -30,9 +30,10 @@ ActiveRecord::Schema.define(:version => 20130513131257) do
   create_table "posts", :force => true do |t|
     t.string   "title"
     t.text     "content"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.string   "shorthand"
+    t.boolean  "custom_shorthand", :default => false
   end
 
 end
