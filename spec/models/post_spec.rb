@@ -1,4 +1,6 @@
+include ActionView::Helpers::SanitizeHelper
 require 'spec_helper'
+require 'pp'
 
 describe Post do
   let(:new_valid_record) { Post.new(:title => "title", :content => "content") }
@@ -14,6 +16,18 @@ describe Post do
   it_behaves_like "a model that accepts text", :content
 
   it_behaves_like "a model that accepts html with links and formatting", :content
+
+  it "sanitizes content before returning it" do
+    record = new_valid_record
+    new_content = "<script type=\"text/javascript\">alert(\"Hello World!\");</script><strong>test</strong>"
+    record.content = new_content
+    record.content.should == sanitize(new_content)
+  end
+
+  it "marks returned content as html_safe" do
+    record = new_valid_record
+    record.content.should be_html_safe
+  end
 
   describe "automatically assigns an URL-compatible value to shorthand when the title is set" do
     describe "when generating shorthand from title" do

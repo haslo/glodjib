@@ -3,6 +3,10 @@ require 'spec_helper'
 describe FlickrImage do
   let(:new_valid_record) { FlickrImage.new }
 
+  it { should validate_presence_of :flickr_username }
+  it { should validate_presence_of :flickr_id }
+  it { should validate_presence_of :image_title }
+
   it_behaves_like "a model that accepts text", :flickr_username
   it_behaves_like "a model that accepts text", :flickr_id
   it_behaves_like "a model that accepts text", :image_title

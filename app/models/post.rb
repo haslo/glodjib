@@ -22,6 +22,13 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def content
+    if read_attribute(:content).blank?
+      return read_attribute(:content)
+    end
+    sanitize(read_attribute(:content)).html_safe
+  end
+
 private
 
   def auto_shorthand
