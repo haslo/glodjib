@@ -59,9 +59,26 @@ describe PostsController do
   end
 
   describe "POST 'create'" do
-    it "returns http success" do
-      post 'create'
-      response.should be_success
+    describe "with nil values" do
+      it "returns http success" do
+        post 'create', { :post => { :title => nil, :content => nil }}
+        response.should be_success
+      end
+
+      it "does not create a post" do
+        expect { post('create', { :post => { :title => nil, :content => nil } }) }.to_not change(Post, :count)
+      end
+    end
+
+    describe "with valid post values" do
+      it "redirects to the posts list" do
+        post 'create', { :post => { :title => "title", :content => "content" }}
+        response.should redirect_to posts_path
+      end
+
+      it "creates one post" do
+        expect { post('create', { :post => { :title => "title", :content => "content" } }) }.to change(Post, :count).from(0).to(1)
+      end
     end
   end
 end
