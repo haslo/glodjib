@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pp'
 
 describe PostsController do
   describe "GET 'frontpage'" do
@@ -23,7 +24,8 @@ describe PostsController do
       end
 
       it "redirects to the root path" do
-        expect { get 'show', :id => -1 }.to redirect_to root_path
+        get 'show', :id => -1
+        response.should redirect_to root_path
       end
     end
 

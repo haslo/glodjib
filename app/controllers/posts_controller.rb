@@ -10,7 +10,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    redirect_to root_path and return
     posts = Post.where("id = ? or shorthand = ?", params[:id], params[:id])
     if posts.count > 0
       @post = posts.first
