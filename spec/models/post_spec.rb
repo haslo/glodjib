@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Post do
-  let(:new_valid_record) { Post.new }
+  let(:new_valid_record) { Post.new(:title => "title", :shorthand => "title", :content => "content") }
 
   it { should validate_presence_of :title }
   it { should validate_presence_of :shorthand }
@@ -13,9 +13,19 @@ describe Post do
 
   it_behaves_like "a model that accepts html with links and formatting", :content
 
-  it { should validate_uniqueness_of(:shorthand) }
+  describe "uniqueness constraints" do
+    before { new_valid_record.save }
+    it { should validate_uniqueness_of(:shorthand) }
+  end
 
   describe "automatically assigns an URL-compatible value to shorthand when the title is set" do
+    it "assigns a lowercase title without spaces or special characters directly to the shorthand" do
+      record = new_valid_record
+      record.shorthand = nil
+      record.title = "testing123"
+      record.shorthand.should == "testing123"
+    end
+
     it "makes everything lowercase" do
       record = new_valid_record
       record.shorthand = nil
