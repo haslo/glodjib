@@ -17,3 +17,6 @@
 
 # Ignore .idea stuff
 /.idea
+
+# Ignore coverage metrics
+/coverage
