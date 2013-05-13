@@ -1,7 +1,4 @@
 class FlickrImagesController < ApplicationController
-  def index
-  end
-
   def portfolio
     portfolio_images = FlickrAPI.new.get_images_with_tag('portfolio')
     if portfolio_images.count > 0

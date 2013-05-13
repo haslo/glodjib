@@ -20,6 +20,7 @@ en:
     post:
       created: New post created
       invalid: Invalid post
+      not_found: Post not found
     flickr_images:
       cache_updated: Flickr image cache updated, found %{count} images
 

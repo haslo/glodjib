@@ -4,7 +4,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by_shorthand(params[:id])
+    @post = Post.find(params[:id]) unless @post
+    unless @post
+      flash[:error] = I18n.t('notices.post.not_found')
+      redirect_to root_path and return
+    end
     @title_parameter = @post.title
   end
 

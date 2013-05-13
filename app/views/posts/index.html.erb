@@ -1,5 +1,5 @@
 <% for post in @posts %>
-  <h3><%= link_to post.title, post %></h3>
+  <h3><%= link_to post.title, post_path(:id => post.shorthand) %></h3>
   <p class="post_date"><%= I18n.l post.created_at, :format => :short %></p>
   <p><%= sanitize post.content.html_safe %></p>
 <% end %>
