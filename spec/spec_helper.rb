@@ -15,11 +15,34 @@ RSpec.configure do |config|
   config.order = "random"
 end
 
-shared_examples_for "a model that validates presence of" do |property|
-  it "requires a value for #{property}" do
+shared_examples_for "a model that accepts text" do |property|
+  let(:text_input) { "some text" }
+
+  it "accepts text input for #{property}" do
     record = new_valid_record
-    record.send(:"#{property}=", nil)
-    record.should_not be_valid
-    record.errors[property.to_sym].to_s.should =~ /can't be blank/
+    record.send(:"#{property}=", text_input)
+    record.errors[property.to_sym].should have(0).errors
+  end
+
+  it "returns the value that was set for #{property}" do
+    record = new_valid_record
+    record.send(:"#{property}=", text_input)
+    record.send(:"#{property}").should == text_input
+  end
+end
+
+shared_examples_for "a model that accepts html with links and formatting" do |property|
+  let(:text_input) { "some <strong>bold</strong> text <a href=\"\">with link</a>" }
+
+  it "accepts html input for #{property}" do
+    record = new_valid_record
+    record.send(:"#{property}=", text_input)
+    record.errors[property.to_sym].should have(0).errors
+  end
+
+  it "returns the value that was set for #{property}" do
+    record = new_valid_record
+    record.send(:"#{property}=", text_input)
+    record.send(:"#{property}").should == text_input
   end
 end

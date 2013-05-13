@@ -16,6 +16,7 @@ gem 'tinymce-rails'
 # testing frameworks
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
+  gem 'shoulda-matchers'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'webrat'
