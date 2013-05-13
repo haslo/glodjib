@@ -20,5 +20,19 @@ describe FlickrCache do
       record.timeout.should <= Time.now + 24.hours
       record.timeout.should > Time.now + 23.hours
     end
+
+    it "should return true with timeout_over? after those 24 hours" do
+      record = new_valid_record
+      record.timeout = Time.now - 1.minute
+      record.should be_timeout_over
+    end
+
+    it "should reset the timeout to 24 hours upon a call to refresh_timeout" do
+      record = new_valid_record
+      record.timeout = Time.now - 1.minute
+      record.refresh_timeout
+      record.timeout.should <= Time.now + 24.hours
+      record.timeout.should > Time.now + 23.hours
+    end
   end
 end

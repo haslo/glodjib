@@ -28,24 +28,40 @@ describe FlickrAPI do
   it_behaves_like "takes constructor values", :shared_secret
   it_behaves_like "takes constructor values", :user_id
 
-  describe "#get_images_with_tags" do
+  describe "api calls" do
     before(:each) do
       @flickr_api = new_valid_record
     end
 
-    it "fetches all images with a tag from cache"
-    it "refreshes the cache if it is empty"
-    it "refreshes the cache if it has timed out"
-  end
-
-  describe "#fill_cache_for_tags" do
-    before(:each) do
-      @flickr_api = new_valid_record
+    describe "#get_images_with_tags" do
+      it "fetches all images with a tag from cache"
+      it "refreshes the cache if it is empty"
+      it "refreshes the cache if it has timed out"
     end
 
-    it "connects to FlickRAW"
-    it "fills the images it obtains from Flickr into the FlickrImage model"
-    it "fills all the tags it obtains into the FlickrTag model"
-    it "assigns all the images it obtains to the current user in a FlickrUser model"
+    describe "#fill_cache_for_tags" do
+      it "connects to FlickRAW"
+      it "fills the images it obtains from Flickr into the FlickrImage model"
+      it "fills all the tags it obtains into the FlickrTag model"
+      it "assigns all the images it obtains to the current user in a FlickrUser model"
+    end
+
+    describe "#find_or_create_cache" do
+      it "creates a user if there is none" do
+        expect { @flickr_api.find_or_create_cache("username", "tag") }.to change(FlickrUser, :count).from(0).to(1)
+      end
+
+      it "creates a tag if there is none" do
+        expect { @flickr_api.find_or_create_cache("username", "tag") }.to change(FlickrTag, :count).from(0).to(1)
+      end
+
+      it "creates a cache if there is none" do
+        expect { @flickr_api.find_or_create_cache("username", "tag") }.to change(FlickrCache, :count).from(0).to(1)
+      end
+
+      it "returns an instance of FlickrCache" do
+        @flickr_api.find_or_create_cache("username", "tag").should be_an_instance_of FlickrCache
+      end
+    end
   end
 end

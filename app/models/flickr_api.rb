@@ -18,6 +18,10 @@ class FlickrAPI
     @user_id = '80288388@N00' unless @user_id
   end
 
+  def persisted?
+    false
+  end
+
   def get_images_with_tags(tags)
     assure_connection
     flickr.photos.search(:user_id => user_id, :tags => tags)
@@ -35,8 +39,10 @@ class FlickrAPI
     end
   end
 
-  def persisted?
-    false
+  def find_or_create_cache(user_id, tag)
+    (flickr_user = FlickrUser.where("username = ?", user_id).first_or_create(:username => user_id)).save
+    (flickr_tag = FlickrTag.where("tag_name = ?", tag).first_or_create(:tag_name => tag)).save
+    FlickrCache.where("flickr_user_id = ? and flickr_tag_id = ?", flickr_user.id, flickr_tag.id).first_or_create(:flickr_user => flickr_user, :flickr_tag => flickr_tag)
   end
 
 private

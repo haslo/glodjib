@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 describe Post do
   let(:new_valid_record) { Post.new(:title => "title", :content => "content") }
@@ -15,7 +14,6 @@ describe Post do
       record = new_valid_record
       record.shorthand = "123"
       record.valid?
-      pp record.errors
       record.errors[:shorthand].should include("shorthand must start with a character")
     end
   end

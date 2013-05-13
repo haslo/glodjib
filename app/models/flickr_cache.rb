@@ -6,10 +6,14 @@ class FlickrCache < ActiveRecord::Base
   belongs_to :flickr_tag
 
   after_initialize do |flickr_cache|
-    write_attribute(:timeout, Time.now + 24.hours)
+    refresh_timeout
   end
 
   def timeout_over?
     timeout < Time.now
+  end
+
+  def refresh_timeout
+    write_attribute(:timeout, Time.now + 24.hours)
   end
 end
