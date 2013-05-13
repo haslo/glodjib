@@ -18,9 +18,21 @@ class FlickrAPI
     @user_id = '80288388@N00' unless @user_id
   end
 
-  def get_images_with_tag(tags)
+  def get_images_with_tags(tags)
     assure_connection
     flickr.photos.search(:user_id => user_id, :tags => tags)
+  end
+
+  def fill_cache_for_tags(tags)
+    images_for_tag = get_images_with_tags(tags)
+    if images_for_tag.count > 0
+      FlickrImage.delete_all
+      images_for_tag.each do |portfolio_image|
+        photo_info = flickr.photos.getInfo :photo_id => portfolio_image.id, :secret => portfolio_image.secret
+        flickr_image = FlickrImage.new
+        # @TODO fetch image data, cache, timeout, manage, etc.
+      end
+    end
   end
 
   def persisted?

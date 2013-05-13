@@ -11,10 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513140417) do
+ActiveRecord::Schema.define(:version => 20130513222706) do
 
   create_table "flickr_images", :force => true do |t|
-    t.string   "flickr_username"
     t.string   "flickr_id"
     t.string   "image_title"
     t.text     "image_description"
@@ -25,6 +24,26 @@ ActiveRecord::Schema.define(:version => 20130513140417) do
     t.boolean  "is_in_portfolio"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.integer  "flickr_user_id"
+  end
+
+  create_table "flickr_images_flickr_tags", :force => true do |t|
+    t.integer  "flickr_image_id"
+    t.integer  "flickr_tag_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  create_table "flickr_tags", :force => true do |t|
+    t.text     "tag_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "flickr_users", :force => true do |t|
+    t.text     "username"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "posts", :force => true do |t|
