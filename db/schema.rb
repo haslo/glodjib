@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513222706) do
+ActiveRecord::Schema.define(:version => 20130513224043) do
+
+  create_table "flickr_caches", :force => true do |t|
+    t.integer  "flickr_user_id"
+    t.integer  "flickr_tag_id"
+    t.datetime "timeout"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "flickr_images", :force => true do |t|
     t.string   "flickr_id"

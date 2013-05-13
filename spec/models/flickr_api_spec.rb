@@ -27,4 +27,25 @@ describe FlickrAPI do
   it_behaves_like "takes constructor values", :api_key
   it_behaves_like "takes constructor values", :shared_secret
   it_behaves_like "takes constructor values", :user_id
+
+  describe "#get_images_with_tags" do
+    before(:each) do
+      @flickr_api = new_valid_record
+    end
+
+    it "fetches all images with a tag from cache"
+    it "refreshes the cache if it is empty"
+    it "refreshes the cache if it has timed out"
+  end
+
+  describe "#fill_cache_for_tags" do
+    before(:each) do
+      @flickr_api = new_valid_record
+    end
+
+    it "connects to FlickRAW"
+    it "fills the images it obtains from Flickr into the FlickrImage model"
+    it "fills all the tags it obtains into the FlickrTag model"
+    it "assigns all the images it obtains to the current user in a FlickrUser model"
+  end
 end
