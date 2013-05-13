@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 describe Post do
   let(:new_valid_record) { Post.new(:title => "title", :content => "content") }
@@ -20,28 +19,24 @@ describe Post do
     describe "when generating shorthand from title" do
       it "assigns a lowercase title without spaces or special characters directly to the shorthand" do
         record = new_valid_record
-        record.shorthand = nil
         record.title = "testing123"
         record.shorthand.should == "testing123"
       end
 
       it "makes everything lowercase" do
         record = new_valid_record
-        record.shorthand = nil
         record.title = "TesTinG"
         record.shorthand.should == "testing"
       end
 
       it "strips spaces and puts _ there" do
         record = new_valid_record
-        record.shorthand = nil
         record.title = "testing title"
         record.shorthand.should == "testing_title"
       end
 
       it "removes all non-alphanumerical characters" do
         record = new_valid_record
-        record.shorthand = nil
         record.title = "testing123%&"
         record.shorthand.should == "testing123"
       end
