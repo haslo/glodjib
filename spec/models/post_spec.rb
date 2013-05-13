@@ -1,6 +1,4 @@
-include ActionView::Helpers::SanitizeHelper
 require 'spec_helper'
-require 'pp'
 
 describe Post do
   let(:new_valid_record) { Post.new(:title => "title", :content => "content") }
