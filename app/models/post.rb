@@ -4,6 +4,7 @@ class Post < ActiveRecord::Base
   attr_accessible :title, :content, :shorthand
   validates_presence_of :title, :content, :shorthand
   validates_uniqueness_of :shorthand
+  validate :shorthand_starts_with_character
 
   def title=(value)
     write_attribute(:title, value)
@@ -35,5 +36,11 @@ private
 
   def auto_shorthand
     read_attribute(:title).blank? ? nil : read_attribute(:title).downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
+  end
+
+  def shorthand_starts_with_character
+    if read_attribute(:shorthand).blank? || !(read_attribute(:shorthand)[0] =~ /[a-z]/i)
+      errors.add(:shorthand, I18n.t('errors.custom_messages.shorthand_start_with_character'))
+    end
   end
 end

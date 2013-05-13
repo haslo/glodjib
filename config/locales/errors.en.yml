@@ -28,3 +28,5 @@ en:
       odd: "%{attribute} must be odd"
       even: "%{attribute} must be even"
       taken: "%{attribute} has already been taken"
+    custom_messages:
+      shorthand_start_with_character: "shorthand must start with a character"

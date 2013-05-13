@@ -20,6 +20,7 @@ shared_examples_for "a model that accepts a boolean" do |property|
   it "accepts text input for #{property}" do
     record = new_valid_record
     record.send(:"#{property}=", boolean_input)
+    record.valid?
     record.errors[:"#{property}"].should have(0).errors
   end
 
@@ -36,6 +37,7 @@ shared_examples_for "a model that accepts html with links and formatting" do |pr
   it "accepts html input for #{property}" do
     record = new_valid_record
     record.send(:"#{property}=", text_input)
+    record.valid?
     record.errors[:"#{property}"].should have(0).errors
   end
 

@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pp'
 
 describe Post do
   let(:new_valid_record) { Post.new(:title => "title", :content => "content") }
@@ -8,6 +9,16 @@ describe Post do
   it { should validate_presence_of :content }
 
   it { should validate_uniqueness_of(:shorthand) }
+
+  describe "the shorthand has to start with an alphabetical character" do
+    it "does not allow a numerical character up front" do
+      record = new_valid_record
+      record.shorthand = "123"
+      record.valid?
+      pp record.errors
+      record.errors[:shorthand].should include("shorthand must start with a character")
+    end
+  end
 
   it_behaves_like "a model that accepts text", :title
   it_behaves_like "a model that accepts text", :shorthand
