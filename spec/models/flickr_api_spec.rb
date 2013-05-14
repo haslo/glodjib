@@ -41,40 +41,85 @@ describe FlickrAPI do
     end
 
     describe "#get_images_from_remote" do
-      it "is being tested with a Flickr search for the tag 'portfolio' that actually returns images" do
+      before(:each) do
         FlickRaw.api_key = @flickr_api.api_key
         FlickRaw.shared_secret = @flickr_api.shared_secret
+      end
+
+      it "is being tested with a Flickr search for the tag 'portfolio' that actually returns images" do
         flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size.should > 0
       end
 
       it "fetches all images with a tag and the current user from Flickr" do
-        FlickRaw.api_key = @flickr_api.api_key
-        FlickRaw.shared_secret = @flickr_api.shared_secret
         image_count = flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size
         @flickr_api.get_images_from_remote(@flickr_api.find_or_create_cache("portfolio")).count.should == image_count
       end
     end
 
     describe "#update_cache" do
+      before(:each) do
+        FlickRaw.api_key = @flickr_api.api_key
+        FlickRaw.shared_secret = @flickr_api.shared_secret
+      end
+
       it "creates a cache if there is none" do
         expect { @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio")) }.to change(FlickrCache, :count).from(0).to(1)
       end
 
       it "is being tested with a Flickr search for the tag 'portfolio' that actually returns images" do
-        FlickRaw.api_key = @flickr_api.api_key
-        FlickRaw.shared_secret = @flickr_api.shared_secret
         flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size.should > 0
       end
 
       it "fills the images it obtains from Flickr into the FlickrImage model" do
-        FlickRaw.api_key = @flickr_api.api_key
-        FlickRaw.shared_secret = @flickr_api.shared_secret
         image_count = flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size
         expect { @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio")) }.to change(FlickrImage, :count).from(0).to(image_count)
       end
 
-      it "fills all the tags it obtains into the FlickrTag model"
-      it "assigns all the images it obtains to the current user in a FlickrUser model"
+      it "returns true if there was a cache update" do
+        @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio")).should == true
+      end
+
+      it "returns false if there was no cache update" do
+        flickr_cache = @flickr_api.find_or_create_cache("portfolio")
+        flickr_cache.refresh_timeout
+        @flickr_api.update_cache(flickr_cache).should == false
+      end
+
+      it "resets the images currently associated with the tag it refreshes" do
+        flickr_tag = FlickrTag.new(:tag_name => "portfolio")
+        0.upto(20).each do |index|
+          image = FlickrImage.new(:flickr_id => "image#{index}", :image_title => "image #{index}", :flickr_user => @flickr_api.flickr_user)
+          flickr_tag.flickr_images << image
+          image.save
+        end
+        flickr_tag.save
+        image_count = flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size
+        expect { @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio")) }.to change(flickr_tag.flickr_images, :count).from(21).to(image_count)
+      end
+
+      it "fills all the tags it obtains into the FlickrTag model" do
+        @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio"))
+        FlickrTag.count.should > 0
+      end
+
+      it "assigns all the images it obtains to the correct user in a FlickrUser model" do
+        image_count = flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size
+        @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio"))
+        @flickr_api.flickr_user.flickr_images.count.should == image_count
+      end
+
+      shared_examples_for "a proper Flickr storage" do |property|
+        it "stores #{property}" do
+          @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio"))
+          FlickrImage.first.send(property.to_sym).should_not be_nil
+        end
+      end
+
+      it_behaves_like "a proper Flickr storage", :image_description
+      it_behaves_like "a proper Flickr storage", :aperture
+      it_behaves_like "a proper Flickr storage", :shutter
+      it_behaves_like "a proper Flickr storage", :iso
+      it_behaves_like "a proper Flickr storage", :focal_length
     end
 
     describe "#find_or_create_cache" do
@@ -92,6 +137,11 @@ describe FlickrAPI do
 
       it "creates a cache if there is none" do
         expect { @flickr_api.find_or_create_cache("tag", "username") }.to change(FlickrCache, :count).from(0).to(1)
+      end
+
+      it "does not create a cache if there is one" do
+        @flickr_api.find_or_create_cache("portfolio")
+        expect { @flickr_api.find_or_create_cache("portfolio") }.not_to change(FlickrCache, :count)
       end
 
       it "returns an instance of FlickrCache" do
