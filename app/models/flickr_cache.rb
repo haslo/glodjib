@@ -6,7 +6,7 @@ class FlickrCache < ActiveRecord::Base
   belongs_to :flickr_tag
 
   after_initialize do |flickr_cache|
-    refresh_timeout
+    flickr_cache.refresh_timeout
   end
 
   def timeout_over?

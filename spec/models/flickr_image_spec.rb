@@ -16,6 +16,4 @@ describe FlickrImage do
   it_behaves_like "a model that accepts text", :shutter
   it_behaves_like "a model that accepts text", :iso
   it_behaves_like "a model that accepts text", :focal_length
-
-  it_behaves_like "a model that accepts a boolean", :is_in_portfolio
 end

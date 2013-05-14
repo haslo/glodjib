@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130513224043) do
+ActiveRecord::Schema.define(:version => 20130513233335) do
 
   create_table "flickr_caches", :force => true do |t|
     t.integer  "flickr_user_id"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(:version => 20130513224043) do
     t.string   "shutter"
     t.string   "iso"
     t.string   "focal_length"
-    t.boolean  "is_in_portfolio"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
     t.integer  "flickr_user_id"

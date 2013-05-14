@@ -9,4 +9,10 @@ describe FlickrTag do
   it { should validate_presence_of :tag_name }
 
   it_behaves_like "a model that accepts text", :tag_name
+
+  it "does not accept non-alphanumeric characters for the tag name" do
+    record = new_valid_record
+    record.tag_name = "@#%"
+    record.errors[:tag_name].should include("tag name must be alphanumeric")
+  end
 end
