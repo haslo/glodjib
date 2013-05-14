@@ -31,3 +31,11 @@ Feature: Basic Visitor Functionality
     Then I should see the page title as "Portfolio - Guido Gloor Modjib Photography"
     And I should see that "Portfolio" is in a h2 tag
     And I should see at least 1 portfolio image thumbnail
+
+  Scenario: Reset Portfolio Caches
+    Given I have no posts
+    And I have at least 2 cache entries
+    And I am on the homepage
+    When I follow "Portfolio"
+    And I follow "Reset Caches"
+    Then there should be exactly 1 cache entries

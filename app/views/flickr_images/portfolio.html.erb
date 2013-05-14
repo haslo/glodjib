@@ -1,3 +1,4 @@
 <% @flickr_images.each do |flickr_image| %>
   <%= flickr_image.image_title %>
 <% end %>
+<%= link_to I18n.t('links.caches.reset'), reset_caches_path %>

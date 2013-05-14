@@ -5,6 +5,7 @@ Glodjib::Application.routes.draw do
 
   scope '/admin' do
     resources :posts, :only => [:index, :new, :create]
+    match 'reset_caches' => 'flickr_images#reset_caches', :as => :reset_caches
   end
   resources :flickr_images, :only => [:index, :new, :create]
 

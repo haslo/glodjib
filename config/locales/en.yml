@@ -16,6 +16,8 @@ en:
   links:
     post:
       new: New Post
+    caches:
+      reset: Reset Caches
 
   notices:
     post:

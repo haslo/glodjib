@@ -23,10 +23,6 @@ class FlickrAPI
     false
   end
 
-  def update_cache_for_tag(tag)
-    update_cache(find_or_create_cache(tag))
-  end
-
   def find_or_create_cache(tag, user_id = nil)
     user_id ||= @flickr_user.username
     flickr_user = FlickrUser.where("username = ?", user_id).first_or_create!(:username => user_id)
@@ -38,6 +34,7 @@ class FlickrAPI
     if flickr_cache.timeout_over?
       flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).each do |flickr_image|
         flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
+        flickr_image.save
       end
       images_from_remote = get_images_from_remote(flickr_cache)
       if images_from_remote.count > 0
