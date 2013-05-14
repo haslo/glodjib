@@ -16,4 +16,7 @@ describe FlickrImage do
   it_behaves_like "a model that accepts text", :shutter
   it_behaves_like "a model that accepts text", :iso
   it_behaves_like "a model that accepts text", :focal_length
+  it_behaves_like "a model that accepts text", :camera
+  it_behaves_like "a model that accepts text", :full_flickr_url
+  it_behaves_like "a model that accepts text", :flickr_thumbnail_url
 end

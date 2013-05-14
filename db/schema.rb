@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130514010450) do
+ActiveRecord::Schema.define(:version => 20130514021856) do
 
   create_table "flickr_caches", :force => true do |t|
     t.integer  "flickr_user_id"
@@ -29,9 +29,12 @@ ActiveRecord::Schema.define(:version => 20130514010450) do
     t.string   "shutter"
     t.string   "iso"
     t.string   "focal_length"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
     t.integer  "flickr_user_id"
+    t.string   "camera"
+    t.string   "full_flickr_url"
+    t.string   "flickr_thumbnail_url"
   end
 
   create_table "flickr_images_flickr_tags", :id => false, :force => true do |t|

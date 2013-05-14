@@ -120,6 +120,9 @@ describe FlickrAPI do
       it_behaves_like "a proper Flickr storage", :shutter
       it_behaves_like "a proper Flickr storage", :iso
       it_behaves_like "a proper Flickr storage", :focal_length
+      it_behaves_like "a proper Flickr storage", :camera
+      it_behaves_like "a proper Flickr storage", :full_flickr_url
+      it_behaves_like "a proper Flickr storage", :flickr_thumbnail_url
     end
 
     describe "#find_or_create_cache" do

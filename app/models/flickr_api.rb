@@ -50,7 +50,10 @@ class FlickrAPI
             flickr_tag.save
           end
           flickr_image.image_description = photo_info.description
+          flickr_image.full_flickr_url = photo_info.urls.url[0]
+          flickr_image.flickr_thumbnail_url = FlickRaw.url_q(photo_info) # square 150
           photo_exif = flickr.photos.getExif :photo_id => portfolio_image.id, :secret => portfolio_image.secret
+          flickr_image.camera = photo_exif["camera"]
           photo_exif["exif"].each do |exif_line|
             flickr_image.aperture = exif_line["clean"] if exif_line["tag"] == "FNumber"
             flickr_image.shutter = exif_line["clean"] if exif_line["tag"] == "ExposureTime"
