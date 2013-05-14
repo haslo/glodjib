@@ -1,4 +1,7 @@
 <% @flickr_images.each do |flickr_image| %>
-  <%= flickr_image.image_title %>
+  <div class="portfolio_tile">
+    <a href="<%= flickr_image.full_flickr_url.html_safe %>"><img class="portfolio_thumbnail" width="150" height="150" src="<%= flickr_image.flickr_thumbnail_url.html_safe %>"/></a>
+    <p><%= flickr_image.image_title %></p>
+  </div>
 <% end %>
 <%= link_to I18n.t('links.caches.reset'), reset_caches_path %>

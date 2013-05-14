@@ -8,6 +8,7 @@ class FlickrImagesController < ApplicationController
 
   def reset_caches
     FlickrCache.destroy_all
+    FlickrTag.destroy_all
     redirect_to :portfolio
   end
 end
