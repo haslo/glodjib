@@ -13,6 +13,7 @@ describe FlickrTag do
   it "does not accept non-alphanumeric characters for the tag name" do
     record = new_valid_record
     record.tag_name = "@#%"
+    record.valid?
     record.errors[:tag_name].should include("tag name must be alphanumeric")
   end
 end

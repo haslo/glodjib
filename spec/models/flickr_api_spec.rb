@@ -41,9 +41,18 @@ describe FlickrAPI do
     end
 
     describe "#get_images_from_remote" do
-      it "fetches all images with a tag from cache"
-      it "refreshes the cache if it is empty"
-      it "refreshes the cache if it has timed out"
+      it "is being tested with a Flickr search for the tag 'portfolio' that actually returns images" do
+        FlickRaw.api_key = @flickr_api.api_key
+        FlickRaw.shared_secret = @flickr_api.shared_secret
+        flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size.should > 0
+      end
+
+      it "fetches all images with a tag and the current user from Flickr" do
+        FlickRaw.api_key = @flickr_api.api_key
+        FlickRaw.shared_secret = @flickr_api.shared_secret
+        image_count = flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size
+        @flickr_api.get_images_from_remote(@flickr_api.find_or_create_cache("portfolio")).count.should == image_count
+      end
     end
 
     describe "#update_cache" do

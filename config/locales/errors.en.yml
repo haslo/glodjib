@@ -30,3 +30,4 @@ en:
       taken: "%{attribute} has already been taken"
     custom_messages:
       shorthand_start_with_character: "shorthand must start with a character"
+      tag_name_alphanumeric: "tag name must be alphanumeric"
