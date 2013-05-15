@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe FlickrImagesController do
+describe FlickrImagesController, :controller => true do
   extend ControllerMacros
 
   describe "routing" do

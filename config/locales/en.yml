@@ -6,6 +6,7 @@ en:
       show: '%{title_parameter}'
       new: New Blog Post
       create: New Blog Post
+      edit: Edit Blog Post
     flickr_images:
       portfolio: Portfolio
 
@@ -16,6 +17,7 @@ en:
   links:
     post:
       new: New Post
+      edit: Edit Post
       destroy: Delete Post
     caches:
       reset: Reset Caches
@@ -30,6 +32,7 @@ en:
       invalid: Invalid post
       not_found: Post not found
       destroyed: Post deleted
+      updated: Post updated
     flickr_images:
       cache_updated: Flickr image cache updated, found %{count} images
 

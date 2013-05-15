@@ -35,6 +35,19 @@ Feature: Manage Posts
     And I should see 2 field error messages
     And I should have 0 posts
 
+  Scenario: Edit Post
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    When I go to the homepage
+    And I follow the first "Edit Post"
+    And I fill in "Title" with "Potatoes"
+    And I fill in "Content" with "Rather awesome dog sauce"
+    And I press "Update Post"
+    Then I should see "Post edited"
+    And I should see "Potatoes"
+    And I should see that "Potatoes" is in a h3 tag
+    And I should see "Rather awesome dog sauce"
+    And I should have 2 post
+
   Scenario: Delete Post
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     When I go to the homepage

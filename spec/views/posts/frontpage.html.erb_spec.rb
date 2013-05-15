@@ -26,4 +26,9 @@ describe "posts/frontpage.html.erb" do
       response.should contain(post.content)
     end
   end
+
+  it "should not have missing translations" do
+    render
+    response.should_not contain("translation missing")
+  end
 end

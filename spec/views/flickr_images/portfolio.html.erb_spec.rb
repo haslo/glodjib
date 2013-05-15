@@ -28,4 +28,9 @@ describe "flickr_images/portfolio.html.erb" do
       response.should have_selector("img", :src => flickr_image.flickr_thumbnail_url)
     end
   end
+
+  it "should not have missing translations" do
+    render
+    response.should_not contain("translation missing")
+  end
 end

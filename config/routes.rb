@@ -4,7 +4,8 @@ Glodjib::Application.routes.draw do
   root to: 'posts#frontpage'
 
   scope '/admin' do
-    resources :posts, :only => [:index, :new, :create]
+    resources :posts, :only => [:index, :new, :create, :edit]
+    put 'posts/:id/edit' => 'posts#edit'
     delete 'posts/:id' => 'posts#destroy', :as => :destroy_post
     delete 'reset_caches' => 'flickr_images#reset_caches', :as => :reset_caches
   end

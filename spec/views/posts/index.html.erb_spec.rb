@@ -2,11 +2,8 @@ require 'spec_helper'
 
 describe "posts/index.html.erb" do
   before(:each) do
-    @posts = [ Post.new(:title => "title of the post 1", :content => "content of the post 1"),
-               Post.new(:title => "title of the post 2", :content => "content of the post 2") ]
-    @posts.each do |post|
-      post.created_at = Time.now
-    end
+    @posts = [ Post.create!(:title => "title of the post 1", :content => "content of the post 1"),
+               Post.create!(:title => "title of the post 2", :content => "content of the post 2") ]
   end
 
   it "should contain titles of all posts" do
@@ -28,5 +25,10 @@ describe "posts/index.html.erb" do
     @posts.each do |post|
       response.should contain(post.content)
     end
+  end
+
+  it "should not have missing translations" do
+    render
+    response.should_not contain("translation missing")
   end
 end

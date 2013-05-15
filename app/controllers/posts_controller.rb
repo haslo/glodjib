@@ -35,10 +35,35 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+    posts = Post.where("id = ?", params[:id])
+    if posts.count > 0
+      if request.get?
+        @post = posts.first
+        @title_parameter = @post.title
+      elsif request.put?
+        @post = Post.find(params[:id])
+        if @post.update_attributes(params[:post])
+          flash[:notice] = I18n.t('notices.post.updated')
+          redirect_to posts_path
+        end
+      end
+    else
+      flash[:error] = I18n.t('notices.post.not_found')
+      redirect_to posts_path
+    end
+  end
+
   def destroy
-    post = Post.find(params[:id])
-    post.destroy
-    flash[:notice] = I18n.t('notices.post.destroyed')
-    redirect_to root_path
+    posts = Post.where("id = ?", params[:id])
+    if posts.count > 0
+      post = posts.first
+      post.destroy
+      flash[:notice] = I18n.t('notices.post.destroyed')
+      redirect_to posts_path
+    else
+      flash[:error] = I18n.t('notices.post.not_found')
+      redirect_to posts_path
+    end
   end
 end

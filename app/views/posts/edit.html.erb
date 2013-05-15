@@ -1,0 +1,8 @@
+<%= simple_form_for @post, :url => edit_post_path(:id => @post.id) do |f| %>
+  <%= f.error_notification %>
+  <%= display_base_errors @post %>
+  <%= f.input :title, input_html: { class: 'input-block-level' }, required: false %>
+  <%= f.input :content, input_html: { class: 'input-block-level tinymce' }, required: false %>
+  <%= f.button :submit %>
+<% end %>
+<%= tinymce %>
