@@ -11,6 +11,15 @@ describe Post do
 
   it { should have_and_belong_to_many :post_tags }
 
+  it "accepts post_tags into its post_tags list" do
+    post = new_valid_record
+    post_tag = PostTag.new(:tag_text => "tag")
+    post.post_tags << post_tag
+    post.save
+    post_tag.save
+    post.post_tags.should have(1).items
+  end
+
   describe "the shorthand has to start with an alphabetical character" do
     it "does not allow a numerical character up front" do
       record = new_valid_record
