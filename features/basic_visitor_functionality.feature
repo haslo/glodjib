@@ -24,6 +24,24 @@ Feature: Basic Visitor Functionality
     Then I should see that "Pizza" is in a h2 tag
     And I should see "Dummy Text"
 
+  Scenario: Post With "Read More" Link in Posts List
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text!!more!!totally hidden text"
+    When I go to the homepage
+    Then I should see "Pizza"
+    And I should see "Breadsticks"
+    And I should see "Dummy Text"
+    And I should not see "!!more!!"
+    And I should not see "totally hidden text"
+
+  Scenario: View Post With "Read More" Link
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text!!more!!totally hidden text"
+    When I go to the homepage
+    And I follow the only "Pizza"
+    Then I should see that "Pizza" is in a h2 tag
+    And I should see "Dummy Text"
+    And I should not see "!!more!!"
+    And I should see "totally hidden text"
+
   @flickr_api
   Scenario: Visit Portfolio
     Given I have no posts

@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "posts/frontpage.html.erb" do
   before(:each) do
-    @posts = [ Post.create!(:title => "title of the post 1", :content => "content of the post 1"),
-               Post.create!(:title => "title of the post 2", :content => "content of the post 2") ]
+    @posts = [ Post.create!(:title => "title of the post 1", :content => "content of the post 1!!more!!new content after the split"),
+               Post.create!(:title => "title of the post 2", :content => "content of the post 2!!more!!new content after the split") ]
   end
 
   it "should contain titles of all posts" do
