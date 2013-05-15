@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
   validates_uniqueness_of :shorthand
   validate :shorthand_starts_with_character
 
+  has_and_belongs_to_many :post_tags
+
   def title=(value)
     write_attribute(:title, value)
     if value

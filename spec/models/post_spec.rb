@@ -9,6 +9,8 @@ describe Post do
 
   it { should validate_uniqueness_of(:shorthand) }
 
+  it { should have_and_belong_to_many :post_tags }
+
   describe "the shorthand has to start with an alphabetical character" do
     it "does not allow a numerical character up front" do
       record = new_valid_record
