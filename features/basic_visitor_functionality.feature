@@ -24,6 +24,7 @@ Feature: Basic Visitor Functionality
     Then I should see that "Pizza" is in a h2 tag
     And I should see "Dummy Text"
 
+  @flickr_api
   Scenario: Visit Portfolio
     Given I have no posts
     And I am on the homepage

@@ -1,3 +1,4 @@
+@flickr_api
 Feature: Manage Portfolios
   In order to make the portfolio part useful
   As an admin
