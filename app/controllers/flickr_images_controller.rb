@@ -8,6 +8,7 @@ class FlickrImagesController < ApplicationController
 
   def reset_caches
     FlickrCache.destroy_all
+    flash[:notice] = I18n.t('notices.flickr_images.cache_updated')
     redirect_to portfolio_path
   end
 end

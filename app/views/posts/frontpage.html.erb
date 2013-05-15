@@ -2,5 +2,6 @@
   <h3><%= link_to post.title, post_path(:id => post.shorthand) %></h3>
   <p class="post_date"><%= I18n.l post.created_at, :format => :short %></p>
   <p><%= post.content %></p>
+  <p><%= link_to I18n.t('links.post.destroy'), destroy_post_path(:id => post.id), :confirm => I18n.t('link_confirmations.destroy_post'), :method => :delete %></p>
 <% end %>
 <p><%= link_to I18n.t('links.post.new'), new_post_path %></p>

@@ -34,4 +34,11 @@ class PostsController < ApplicationController
       render 'new'
     end
   end
+
+  def destroy
+    post = Post.find(params[:id])
+    post.destroy
+    flash[:notice] = I18n.t('notices.post.destroyed')
+    redirect_to root_path
+  end
 end

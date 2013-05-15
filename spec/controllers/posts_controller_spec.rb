@@ -26,7 +26,8 @@ describe PostsController do
     end
 
     it "routes /admin/posts/:id to #destroy" do
-      expect(:delete => "/admin/posts/test").to route_to(:controller => "posts", :action => "destroy", :id => "test")
+      destroy_post_path(:id => "test").should == "/admin/posts/test"
+      expect(:delete => destroy_post_path(:id => "test")).to route_to(:controller => "posts", :action => "destroy", :id => "test")
     end
   end
 

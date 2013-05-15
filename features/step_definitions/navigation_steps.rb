@@ -14,7 +14,11 @@ When(/^I follow the page title link$/) do
   find("h2:first a").click
 end
 
-When(/^I follow "(.*?)"$/) do |link_text|
+When(/^I follow the first "(.*?)"$/) do |link_text|
+  first(:link, link_text).click
+end
+
+When(/^I follow the only "(.*?)"$/) do |link_text|
   click_link link_text
 end
 
