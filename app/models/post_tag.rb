@@ -5,4 +5,8 @@ class PostTag < ActiveRecord::Base
   validates_uniqueness_of :tag_text
 
   has_and_belongs_to_many :posts
+
+  def tag_text=(value)
+    write_attribute(:tag_text, value.blank? ? nil : value.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, ''))
+  end
 end

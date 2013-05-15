@@ -1,5 +1,5 @@
 shared_examples_for "a model that accepts text" do |property|
-  let(:text_input) { "some text" }
+  let(:text_input) { "some_text" }
 
   it "accepts text input for #{property}" do
     record = new_valid_record
@@ -7,7 +7,7 @@ shared_examples_for "a model that accepts text" do |property|
     record.errors[:"#{property}"].should have(0).errors
   end
 
-  it "returns the value that was set for #{property}" do
+  it "returns the value that was set for #{property} (no spaces, alphanumerical plus _)" do
     record = new_valid_record
     record.send(:"#{property}=", text_input)
     record.send(:"#{property}").should == text_input

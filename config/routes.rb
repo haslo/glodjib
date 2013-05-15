@@ -10,6 +10,10 @@ Glodjib::Application.routes.draw do
     delete 'reset_caches' => 'flickr_images#reset_caches', :as => :reset_caches
   end
 
+  scope '/tag' do
+    get ':id' => 'post_tag#show', :as => :post_tag
+  end
+
   get 'portfolio' => 'flickr_images#portfolio', :as => :portfolio
   get ':id' => 'posts#show', :as => :post
 end

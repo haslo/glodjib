@@ -47,7 +47,7 @@ Feature: Manage Posts
     And I should see "Potatoes"
     And I should see that "Potatoes" is in a h3 tag
     And I should see "Rather awesome dog sauce"
-    And I should have 2 post
+    And I should have 2 posts
 
   Scenario: Delete post
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
@@ -55,3 +55,16 @@ Feature: Manage Posts
     And I follow the first "Delete Post"
     Then I should not see that "Pizza" is in a h3 tag
     And I should see that "Breadsticks" is in a h3 tag
+
+  Scenario: Add tag to post in edit
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    When I go to the homepage
+    And I follow the first "Edit Post"
+    And I fill in "Tags" with "pizza, cheese, yummie"
+    And I press "Update Post"
+    Then I should see "Post updated"
+    And I should see "pizza"
+    And I should see "cheese"
+    And I should see "yummie"
+    And I should have 2 posts
+    And I should have 3 post tags

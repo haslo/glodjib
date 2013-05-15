@@ -74,6 +74,26 @@ describe Post do
       end
     end
 
+    describe "when accepting explicit shorthand" do
+      it "makes everything lowercase" do
+        record = new_valid_record
+        record.shorthand = "TesTinG"
+        record.shorthand.should == "testing"
+      end
+
+      it "strips spaces and puts _ there" do
+        record = new_valid_record
+        record.shorthand = "testing title"
+        record.shorthand.should == "testing_title"
+      end
+
+      it "removes all non-alphanumerical characters" do
+        record = new_valid_record
+        record.shorthand = "testing123%&"
+        record.shorthand.should == "testing123"
+      end
+    end
+
     it "overwrites automatically saved shorthands when the title is updated" do
       record = new_valid_record
       record.title = "Initial Testing"

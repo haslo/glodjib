@@ -9,6 +9,8 @@ en:
       edit: Edit Blog Post
     flickr_images:
       portfolio: Portfolio
+    post_tag:
+      show: 'Posts with tag "%{title_parameter}"'
 
   navigation:
     home: Blog
@@ -34,6 +36,9 @@ en:
       not_found: Post not found
       destroyed: Post deleted
       updated: Post updated
+    tag:
+      no_posts: Tag not found (it has no posts assigned)
+      not_found: Tag not found
     flickr_images:
       cache_updated: Flickr image cache updated, found %{count} images
 

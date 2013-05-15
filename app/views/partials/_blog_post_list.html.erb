@@ -1,0 +1,13 @@
+<% for post in posts %>
+  <h3><%= link_to post.title, post_path(:id => post.shorthand) %></h3>
+  <p class="post_date"><%= I18n.l post.created_at, :format => :short %></p>
+  <% if post.post_tags.count > 0 %>
+    <p class="post_tags"><%= post.post_tags.collect{|post_tag| link_to post_tag.tag_text, post_tag_path(:id => post_tag.id)}.join(' - ').html_safe %></p>
+  <% end %>
+  <%= Nokogiri::HTML::DocumentFragment.parse(post.content.split('!!more!!')[0]).to_html.html_safe %>
+  <% if post.content.include?('!!more!!') %>
+    <p><%= link_to I18n.t('links.post.read_more'), post_path(:id => post.shorthand) %></p>
+  <% end %>
+  <p><%= link_to I18n.t('links.post.edit'), edit_post_path(:id => post.id) %> - <%= link_to I18n.t('links.post.destroy'), destroy_post_path(:id => post.id), :confirm => I18n.t('link_confirmations.destroy_post'), :method => :delete %></p>
+<% end %>
+<p><%= link_to I18n.t('links.post.new'), new_post_path %></p>

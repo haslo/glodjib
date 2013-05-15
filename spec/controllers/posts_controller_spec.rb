@@ -61,6 +61,11 @@ describe PostsController, :controller => true do
           get 'show', :id => -1
           response.should redirect_to root_path
         end
+
+        it "adds a flash error" do
+          get 'show', :id => -1
+          flash[:error].should_not be_nil
+        end
       end
 
       describe "with valid post" do

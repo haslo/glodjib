@@ -18,4 +18,24 @@ describe PostTag do
     post_tag.save
     post_tag.posts.should have(1).items
   end
+
+  describe "tag_text parsing" do
+    it "downcases assigns to its post_tag member" do
+      record = new_valid_record
+      record.tag_text = "TaGtExT"
+      record.tag_text.should == "tagtext"
+    end
+
+    it "strips spaces and puts _ there" do
+      record = new_valid_record
+      record.tag_text = "testing tag text"
+      record.tag_text.should == "testing_tag_text"
+    end
+
+    it "removes all non-alphanumerical characters" do
+      record = new_valid_record
+      record.tag_text = "testing123%&"
+      record.tag_text.should == "testing123"
+    end
+  end
 end

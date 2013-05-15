@@ -49,7 +49,8 @@ Feature: Visit blog
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my "Pizza" post has the tags pizza, cheese, yummie
     And my "Breadsticks" post has the tags bread, yummie
-    When I follow the first "yummie"
+    When I go to the homepage
+    And I follow the first "yummie"
     Then I should see "Pizza"
     And I should see "Breadsticks"
 
@@ -57,6 +58,7 @@ Feature: Visit blog
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my "Pizza" post has the tags pizza, cheese, yummie
     And my "Breadsticks" post has the tags bread, yummie
-    When I follow the first "cheese"
+    When I go to the homepage
+    And I follow the first "cheese"
     Then I should see "Pizza"
     And I should not see "Breadsticks"
