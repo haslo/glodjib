@@ -19,6 +19,7 @@ en:
       new: New Post
       edit: Edit Post
       destroy: Delete Post
+      read_more: Read more...
     caches:
       reset: Reset Caches
 

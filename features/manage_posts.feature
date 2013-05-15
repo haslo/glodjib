@@ -1,9 +1,10 @@
+@admin
 Feature: Manage Posts
-  In order to make a blog
-  As an admin
+  In order to provide information to the visitors with a blog
+  as an admin
   I want to create and manage posts
 
-  Scenario: Open New Post Form
+  Scenario: Open new post form
     Given I have no posts
     And I am on the homepage
     When I follow the only "New Post"
@@ -11,7 +12,7 @@ Feature: Manage Posts
     And I should see "Title"
     And I should see "Content"
 
-  Scenario: Create Valid Post
+  Scenario: Create valid post
     Given I have no posts
     And I am on the homepage
     When I follow the only "New Post"
@@ -24,7 +25,7 @@ Feature: Manage Posts
     And I should see "Delicious potato wedges!"
     And I should have 1 post
 
-  Scenario: Create Invalid Post
+  Scenario: Attempt to create invalid post
     Given I have no posts
     And I am on the homepage
     When I follow the only "New Post"
@@ -35,7 +36,7 @@ Feature: Manage Posts
     And I should see 2 field error messages
     And I should have 0 posts
 
-  Scenario: Edit Post
+  Scenario: Edit post
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     When I go to the homepage
     And I follow the first "Edit Post"
@@ -48,7 +49,7 @@ Feature: Manage Posts
     And I should see "Rather awesome dog sauce"
     And I should have 2 post
 
-  Scenario: Delete Post
+  Scenario: Delete post
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     When I go to the homepage
     And I follow the first "Delete Post"
