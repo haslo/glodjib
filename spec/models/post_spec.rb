@@ -58,10 +58,16 @@ describe Post do
       expect { record.tags = "tag1, tag2" }.to change(PostTag, :count).from(0).to(2)
     end
 
-    it "correctly parses the names in a comma-separated list of strings into PostTag objects with #tags=" do
+    it "correctly parses the first name in a comma-separated list of strings into PostTag objects with #tags=" do
       record = new_valid_record
       record.tags = "tag1"
       PostTag.first.tag_text.should == "tag1"
+    end
+
+    it "correctly parses the second name in a comma-separated list of two strings into PostTag objects with #tags=" do
+      record = new_valid_record
+      record.tags = "tag1, tag2"
+      PostTag.last.tag_text.should == "tag2"
     end
   end
 
@@ -90,6 +96,12 @@ describe Post do
         record.title = "testing123%&"
         record.shorthand.should == "testing123"
       end
+
+      it "strips starting and ending whitespace" do
+        record = new_valid_record
+        record.title = "   testing   "
+        record.shorthand.should == "testing"
+      end
     end
 
     describe "when accepting explicit shorthand" do
@@ -109,6 +121,12 @@ describe Post do
         record = new_valid_record
         record.shorthand = "testing123%&"
         record.shorthand.should == "testing123"
+      end
+
+      it "strips starting and ending whitespace" do
+        record = new_valid_record
+        record.shorthand = "   testing   "
+        record.shorthand.should == "testing"
       end
     end
 

@@ -7,6 +7,6 @@ class PostTag < ActiveRecord::Base
   has_and_belongs_to_many :posts
 
   def tag_text=(value)
-    write_attribute(:tag_text, value.blank? ? nil : value.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, ''))
+    write_attribute(:tag_text, value.blank? ? nil : value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, ''))
   end
 end

@@ -51,7 +51,7 @@ class Post < ActiveRecord::Base
 private
 
   def auto_shorthand(original_value)
-    original_value.blank? ? nil : original_value.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
+    original_value.blank? ? nil : original_value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
   end
 
   def shorthand_starts_with_character

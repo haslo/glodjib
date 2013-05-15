@@ -35,5 +35,11 @@ describe PostTag do
       record.tag_text = "testing123%&"
       record.tag_text.should == "testing123"
     end
+
+    it "strips starting and ending whitespace" do
+      record = new_valid_record
+      record.tag_text = "   testing   "
+      record.tag_text.should == "testing"
+    end
   end
 end
