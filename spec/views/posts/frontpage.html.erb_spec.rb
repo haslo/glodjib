@@ -23,7 +23,7 @@ describe "posts/frontpage.html.erb" do
   it "should contain trimmed contents of all posts" do
     render
     @posts.each do |post|
-      response.should contain(post.content.split('!!more!!')[0])
+      response.should contain(Nokogiri::HTML::DocumentFragment.parse(post.content.split('!!more!!')[0]).text)
     end
   end
 
@@ -35,7 +35,7 @@ describe "posts/frontpage.html.erb" do
   it "should not contain untrimmed contents of any posts" do
     render
     @posts.each do |post|
-      response.should_not contain(post.content.split('!!more!!')[1])
+      response.should_not contain(Nokogiri::HTML::DocumentFragment.parse(post.content.split('!!more!!')[1]).text)
     end
   end
 
