@@ -19,6 +19,9 @@ en:
     caches:
       reset: Reset Caches
 
+  link_confirmations:
+    reset_caches: Are you certain that you want to reset all Flickr caches? This will make loading pages slow until they're refilled.
+
   notices:
     post:
       created: New post created

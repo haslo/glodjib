@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'flickraw'
 
-describe FlickrAPI do
+describe FlickrAPI, :flickr_api => true do
   let(:new_valid_record) { FlickrAPI.new }
 
   it "is not persisted" do

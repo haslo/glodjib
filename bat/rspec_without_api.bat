@@ -1,0 +1,1 @@
+rspec --tag ~flickr_api --format documentation

@@ -34,3 +34,9 @@ Feature: Manage Posts
     And I should see "Content can't be blank"
     And I should see 2 field error messages
     And I should have 0 posts
+
+  Scenario: Delete Post
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    When I go to the homepage
+    And I follow "Delete Post"
+    Then I should not see that "Pizza" is in a h2 tag

@@ -18,14 +18,14 @@ describe "flickr_images/portfolio.html.erb" do
   it "should contain URLs of all images" do
     render
     @flickr_images.each do |flickr_image|
-      response.should contain(flickr_image.full_flickr_url)
+      response.should have_selector("a", :href => flickr_image.full_flickr_url)
     end
   end
 
   it "should contain all the thumbnails themselves" do
     render
     @flickr_images.each do |flickr_image|
-      response.should contain(flickr_image.flickr_thumbnail_url)
+      response.should have_selector("img", :src => flickr_image.flickr_thumbnail_url)
     end
   end
 end
