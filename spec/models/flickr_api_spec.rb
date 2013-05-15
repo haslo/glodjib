@@ -86,13 +86,11 @@ describe FlickrAPI, :flickr_api => true do
       end
 
       it "resets the images currently associated with the tag it refreshes" do
-        flickr_tag = FlickrTag.new(:tag_name => "portfolio")
+        flickr_tag = FlickrTag.create!(:tag_name => "portfolio")
         0.upto(20).each do |index|
-          image = FlickrImage.new(:flickr_id => "image#{index}", :image_title => "image #{index}", :flickr_user => @flickr_api.flickr_user)
+          image = FlickrImage.create!(:flickr_id => "image#{index}", :image_title => "image #{index}", :flickr_user => @flickr_api.flickr_user)
           flickr_tag.flickr_images << image
-          image.save
         end
-        flickr_tag.save
         image_count = flickr.photos.search(:user_id => @flickr_api.flickr_user.username, :tags => "portfolio").size
         expect { @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio")) }.to change(flickr_tag.flickr_images, :count).from(21).to(image_count)
       end

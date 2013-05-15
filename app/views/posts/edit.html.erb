@@ -2,6 +2,7 @@
   <%= f.error_notification %>
   <%= display_base_errors @post %>
   <%= f.input :title, input_html: { class: 'input-block-level' }, required: false %>
+  <%= f.input :tags, input_html: { class: 'input-block-level' } %>
   <%= f.input :content, input_html: { class: 'input-block-level tinymce' }, required: false %>
   <%= f.button :submit %>
 <% end %>

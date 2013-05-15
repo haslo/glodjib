@@ -5,7 +5,6 @@ describe "post_tag/show.html.erb" do
     @post_tag = PostTag.create!(:tag_text => "tag_text")
     @post_tag.posts << Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>")
     @post_tag.posts << Post.create!(:title => "title of the post 2", :content => "<p>content of the post 2!!more!!<strong>new</strong> 2 content after the split</p>")
-    @post_tag.save
     @posts = @post_tag.posts
   end
 

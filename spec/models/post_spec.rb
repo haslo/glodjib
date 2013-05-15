@@ -13,10 +13,8 @@ describe Post do
 
   it "accepts post_tags into its post_tags list" do
     post = new_valid_record
-    post_tag = PostTag.new(:tag_text => "tag")
+    post_tag = PostTag.create!(:tag_text => "tag")
     post.post_tags << post_tag
-    post.save
-    post_tag.save
     post.post_tags.should have(1).items
   end
 
@@ -45,6 +43,26 @@ describe Post do
   it "marks returned content as html_safe" do
     record = new_valid_record
     record.content.should be_html_safe
+  end
+
+  describe "automatically parses tags for input and output" do
+    it "returns a comma-separated list of all its tags with #tags" do
+      record = new_valid_record
+      record.post_tags << PostTag.create!(:tag_text => "tag1")
+      record.post_tags << PostTag.create!(:tag_text => "tag2")
+      record.tags.should == "tag1, tag2"
+    end
+
+    it "parses a comma-separated list of strings into the correct number of PostTag objects with #tags=" do
+      record = new_valid_record
+      expect { record.tags = "tag1, tag2" }.to change(PostTag, :count).from(0).to(2)
+    end
+
+    it "correctly parses the names in a comma-separated list of strings into PostTag objects with #tags=" do
+      record = new_valid_record
+      record.tags = "tag1"
+      PostTag.first.tag_text.should == "tag1"
+    end
   end
 
   describe "automatically assigns an URL-compatible value to shorthand when the title is set" do

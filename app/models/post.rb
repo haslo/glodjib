@@ -1,7 +1,7 @@
 include ActionView::Helpers::SanitizeHelper
 
 class Post < ActiveRecord::Base
-  attr_accessible :title, :content, :shorthand
+  attr_accessible :title, :content, :shorthand, :tags
   validates_presence_of :title, :content, :shorthand
   validates_uniqueness_of :shorthand
   validate :shorthand_starts_with_character
@@ -32,6 +32,20 @@ class Post < ActiveRecord::Base
       return nil
     end
     sanitize(read_attribute(:content)).html_safe
+  end
+
+  def tags
+    post_tags.collect{|post_tag| post_tag.tag_text}.join(', ')
+  end
+
+  def tags=(value)
+    unless value.blank?
+      post_tags.destroy_all
+      value.split(',').each do |tag_text|
+        post_tag = PostTag.where("tag_text = ?", tag_text).first_or_create!(:tag_text => tag_text)
+        post_tags << post_tag
+      end
+    end
   end
 
 private

@@ -70,8 +70,7 @@ describe PostsController, :controller => true do
 
       describe "with valid post" do
         before(:each) do
-          @post = Post.new(:title => "title", :shorthand => "shorthand", :content => "content")
-          @post.save!
+          @post = Post.create!(:title => "title", :shorthand => "shorthand", :content => "content")
         end
 
         describe "called with id" do
@@ -141,8 +140,7 @@ describe PostsController, :controller => true do
 
       describe "with valid post" do
         before(:each) do
-          @post = Post.new(:title => "title", :shorthand => "shorthand", :content => "content")
-          @post.save!
+          @post = Post.create!(:title => "title", :shorthand => "shorthand", :content => "content")
         end
 
         it "returns http success" do
@@ -173,8 +171,7 @@ describe PostsController, :controller => true do
 
       describe "with valid post" do
         before(:each) do
-          @post = Post.new(:title => "title", :shorthand => "shorthand", :content => "content")
-          @post.save!
+          @post = Post.create!(:title => "title", :shorthand => "shorthand", :content => "content")
         end
 
         describe "with invalid updates" do
@@ -234,8 +231,7 @@ describe PostsController, :controller => true do
 
       describe "with valid id" do
         before(:each) do
-          @post = Post.new(:title => "title", :shorthand => "shorthand", :content => "content")
-          @post.save!
+          @post = Post.create!(:title => "title", :shorthand => "shorthand", :content => "content")
         end
 
         it "redirects to the posts path" do

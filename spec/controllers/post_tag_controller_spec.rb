@@ -29,8 +29,7 @@ describe PostTagController do
 
       describe "with valid post_tag" do
         before(:each) do
-          @post_tag = PostTag.new(:tag_text => "tag")
-          @post_tag.save!
+          @post_tag = PostTag.create!(:tag_text => "tag")
         end
 
         describe "with no posts assigned" do
@@ -54,7 +53,6 @@ describe PostTagController do
           before(:each) do
             @post_tag.posts << Post.create!(:title => "title 1", :content => "content 1")
             @post_tag.posts << Post.create!(:title => "title 2", :content => "content 2")
-            @post_tag.save
           end
 
           describe "called with id" do
