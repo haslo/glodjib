@@ -27,7 +27,7 @@ class Post < ActiveRecord::Base
 
   def content
     if read_attribute(:content).blank?
-      return read_attribute(:content)
+      return nil
     end
     sanitize(read_attribute(:content)).html_safe
   end

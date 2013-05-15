@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    render 'frontpage'
   end
 
   def show

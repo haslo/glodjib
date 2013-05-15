@@ -1,2 +1,2 @@
 <p class="post_date"><%= I18n.l @post.created_at, :format => :short %></p>
-<%= @post.content %>
+<%= @post.content.gsub('!!more!!', '</p><p>').html_safe %>

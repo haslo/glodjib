@@ -46,7 +46,7 @@ describe PostsController, :controller => true do
 
     describe "GET 'index'" do
       get :index do
-        should_render 'index'
+        should_render 'frontpage'
       end
     end
 

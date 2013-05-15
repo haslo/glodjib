@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe "posts/frontpage.html.erb" do
   before(:each) do
-    @posts = [ Post.create!(:title => "title of the post 1", :content => "content of the post 1!!more!!new content after the split"),
-               Post.create!(:title => "title of the post 2", :content => "content of the post 2!!more!!new content after the split") ]
+    @posts = [ Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>"),
+               Post.create!(:title => "title of the post 2", :content => "<p>content of the post 2!!more!!<strong>new</strong> 2 content after the split</p>") ]
   end
 
   it "should contain titles of all posts" do
@@ -20,11 +20,29 @@ describe "posts/frontpage.html.erb" do
     end
   end
 
-  it "should contain contents of all posts" do
+  it "should contain trimmed contents of all posts" do
     render
     @posts.each do |post|
-      response.should contain(post.content)
+      response.should contain(post.content.split('!!more!!')[0])
     end
+  end
+
+  it "should not contain any trimming tags ('!!more!!')" do
+    render
+    response.should_not contain('!!more!!')
+  end
+
+  it "should not contain untrimmed contents of any posts" do
+    render
+    @posts.each do |post|
+      response.should_not contain(post.content.split('!!more!!')[1])
+    end
+  end
+
+  it "should have HTML tags in the post content" do
+    render
+    response.should_not contain('<')
+    response.should_not contain('>')
   end
 
   it "should not have missing translations" do
