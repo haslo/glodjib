@@ -1,6 +1,8 @@
 require 'pp'
 
 class PostsController < ApplicationController
+  before_filter :authenticate_user!, :except => [:frontpage, :show]
+
   def frontpage
     @posts = Post.all
   end
