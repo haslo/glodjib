@@ -66,6 +66,7 @@ en:
           one: Content
           other: Contents
       setting:
+        flickr_user: Flickr user
         flickr_api_key: Flickr API key
         flickr_shared_secret: Flickr shared secret
         page_title: Page title (displayed in the title bar)

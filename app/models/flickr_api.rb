@@ -14,10 +14,9 @@ class FlickrAPI
     end
     # defaults
     # @TODO move to storage somewhere
-    @api_key = '07c77887e7450e5d0d86781a7264c45c' unless @api_key
-    @shared_secret = 'f6e1a90eb6ab7755' unless @shared_secret
-    default_user_id = '80288388@N00'
-    @flickr_user = FlickrUser.where("username = ?", default_user_id).first_or_create!(:username => default_user_id) unless @flickr_user
+    @api_key = Setting.flickr_api_key unless @api_key
+    @shared_secret = Setting.flickr_shared_secret unless @shared_secret
+    @flickr_user = FlickrUser.where("username = ?", Setting.flickr_user).first_or_create!(:username => Setting.flickr_user) unless @flickr_user
   end
 
   def persisted?

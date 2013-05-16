@@ -25,6 +25,7 @@ Feature: Manage the site as a whole
 
   Examples:
     |fieldname                  |
+    |flickr_user                |
     |flickr_api_key             |
     |flickr_shared_secret       |
     |page_title                 |
@@ -35,13 +36,15 @@ Feature: Manage the site as a whole
   Scenario: Update settings
     Given I am on the homepage
     And I follow the only "Admin"
-    When I fill in "Flickr API key" with "1234"
+    When I fill in "Flickr user" with "0x0x"
+    And I fill in "Flickr API key" with "1234"
     And I fill in "Flickr shared secret" with "5678"
     And I fill in "Page title" with "9012"
     And I fill in "Separator" with "3456"
     And I press "Save settings"
     Then my settings should be as follows:
       |fieldname                  |value|
+      |flickr_user                |0x0x |
       |flickr_api_key             |1234 |
       |flickr_shared_secret       |5678 |
       |page_title                 |9012 |

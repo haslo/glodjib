@@ -10,7 +10,11 @@ class Setting < ActiveRecord::Base
     if message.to_s =~ /([a-z_]+)=/
       return put($1, args[0])
     elsif message.to_s =~ /([a-z_]+)/
-      return get(message)
+      return get(message) unless get(message).nil?
+      if %w(flickr_api_key flickr_shared_secret flickr_user).include?(message.to_s)
+        return put(message, FLICKR_CONFIG[message[7..message.length]])
+      end
+      return nil
     end
     super
   end
