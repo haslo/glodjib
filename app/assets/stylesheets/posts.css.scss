@@ -24,8 +24,9 @@ body {
   margin-bottom: 10px;
 }
 
-.post_date {
+.post_date, .post_tags {
   font-size: smaller;
   position: relative;
   top: -15px;
+  margin-bottom: -5px;
 }

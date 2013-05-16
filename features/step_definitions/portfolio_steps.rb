@@ -1,10 +1,10 @@
-Given(/^I have at least (\d+) cache entries$/) do |count|
+Given(/^I have at least (\d+) Flickr cache entries$/) do |count|
   1.upto(count.to_i).each do |index|
     FlickrAPI.new.find_or_create_cache("testtag#{index}", "test-user #{index}")
   end
 end
 
-Then(/^there should be exactly (\d+) cache entries$/) do |count|
+Then(/^there should be exactly (\d+) Flickr cache entries$/) do |count|
   FlickrCache.count.should == count.to_i
 end
 

@@ -1,7 +1,11 @@
-<% @flickr_images.each do |flickr_image| %>
-  <div class="portfolio_tile">
-    <a href="<%= flickr_image.full_flickr_url.html_safe %>"><img class="portfolio_thumbnail" width="150" height="150" src="<%= flickr_image.flickr_thumbnail_url.html_safe %>"/></a>
-    <p><%= flickr_image.image_title %></p>
-  </div>
+<div class="clearfix">
+  <% @flickr_images.each do |flickr_image| %>
+    <div class="portfolio_tile">
+      <a href="<%= flickr_image.full_flickr_url.html_safe %>"><img class="portfolio_thumbnail" width="150" height="150" src="<%= flickr_image.flickr_thumbnail_url.html_safe %>"/></a>
+      <p><%= flickr_image.image_title %></p>
+    </div>
+  <% end %>
+</div>
+<% if user_signed_in? %>
+  <p><%= link_to I18n.t('links.caches.reset'), reset_caches_path, :confirm => I18n.t('link_confirmations.reset_caches'), :method => :delete %></p>
 <% end %>
-<%= link_to I18n.t('links.caches.reset'), reset_caches_path %>

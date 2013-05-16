@@ -1,2 +1,2 @@
 call cucumber features
-call rspec
+call rspec --format documentation

@@ -9,6 +9,15 @@ describe Post do
 
   it { should validate_uniqueness_of(:shorthand) }
 
+  it { should have_and_belong_to_many :post_tags }
+
+  it "accepts post_tags into its post_tags list" do
+    post = new_valid_record
+    post_tag = PostTag.create!(:tag_text => "tag")
+    post.post_tags << post_tag
+    post.post_tags.should have(1).items
+  end
+
   describe "the shorthand has to start with an alphabetical character" do
     it "does not allow a numerical character up front" do
       record = new_valid_record
@@ -36,6 +45,32 @@ describe Post do
     record.content.should be_html_safe
   end
 
+  describe "automatically parses tags for input and output" do
+    it "returns a comma-separated list of all its tags with #tags" do
+      record = new_valid_record
+      record.post_tags << PostTag.create!(:tag_text => "tag1")
+      record.post_tags << PostTag.create!(:tag_text => "tag2")
+      record.tags.should == "tag1, tag2"
+    end
+
+    it "parses a comma-separated list of strings into the correct number of PostTag objects with #tags=" do
+      record = new_valid_record
+      expect { record.tags = "tag1, tag2" }.to change(PostTag, :count).from(0).to(2)
+    end
+
+    it "correctly parses the first name in a comma-separated list of strings into PostTag objects with #tags=" do
+      record = new_valid_record
+      record.tags = "tag1"
+      PostTag.first.tag_text.should == "tag1"
+    end
+
+    it "correctly parses the second name in a comma-separated list of two strings into PostTag objects with #tags=" do
+      record = new_valid_record
+      record.tags = "tag1, tag2"
+      PostTag.last.tag_text.should == "tag2"
+    end
+  end
+
   describe "automatically assigns an URL-compatible value to shorthand when the title is set" do
     describe "when generating shorthand from title" do
       it "assigns a lowercase title without spaces or special characters directly to the shorthand" do
@@ -60,6 +95,38 @@ describe Post do
         record = new_valid_record
         record.title = "testing123%&"
         record.shorthand.should == "testing123"
+      end
+
+      it "strips starting and ending whitespace" do
+        record = new_valid_record
+        record.title = "   testing   "
+        record.shorthand.should == "testing"
+      end
+    end
+
+    describe "when accepting explicit shorthand" do
+      it "makes everything lowercase" do
+        record = new_valid_record
+        record.shorthand = "TesTinG"
+        record.shorthand.should == "testing"
+      end
+
+      it "strips spaces and puts _ there" do
+        record = new_valid_record
+        record.shorthand = "testing title"
+        record.shorthand.should == "testing_title"
+      end
+
+      it "removes all non-alphanumerical characters" do
+        record = new_valid_record
+        record.shorthand = "testing123%&"
+        record.shorthand.should == "testing123"
+      end
+
+      it "strips starting and ending whitespace" do
+        record = new_valid_record
+        record.shorthand = "   testing   "
+        record.shorthand.should == "testing"
       end
     end
 
