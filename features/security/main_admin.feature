@@ -1,4 +1,4 @@
-@admin
+@admin @blub
 Feature: Manage the site as a whole
   In order to configure the site as a whole
   as an admin
@@ -16,14 +16,17 @@ Feature: Manage the site as a whole
 
   Scenario: Observe settings link
     Given I am on the homepage
-    Then I should see "Settings"
+    Then I should see "Admin"
 
-  Scenario Scenario Outline: Open settings page and check for fields
+  Scenario Outline: Open settings page and check for fields
     Given I am on the homepage
-    And I follow the only "Settings"
-    Then I should see "Flickr username"
-    And I should see "Flickr API key"
-    And I should see "Flickr shared secret"
-    And I should see "Page title"
-    And I should see "Admin password"
-    And I should see "Admin password confirmation"
+    And I follow the only "Admin"
+    Then I should see "<fieldname>"
+
+  Examples:
+    |fieldname                  |
+    |Flickr API key             |
+    |Flickr shared secret       |
+    |Page title                 |
+    |Admin password             |
+    |Admin password confirmation|

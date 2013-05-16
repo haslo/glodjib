@@ -219,7 +219,7 @@ describe PostsController, :controller => true do
         end
       end
 
-      describe "DELETE 'destroy'", :current => true do
+      describe "DELETE 'destroy'" do
         describe "with invalid id" do
           it "does not return http success" do
             delete 'destroy', :id => -1

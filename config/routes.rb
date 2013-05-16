@@ -1,4 +1,6 @@
 Glodjib::Application.routes.draw do
+  get "settings/index"
+
   root to: 'posts#frontpage'
 
   scope '/admin' do
@@ -7,6 +9,8 @@ Glodjib::Application.routes.draw do
     put 'posts/:id/edit' => 'posts#edit'
     delete 'posts/:id' => 'posts#destroy', :as => :destroy_post
     delete 'reset_caches' => 'flickr_images#reset_caches', :as => :reset_caches
+    get 'settings' => 'settings#index', :as => :settings
+    put 'settings' => 'settings#update_all'
   end
 
   scope '/tag' do
