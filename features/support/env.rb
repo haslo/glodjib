@@ -11,3 +11,6 @@ rescue NameError
   raise "You need to add database_cleaner to your Gemfile (in the :test group) if you wish to use it."
 end
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Setting.page_title = "the glodjib platform"
+Setting.post_more_separator = "!!more!!"

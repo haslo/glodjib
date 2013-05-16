@@ -11,7 +11,7 @@ Feature: Visit blog
     Given I have no posts
     And I am on the homepage
     When I follow the page title link
-    Then I should see the page title as "Blog - Guido Gloor Modjib Photography"
+    Then I should see the page title as "Blog - the glodjib platform"
     And I should see that "Blog" is in a h2 tag
 
   Scenario: View posts list on homepage

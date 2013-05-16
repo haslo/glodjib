@@ -7,6 +7,7 @@ describe "post_tag/show.html.erb" do
     @post_tag.posts << Post.create!(:title => "title of the post 2", :content => "<p>content of the post 2!!more!!<strong>new</strong> 2 content after the split</p>")
     @posts = @post_tag.posts
     view.stub(:user_signed_in?) { true }
+    Setting.post_more_separator = '!!more!!'
   end
 
   it "should contain titles of all posts" do
@@ -26,7 +27,7 @@ describe "post_tag/show.html.erb" do
   it "should contain trimmed contents of all posts" do
     render
     @post_tag.posts.each do |post|
-      response.should contain(Nokogiri::HTML::DocumentFragment.parse(post.content.split('!!more!!')[0]).text)
+      response.should contain(Nokogiri::HTML::DocumentFragment.parse(post.content.split(Setting.post_more_separator)[0]).text)
     end
   end
 

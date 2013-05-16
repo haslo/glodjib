@@ -2,8 +2,8 @@
   <h3><%= link_to post.title, post_path(:id => post.shorthand) %></h3>
   <p class="post_date"><%= I18n.l post.created_at, :format => :short %></p>
   <%= render :partial => '/partials/blog_post_tags', :locals => { :post_tags => post.post_tags } %>
-  <%= Nokogiri::HTML::DocumentFragment.parse(post.content.split('!!more!!')[0]).to_html.html_safe %>
-  <% if post.content.include?('!!more!!') %>
+  <%= Nokogiri::HTML::DocumentFragment.parse(post.content.split(Setting.post_more_separator)[0]).to_html.html_safe %>
+  <% if post.content.include?(Setting.post_more_separator) %>
     <p><%= link_to I18n.t('links.post.read_more'), post_path(:id => post.shorthand) %></p>
   <% end %>
   <% if user_signed_in? %>

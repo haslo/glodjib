@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "posts/show.html.erb" do
   before(:each) do
     @post = Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>")
+    Setting.post_more_separator = "!!more!!"
   end
 
   it "should not contain title of the post, because the layout does contain it" do
