@@ -1,20 +1,23 @@
 @admin
-Feature: Manage Posts
+Feature: Manage posts
   In order to provide information to the visitors with a blog
   as an admin
   I want to create and manage posts
 
+  Background:
+    Given I am logged in as an admin
+
   Scenario: Open new post form
-    Given I have no posts
-    And I am on the homepage
+    Given I am on the homepage
+    And I have no posts
     When I follow the only "New Post"
     Then I should see that "New Blog Post" is in a h2 tag
     And I should see "Title"
     And I should see "Content"
 
   Scenario: Create valid post
-    Given I have no posts
-    And I am on the homepage
+    Given I am on the homepage
+    And I have no posts
     When I follow the only "New Post"
     And I fill in "Title" with "Spuds"
     And I fill in "Content" with "Delicious potato wedges!"
@@ -26,8 +29,8 @@ Feature: Manage Posts
     And I should have 1 post
 
   Scenario: Attempt to create invalid post
-    Given I have no posts
-    And I am on the homepage
+    Given I am on the homepage
+    And I have no posts
     When I follow the only "New Post"
     And I press "Create Post"
     Then I should see "Invalid post"
@@ -37,9 +40,9 @@ Feature: Manage Posts
     And I should have 0 posts
 
   Scenario: Edit post
-    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    When I go to the homepage
-    And I follow the first "Edit Post"
+    Given I am on the homepage
+    And I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    When I follow the first "Edit Post"
     And I fill in "Title" with "Potatoes"
     And I fill in "Content" with "Rather awesome dog sauce"
     And I press "Update Post"
@@ -50,15 +53,15 @@ Feature: Manage Posts
     And I should have 2 posts
 
   Scenario: Delete post
-    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    When I go to the homepage
-    And I follow the first "Delete Post"
+    Given I am on the homepage
+    And I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    When I follow the first "Delete Post"
     Then I should not see that "Pizza" is in a h3 tag
     And I should see that "Breadsticks" is in a h3 tag
 
   Scenario: Add tag to post in edit
-    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    When I go to the homepage
+    Given I am on the homepage
+    And I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And I follow the first "Edit Post"
     And I fill in "Tags" with "pizza, cheese, yummie"
     And I press "Update Post"
