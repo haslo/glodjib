@@ -18,4 +18,9 @@ class Setting < ActiveRecord::Base
       nil
     end
   end
+
+  def method_missing(message, *args, &block)
+    return Setting.get(message) unless Setting.get(message).nil?
+    super
+  end
 end

@@ -4,9 +4,9 @@ class SettingsController < ApplicationController
 
   def update_all
     valid_keys = %w(flickr_api_key flickr_shared_secret page_title post_more_separator)
-    if params.keys.include?("settings") && valid_keys.collect{|key| params["settings"].keys.include?(key) && !params["settings"][key].blank?}.all?
+    if params.keys.include?("setting") && valid_keys.collect{|key| params["setting"].keys.include?(key) && !params["setting"][key].blank?}.all?
       valid_keys.each do |key|
-        Setting.put(key, params["settings"][key])
+        Setting.put(key, params["setting"][key])
       end
     else
       flash[:error] = I18n.t('notices.settings.invalid_settings')

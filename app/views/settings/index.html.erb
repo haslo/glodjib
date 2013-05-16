@@ -1,2 +1,11 @@
-<h1>Settings#index</h1>
-<p>Find me in app/views/settings/index.html.erb</p>
+<%= simple_form_for Setting.new, :url => update_settings_path do |f| %>
+  <div class="form-inputs">
+    <%= f.error_notification %>
+    <% %w(flickr_api_key flickr_shared_secret page_title post_more_separator).each do |key| %>
+      <%= f.input key, input_html: { class: 'input-block-level' } %>
+    <% end %>
+  </div>
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

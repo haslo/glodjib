@@ -15,8 +15,8 @@ describe SettingsController, :blub => true do
       end
 
       it "routes /admin/settings to #update_all with put" do
-        settings_path.should == "/admin/settings"
-        expect(:put => settings_path).to route_to(:controller => "settings", :action => "update_all")
+        update_settings_path.should == "/admin/settings"
+        expect(:put => update_settings_path).to route_to(:controller => "settings", :action => "update_all")
       end
     end
 
@@ -30,17 +30,17 @@ describe SettingsController, :blub => true do
       describe "PUT 'update_all'" do
           describe "with empty values" do
             it "does not return http success" do
-              put 'update_all', :settings => {}
+              put 'update_all', :setting => {}
               response.should_not be_success
             end
 
             it "redirects to the settings path" do
-              put 'update_all', :settings => {}
+              put 'update_all', :setting => {}
               response.should redirect_to settings_path
             end
 
             it "adds a flash error" do
-              put 'update_all', :settings => {}
+              put 'update_all', :setting => {}
               flash[:error].should_not be_nil
             end
           end
@@ -51,12 +51,12 @@ describe SettingsController, :blub => true do
             end
 
             it "redirects to the settings path" do
-              put 'update_all', :settings => @params
+              put 'update_all', :setting => @params
               response.should redirect_to settings_path
             end
 
             it "updates the settings with new parameters for api key, shared secret, page title" do
-              put 'update_all', :settings => @params
+              put 'update_all', :setting => @params
               Setting.get(:flickr_api_key).should == @params[:flickr_api_key]
               Setting.get(:flickr_shared_secret).should == @params[:flickr_shared_secret]
               Setting.get(:page_title).should == @params[:page_title]
