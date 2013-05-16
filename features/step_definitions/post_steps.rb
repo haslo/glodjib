@@ -1,9 +1,6 @@
-require 'pp'
-
 Given /^I have posts titled (.+) that say "(.+)"$/ do |titles, content|
   titles.split(', ').each do |title|
     post = Post.create!(:title => title, :content => content)
-    pp post
   end
 end
 

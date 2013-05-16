@@ -6,8 +6,23 @@ When(/^I go to the homepage$/) do
   visit root_path
 end
 
-When(/^I try to visit the "new_post" page$/) do
-  visit new_post_path(:format => :html)
+When(/^I try to visit the "(.*?)" page with method "(.*?)" and id "(.*?)"$/) do |page_name, method, id|
+  case method.downcase.strip
+    when "get"
+      if id.nil?
+        eval "visit #{page_name}_path"
+      else
+        eval "visit #{page_name}_path(:id => '#{id}')"
+      end
+    when "delete"
+      if id.nil?
+        eval "Capybara.current_session.driver.delete #{page_name}_path"
+      else
+        eval "Capybara.current_session.driver.delete #{page_name}_path(:id => '#{id}')"
+      end
+    else
+      pending "method #{method} not implemented yet"
+  end
 end
 
 When(/^I follow the main title link$/) do
