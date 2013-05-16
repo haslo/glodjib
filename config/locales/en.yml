@@ -51,6 +51,8 @@ en:
     flickr_images:
       cache_updated: Flickr image cache updated
     logged_in_as: Logged in as %{user}
+    settings:
+      invalid_settings: Invalid settings, nothing was saved
 
   activerecord:
     attributes:

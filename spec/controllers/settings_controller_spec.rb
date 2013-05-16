@@ -30,36 +30,36 @@ describe SettingsController, :blub => true do
       describe "PUT 'update_all'" do
           describe "with empty values" do
             it "does not return http success" do
-              put 'update_all', :post => {}
+              put 'update_all', :settings => {}
               response.should_not be_success
             end
 
             it "redirects to the settings path" do
-              put 'update_all', :post => {}
+              put 'update_all', :settings => {}
               response.should redirect_to settings_path
             end
 
             it "adds a flash error" do
-              put 'update_all', :post => {}
+              put 'update_all', :settings => {}
               flash[:error].should_not be_nil
             end
           end
 
           describe "with valid values (no password)" do
             before(:each) do
-              @params = {:flickr_api_key => '1234', :flickr_shared_secret => '1324', :page_title => 'page title'}
+              @params = {:flickr_api_key => '1234', :flickr_shared_secret => '1324', :page_title => 'page title', :post_more_separator => '!!more!!'}
             end
 
             it "redirects to the settings path" do
-              put 'update_all', :post => @params
+              put 'update_all', :settings => @params
               response.should redirect_to settings_path
             end
 
             it "updates the settings with new parameters for api key, shared secret, page title" do
-              put 'update_all', :post => @params
-              Settings.get(:flickr_api_key).should == @params[:flickr_api_key]
-              Settings.get(:flickr_shared_secret).should == @params[:flickr_shared_secret]
-              Settings.get(:page_title).should == @params[:page_title]
+              put 'update_all', :settings => @params
+              Setting.get(:flickr_api_key).should == @params[:flickr_api_key]
+              Setting.get(:flickr_shared_secret).should == @params[:flickr_shared_secret]
+              Setting.get(:page_title).should == @params[:page_title]
             end
           end
       end
