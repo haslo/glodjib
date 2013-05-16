@@ -20,7 +20,7 @@ group :test, :development do
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'
   gem 'webrat'
-  gem 'simplecov', :require => false
+  gem 'simplecov'
 end
 
 # server without content-length warning spam
