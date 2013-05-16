@@ -6,6 +6,7 @@ describe "post_tag/show.html.erb" do
     @post_tag.posts << Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>")
     @post_tag.posts << Post.create!(:title => "title of the post 2", :content => "<p>content of the post 2!!more!!<strong>new</strong> 2 content after the split</p>")
     @posts = @post_tag.posts
+    view.stub(:user_signed_in?) { true }
   end
 
   it "should contain titles of all posts" do

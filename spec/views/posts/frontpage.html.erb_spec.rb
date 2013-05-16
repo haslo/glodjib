@@ -4,6 +4,7 @@ describe "posts/frontpage.html.erb" do
   before(:each) do
     @posts = [ Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>"),
                Post.create!(:title => "title of the post 2", :content => "<p>content of the post 2!!more!!<strong>new</strong> 2 content after the split</p>") ]
+    view.stub(:user_signed_in?) { true }
   end
 
   it "should contain titles of all posts" do

@@ -6,8 +6,8 @@ When(/^I go to the homepage$/) do
   visit root_path
 end
 
-When(/^I try to visit the (.*?)/) do |path_name|
-  eval("visit(#{path_name})")
+When(/^I try to visit the "new_post" page$/) do
+  visit new_post_path(:format => :html)
 end
 
 When(/^I follow the main title link$/) do

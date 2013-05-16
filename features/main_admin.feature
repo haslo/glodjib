@@ -29,5 +29,5 @@ Feature: Manage the site as a whole
   Scenario: Check new post page for access denial
     Given I am on the homepage
     And I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    When I try to visit the new_post_path
+    When I try to visit the "new_post" page
     Then I should see "Access denied, please log in"
