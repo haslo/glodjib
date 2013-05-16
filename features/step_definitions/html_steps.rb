@@ -10,6 +10,10 @@ Then(/^I should not see "(.*?)"$/) do |message|
   page.should_not have_text(message)
 end
 
+Then(/^I should see the setting translation for "(.*?)"$/) do |setting_name|
+  page.should have_text(I18n.t("activerecord.attributes.setting.#{setting_name}"))
+end
+
 Then(/^I should see that "(.*?)" is in a (.*?) tag/) do |text, tag|
   page.should have_selector(tag, :text => text)
 end

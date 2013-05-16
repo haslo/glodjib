@@ -21,12 +21,13 @@ Feature: Manage the site as a whole
   Scenario Outline: Open settings page and check for fields
     Given I am on the homepage
     And I follow the only "Admin"
-    Then I should see "<fieldname>"
+    Then I should see the setting translation for "<fieldname>"
 
   Examples:
     |fieldname                  |
-    |Flickr API key             |
-    |Flickr shared secret       |
-    |Page title                 |
-    |Admin password             |
-    |Admin password confirmation|
+    |flickr_api_key             |
+    |flickr_shared_secret       |
+    |page_title                 |
+    |post_more_separator        |
+    |admin_password             |
+    |admin_password_confirmation|

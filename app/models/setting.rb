@@ -15,6 +15,22 @@ class Setting < ActiveRecord::Base
     super
   end
 
+  def admin_password=(value)
+    @admin_password = value
+  end
+
+  def admin_password_confirmation=(value)
+    @admin_password_confirmation = value
+  end
+
+  def save_admin_password
+    if @admin_password == @admin_password_confirmation
+      user = User.first
+      user.password = user.password_confirmation = @admin_password
+      user.save!
+    end
+  end
+
 private
 
   def self.put(key, value)

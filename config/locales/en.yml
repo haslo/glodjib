@@ -68,3 +68,5 @@ en:
         flickr_shared_secret: Flickr shared secret
         page_title: Page title (displayed in the title bar)
         post_more_separator: Separator for "Read more..." in posts
+        admin_password: Admin password
+        admin_password_confirmation: Admin password confirmation
