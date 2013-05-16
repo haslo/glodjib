@@ -6,6 +6,10 @@ When(/^I go to the homepage$/) do
   visit root_path
 end
 
+When(/^I try to visit the (.*?)/) do |path_name|
+  eval("visit(#{path_name})")
+end
+
 When(/^I follow the main title link$/) do
   find("h1:first a").click
 end
