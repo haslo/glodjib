@@ -1,9 +1,8 @@
 Glodjib::Application.routes.draw do
-  get "flickr_images/index"
-
   root to: 'posts#frontpage'
 
   scope '/admin' do
+    devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
     resources :posts, :only => [:index, :new, :create, :edit]
     put 'posts/:id/edit' => 'posts#edit'
     delete 'posts/:id' => 'posts#destroy', :as => :destroy_post

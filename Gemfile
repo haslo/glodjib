@@ -12,6 +12,7 @@ gem 'ruby-akismet', :require => 'akismet'
 gem 'mini_magick'
 gem 'flickraw'
 gem 'tinymce-rails'
+gem 'devise'
 
 # testing frameworks
 group :test, :development do
