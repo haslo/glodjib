@@ -46,7 +46,7 @@ en:
       no_posts: Tag not found (it has no posts assigned)
       not_found: Tag not found
     flickr_images:
-      cache_updated: Flickr image cache updated, found %{count} images
+      cache_updated: Flickr image cache updated
     logged_in_as: Logged in as %{user}
 
   activerecord:

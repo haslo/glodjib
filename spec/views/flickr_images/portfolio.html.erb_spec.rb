@@ -6,6 +6,7 @@ describe "flickr_images/portfolio.html.erb" do
     1.upto(10).each do |index|
       @flickr_images << FlickrImage.new(:image_title => "image title #{index}", :full_flickr_url => "url #{index}", :flickr_thumbnail_url => "thumbnail #{index}")
     end
+    view.stub(:user_signed_in?) { true }
   end
 
   it "should contain titles of all images" do

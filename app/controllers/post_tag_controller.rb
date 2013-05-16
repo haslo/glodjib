@@ -1,4 +1,6 @@
 class PostTagController < ApplicationController
+  before_filter :authenticate_user!, :except => [:show]
+
   def show
     post_tags = PostTag.where("id = ? or tag_text = ?", params[:id], params[:id])
     if post_tags.count > 0

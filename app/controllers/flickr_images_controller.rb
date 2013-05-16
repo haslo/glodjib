@@ -1,4 +1,6 @@
 class FlickrImagesController < ApplicationController
+  before_filter :authenticate_user!, :except => [:portfolio]
+
   def portfolio
     flickr_api = FlickrAPI.new
     flickr_cache = flickr_api.find_or_create_cache('portfolio')

@@ -6,4 +6,6 @@
     </div>
   <% end %>
 </div>
-<%= link_to I18n.t('links.caches.reset'), reset_caches_path, :confirm => I18n.t('link_confirmations.reset_caches'), :method => :delete %>
+<% if user_signed_in? %>
+  <p><%= link_to I18n.t('links.caches.reset'), reset_caches_path, :confirm => I18n.t('link_confirmations.reset_caches'), :method => :delete %></p>
+<% end %>

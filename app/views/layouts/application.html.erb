@@ -28,7 +28,7 @@
           <%= render 'layouts/messages' %>
           <%= yield %>
           <% if user_signed_in? %>
-            <%= I18n.t 'notices.logged_in_as', :user => current_user.email %>
+            <p class="login_notice"><%= I18n.t 'notices.logged_in_as', :user => current_user.email %></p>
           <% end %>
         </div>
       </div>

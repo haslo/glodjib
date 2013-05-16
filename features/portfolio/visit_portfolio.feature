@@ -8,9 +8,15 @@ Feature: Visit portfolio
     Given I am not logged in
 
   Scenario: Visit portfolio
-    Given I am on the homepage
-    And I have no posts
+    Given I have no posts
+    And I am on the homepage
     When I follow the only "Portfolio"
     Then I should see the page title as "Portfolio - Guido Gloor Modjib Photography"
     And I should see that "Portfolio" is in a h2 tag
     And I should see at least 1 portfolio image thumbnail
+
+  Scenario: No management functionality is exposed on the portfolio page
+    Given I have no posts
+    And I am on the homepage
+    When I follow the only "Portfolio"
+    Then I should not see "Reset Caches"
