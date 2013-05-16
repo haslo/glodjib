@@ -63,3 +63,8 @@ en:
         content:
           one: Content
           other: Contents
+      setting:
+        flickr_api_key: Flickr API key
+        flickr_shared_secret: Flickr shared secret
+        page_title: Page title (displayed in the title bar)
+        post_more_separator: Separator for "Read more..." in posts

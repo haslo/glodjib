@@ -9,12 +9,12 @@ describe "settings/index.html.erb", :blub => true do
 
   shared_examples_for "displays the settings" do |setting, value|
     it "should display the label for #{setting}" do
-      render :file => '/settings/index.html.erb'
-      pending "translation"
+      render
+      response.should contain(I18n.t("activerecord.attributes.setting.#{setting}"))
     end
 
-    it "should display a text field for #{setting}" do
-      render :file => '/settings/index.html.erb'
+    it "displays a text field for #{setting}" do
+      render
       response.should have_selector("input", :type => "text", :name => "setting[#{setting}]", :value => value)
     end
   end
