@@ -13,6 +13,8 @@ en:
       show: 'Posts with tag "%{title_parameter}"'
     sessions:
       new: Login
+    settings:
+      index: Admin
 
   navigation:
     home: Blog

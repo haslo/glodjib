@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130516095517) do
+ActiveRecord::Schema.define(:version => 20130516121821) do
 
   create_table "flickr_caches", :force => true do |t|
     t.integer  "flickr_user_id"
@@ -72,6 +72,13 @@ ActiveRecord::Schema.define(:version => 20130516095517) do
     t.datetime "updated_at",                          :null => false
     t.string   "shorthand"
     t.boolean  "custom_shorthand", :default => false
+  end
+
+  create_table "settings", :force => true do |t|
+    t.string   "key"
+    t.string   "value"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
