@@ -14,13 +14,13 @@ describe Setting, :blub => true do
     expect { Setting.put("key", "value") }.to change(Setting, :count).from(0).to(1)
   end
 
-  it "stores the correct value for a key when #put is called" do
-    Setting.put("key", "value")
+  it "stores the correct value for a key through #method_missing" do
+    Setting.send(:key=, "value")
     Setting.find_by_key("key").value.should == "value"
   end
 
-  it "retreives the correct value with #get" do
-    Setting.put("key", "value")
-    Setting.get("key").should == "value"
+  it "retreives the correct value through #method_missing" do
+    Setting.send(:key=, "value")
+    Setting.send(:key).should == "value"
   end
 end
