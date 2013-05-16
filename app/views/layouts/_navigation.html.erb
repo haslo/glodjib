@@ -1,8 +1,6 @@
 <%= link_to I18n.t('navigation.home'), root_path, :class => 'brand' %>
 <%= link_to I18n.t('navigation.portfolio'), portfolio_path, :class => 'brand' %>
 <% if user_signed_in? %>
-  <!-- http://railscasts.com/episodes/209-devise-revised, 3:30 -->
-  <%= current_user.email %>
   <%= link_to I18n.t('navigation.logout'), destroy_user_session_path, :method => :delete, :class => 'brand' %>
 <% else %>
   <%= link_to I18n.t('navigation.login'), new_user_session_path, :class => 'brand'  %>

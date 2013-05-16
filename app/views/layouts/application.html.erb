@@ -27,6 +27,9 @@
           <h2><%= link_to I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), params %></h2>
           <%= render 'layouts/messages' %>
           <%= yield %>
+          <% if user_signed_in? %>
+            <%= I18n.t 'notices.logged_in_as', :user => current_user.email %>
+          <% end %>
         </div>
       </div>
       <footer>
