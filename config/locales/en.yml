@@ -33,6 +33,8 @@ en:
       reset: Reset Caches
     user:
       login: Login
+    setting:
+      save: Save settings
 
   link_confirmations:
     destroy_post: Are you certain that you want to delete this post?

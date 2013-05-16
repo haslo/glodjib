@@ -13,3 +13,9 @@ end
 Given(/^I am not logged in$/) do
   # nothing to do
 end
+
+Then(/^my settings should be as follows:$/) do |settings_table|
+  settings_table.hashes.each do |settings_hash|
+    Setting.send(settings_hash[:fieldname].to_sym).should == settings_hash[:value]
+  end
+end

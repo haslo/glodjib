@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Setting, :blub => true do
+describe Setting, :issue23 => true do
   it { should validate_presence_of :key }
   it { should validate_presence_of :value }
 

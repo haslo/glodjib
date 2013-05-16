@@ -10,5 +10,5 @@ require 'spec_helper'
 #     end
 #   end
 # end
-describe SettingsHelper, :blub => true do
+describe SettingsHelper, :issue23 => true do
 end

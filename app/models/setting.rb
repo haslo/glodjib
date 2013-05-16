@@ -24,14 +24,15 @@ class Setting < ActiveRecord::Base
   end
 
   def save_admin_password
-    if @admin_password == @admin_password_confirmation
+    unless @admin_password.blank? || @admin_password_confirmation.blank?
       user = User.first
-      user.password = user.password_confirmation = @admin_password
-      user.save!
+      user.password = @admin_password
+      user.password_confirmation = @admin_password_confirmation
+      unless user.save
+        user.errors[:password][0]
+      end
     end
   end
-
-private
 
   def self.put(key, value)
     setting = Setting.where("`key` = ?", key.to_s).first_or_initialize

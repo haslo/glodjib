@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe SettingsController, :blub => true do
+describe SettingsController, :issue23 => true do
   describe "as a logged in user" do
     before(:each) do
       @request.env["devise.mapping"] = Devise.mappings[:admin]
@@ -14,9 +14,9 @@ describe SettingsController, :blub => true do
         expect(:get => settings_path).to route_to(:controller => "settings", :action => "index")
       end
 
-      it "routes /admin/settings to #update_all with put" do
+      it "routes /admin/settings to #index with post" do
         update_settings_path.should == "/admin/settings"
-        expect(:put => update_settings_path).to route_to(:controller => "settings", :action => "update_all")
+        expect(:post => update_settings_path).to route_to(:controller => "settings", :action => "index")
       end
     end
 
@@ -27,20 +27,10 @@ describe SettingsController, :blub => true do
         end
       end
 
-      describe "PUT 'update_all'" do
+      describe "POST 'index'" do
           describe "with empty values" do
-            it "does not return http success" do
-              put 'update_all', :setting => {}
-              response.should_not be_success
-            end
-
-            it "redirects to the settings path" do
-              put 'update_all', :setting => {}
-              response.should redirect_to settings_path
-            end
-
             it "adds a flash error" do
-              put 'update_all', :setting => {}
+              post 'index', :setting => {}
               flash[:error].should_not be_nil
             end
           end
@@ -50,16 +40,66 @@ describe SettingsController, :blub => true do
               @params = {:flickr_api_key => '1234', :flickr_shared_secret => '1324', :page_title => 'page title', :post_more_separator => '!!more!!'}
             end
 
-            it "redirects to the settings path" do
-              put 'update_all', :setting => @params
-              response.should redirect_to settings_path
+            it "updates the settings with new parameters for api key, shared secret, page title" do
+              post 'index', :setting => @params
+              Setting.flickr_api_key.should == @params[:flickr_api_key]
+              Setting.flickr_shared_secret.should == @params[:flickr_shared_secret]
+              Setting.page_title.should == @params[:page_title]
+            end
+          end
+
+          describe "with valid values including password" do
+            before(:each) do
+              @params = {:flickr_api_key => '1234', :flickr_shared_secret => '1324', :page_title => 'page title', :post_more_separator => '!!more!!', :admin_password => "12345678", :admin_password_confirmation => "12345678"}
             end
 
             it "updates the settings with new parameters for api key, shared secret, page title" do
-              put 'update_all', :setting => @params
-              Setting.get(:flickr_api_key).should == @params[:flickr_api_key]
-              Setting.get(:flickr_shared_secret).should == @params[:flickr_shared_secret]
-              Setting.get(:page_title).should == @params[:page_title]
+              post 'index', :setting => @params
+              Setting.flickr_api_key.should == @params[:flickr_api_key]
+              Setting.flickr_shared_secret.should == @params[:flickr_shared_secret]
+              Setting.page_title.should == @params[:page_title]
+            end
+
+            it "does not update admin_password or admin_password_confirmation" do
+              post 'index', :setting => @params
+              Setting.admin_password.should be_nil
+              Setting.admin_password_confirmation.should be_nil
+            end
+
+            it "updates the first user's password" do
+              encrypted_password = User.first.encrypted_password
+              post 'index', :setting => @params
+              encrypted_password.should_not == User.first.encrypted_password
+            end
+          end
+
+          describe "with valid values but invalid password" do
+            before(:each) do
+              @params = {:flickr_api_key => '1234', :flickr_shared_secret => '1324', :page_title => 'page title', :post_more_separator => '!!more!!', :admin_password => "12345678", :admin_password_confirmation => "87654321"}
+            end
+
+            it "updates the settings with new parameters for api key, shared secret, page title" do
+              post 'index', :setting => @params
+              Setting.flickr_api_key.should == @params[:flickr_api_key]
+              Setting.flickr_shared_secret.should == @params[:flickr_shared_secret]
+              Setting.page_title.should == @params[:page_title]
+            end
+
+            it "does not update admin_password or admin_password_confirmation" do
+              post 'index', :setting => @params
+              Setting.admin_password.should be_nil
+              Setting.admin_password_confirmation.should be_nil
+            end
+
+            it "does not update the first user's password" do
+              encrypted_password = User.first.encrypted_password
+              post 'index', :setting => @params
+              encrypted_password.should == User.first.encrypted_password
+            end
+
+            it "shows a flash error" do
+              post 'index', :setting => @params
+              flash[:error].should_not be_nil
             end
           end
       end

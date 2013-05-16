@@ -1,4 +1,4 @@
-@admin @blub
+@admin @issue23
 Feature: Manage the site as a whole
   In order to configure the site as a whole
   as an admin
@@ -31,3 +31,18 @@ Feature: Manage the site as a whole
     |post_more_separator        |
     |admin_password             |
     |admin_password_confirmation|
+
+  Scenario: Update settings
+    Given I am on the homepage
+    And I follow the only "Admin"
+    When I fill in "Flickr API key" with "1234"
+    And I fill in "Flickr shared secret" with "5678"
+    And I fill in "Page title" with "9012"
+    And I fill in "Separator" with "3456"
+    And I press "Save settings"
+    Then my settings should be as follows:
+      |fieldname                  |value|
+      |flickr_api_key             |1234 |
+      |flickr_shared_secret       |5678 |
+      |page_title                 |9012 |
+      |post_more_separator        |3456 |

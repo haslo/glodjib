@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "settings/index.html.erb", :blub => true do
+describe "settings/index.html.erb", :issue23 => true do
   before(:each) do
     {:flickr_api_key => '1234', :flickr_shared_secret => '5678', :page_title => 'page title', :post_more_separator => '!!more!!'}.each do |key, value|
       Setting.put(key, value)
