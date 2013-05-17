@@ -70,6 +70,13 @@ describe Post, :issue4 => true do
       record.tags = "tag1, tag2"
       PostTag.last.tag_text.should == "tag2"
     end
+
+    it "doesn't break down when having the same values assigned twice with #tags=" do
+      record = new_valid_record
+      record.tags = "tag1, tag2"
+      record.tags = "tag1, tag2"
+      PostTag.last.tag_text.should == "tag2"
+    end
   end
 
   describe "automatically assigns an URL-compatible value to shorthand when the title is set" do

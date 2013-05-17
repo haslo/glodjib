@@ -7,7 +7,7 @@ class PostTag < ActiveRecord::Base
   has_and_belongs_to_many :posts
 
   def tag_text=(value)
-    write_attribute(:tag_text, parse(value))
+    write_attribute(:tag_text, PostTag.parse(value))
   end
 
   def self.parse(value)
