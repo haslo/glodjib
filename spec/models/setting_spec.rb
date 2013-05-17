@@ -11,12 +11,8 @@ describe Setting, :issue23 => true do
       (Setting.key = "value").should == "value"
     end
 
-    it "has two setting values by default for API key and shared secret" do
-      Setting.count.should == 2
-    end
-
     it "stores settings as key-value pairs with #method_missing assignment" do
-      expect { Setting.key = "value" }.to change(Setting, :count).from(2).to(3)
+      expect { Setting.key = "value" }.to change(Setting, :count).from(0).to(1)
     end
 
     it "stores the correct value for a key through #method_missing" do

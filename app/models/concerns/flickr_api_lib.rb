@@ -20,9 +20,9 @@ module Concerns::FlickrAPILib
         images_from_remote.each do |portfolio_image|
           photo_info = flickr.photos.getInfo :photo_id => portfolio_image.id, :secret => portfolio_image.secret
           flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
-          extract_tags(flickr_image, photo_info)
           extract_basic_image_info(flickr_cache, flickr_image, photo_info)
           extract_exif_info(flickr_image, portfolio_image)
+          extract_tags(flickr_image, photo_info)
           flickr_image.save
         end
       end
@@ -53,10 +53,16 @@ module Concerns::FlickrAPILib
     photo_exif = flickr.photos.getExif :photo_id => portfolio_image.id, :secret => portfolio_image.secret
     flickr_image.camera = photo_exif["camera"]
     photo_exif["exif"].each do |exif_line|
-      flickr_image.aperture = exif_line["clean"] if exif_line["tag"] == "FNumber"
-      flickr_image.shutter = exif_line["clean"] if exif_line["tag"] == "ExposureTime"
-      flickr_image.iso = exif_line["raw"] if exif_line["tag"] == "ISO"
-      flickr_image.focal_length = exif_line["clean"] if exif_line["tag"] == "FocalLength"
+      extract_individual_exif(flickr_image, :aperture, exif_line, "FNumber")
+      extract_individual_exif(flickr_image, :shutter, exif_line, "ExposureTime")
+      extract_individual_exif(flickr_image, :iso, exif_line, "ISO")
+      extract_individual_exif(flickr_image, :focal_length, exif_line, "FocalLength")
+    end
+  end
+
+  def extract_individual_exif(flickr_image, property, exif_line, key)
+    if exif_line["tag"] == key
+      flickr_image.send("#{property}=".to_sym, (exif_line["clean"].nil? ? exif_line["raw"] : exif_line["clean"]))
     end
   end
 
