@@ -105,22 +105,6 @@ describe FlickrAPI, :flickr_api => true do
         @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio"))
         @flickr_api.flickr_user.flickr_images.count.should == image_count
       end
-
-      shared_examples_for "a proper Flickr storage" do |property|
-        it "stores #{property}" do
-          @flickr_api.update_cache(@flickr_api.find_or_create_cache("portfolio"))
-          FlickrImage.first.send(property.to_sym).should_not be_nil
-        end
-      end
-
-      it_behaves_like "a proper Flickr storage", :image_description
-      it_behaves_like "a proper Flickr storage", :aperture
-      it_behaves_like "a proper Flickr storage", :shutter
-      it_behaves_like "a proper Flickr storage", :iso
-      it_behaves_like "a proper Flickr storage", :focal_length
-      it_behaves_like "a proper Flickr storage", :camera
-      it_behaves_like "a proper Flickr storage", :full_flickr_url
-      it_behaves_like "a proper Flickr storage", :flickr_thumbnail_url
     end
 
     describe "#find_or_create_cache" do
@@ -147,6 +131,19 @@ describe FlickrAPI, :flickr_api => true do
 
       it "returns an instance of FlickrCache" do
         @flickr_api.find_or_create_cache("tag", "username").should be_an_instance_of FlickrCache
+      end
+    end
+  end
+
+  describe "stores values from each api call" do
+    before(:each) do
+      shared_flickr_api = FlickrAPI.new
+      shared_flickr_api.update_cache(shared_flickr_api.find_or_create_cache("portfolio"))
+    end
+
+    %w(image_description aperture shutter iso focal_length camera full_flickr_url flickr_thumbnail_url).each do |property|
+      it "stores #{property}" do
+        FlickrImage.first.send(property.to_sym).should_not be_nil
       end
     end
   end

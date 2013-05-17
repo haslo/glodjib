@@ -19,24 +19,10 @@ module Concerns::FlickrAPILib
       if images_from_remote.count > 0
         images_from_remote.each do |portfolio_image|
           photo_info = flickr.photos.getInfo :photo_id => portfolio_image.id, :secret => portfolio_image.secret
-          flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_create!(:flickr_id => portfolio_image.id, :image_title => photo_info.title)
-          flickr_image.flickr_user = flickr_cache.flickr_user
-          photo_info.tags.each do |tag_name|
-            flickr_tag = FlickrTag.where("tag_name = ?", tag_name.to_s).first_or_create!(:tag_name => tag_name.to_s)
-            flickr_tag.flickr_images << flickr_image unless flickr_tag.flickr_images.include?(flickr_image)
-            flickr_tag.save
-          end
-          flickr_image.image_description = photo_info.description
-          flickr_image.full_flickr_url = FlickRaw.url_photopage(photo_info) + "/lightbox/"
-          flickr_image.flickr_thumbnail_url = FlickRaw.url_q(photo_info) # square 150
-          photo_exif = flickr.photos.getExif :photo_id => portfolio_image.id, :secret => portfolio_image.secret
-          flickr_image.camera = photo_exif["camera"]
-          photo_exif["exif"].each do |exif_line|
-            flickr_image.aperture = exif_line["clean"] if exif_line["tag"] == "FNumber"
-            flickr_image.shutter = exif_line["clean"] if exif_line["tag"] == "ExposureTime"
-            flickr_image.iso = exif_line["raw"] if exif_line["tag"] == "ISO"
-            flickr_image.focal_length = exif_line["clean"] if exif_line["tag"] == "FocalLength"
-          end
+          flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
+          extract_tags(flickr_image, photo_info)
+          extract_basic_image_info(flickr_cache, flickr_image, photo_info)
+          extract_exif_info(flickr_image, portfolio_image)
           flickr_image.save
         end
       end
@@ -45,6 +31,33 @@ module Concerns::FlickrAPILib
       return true
     end
     false
+  end
+
+  def extract_tags(flickr_image, photo_info)
+    photo_info.tags.each do |tag_name|
+      flickr_tag = FlickrTag.where("tag_name = ?", tag_name.to_s).first_or_create!(:tag_name => tag_name.to_s)
+      flickr_tag.flickr_images << flickr_image unless flickr_tag.flickr_images.include?(flickr_image)
+      flickr_tag.save
+    end
+  end
+
+  def extract_basic_image_info(flickr_cache, flickr_image, photo_info)
+    flickr_image.image_title = photo_info.title
+    flickr_image.flickr_user = flickr_cache.flickr_user
+    flickr_image.image_description = photo_info.description
+    flickr_image.full_flickr_url = FlickRaw.url_photopage(photo_info) + "/lightbox/"
+    flickr_image.flickr_thumbnail_url = FlickRaw.url_q(photo_info) # square 150 format
+  end
+
+  def extract_exif_info(flickr_image, portfolio_image)
+    photo_exif = flickr.photos.getExif :photo_id => portfolio_image.id, :secret => portfolio_image.secret
+    flickr_image.camera = photo_exif["camera"]
+    photo_exif["exif"].each do |exif_line|
+      flickr_image.aperture = exif_line["clean"] if exif_line["tag"] == "FNumber"
+      flickr_image.shutter = exif_line["clean"] if exif_line["tag"] == "ExposureTime"
+      flickr_image.iso = exif_line["raw"] if exif_line["tag"] == "ISO"
+      flickr_image.focal_length = exif_line["clean"] if exif_line["tag"] == "FocalLength"
+    end
   end
 
   def get_images_from_remote(flickr_cache)
