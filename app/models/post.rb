@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   validate :shorthand_starts_with_character
 
   has_and_belongs_to_many :post_tags
+  has_many :post_comments
 
   def title=(value)
     write_attribute(:title, value)

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Post do
+describe Post, :issue4 => true do
   let(:new_valid_record) { Post.new(:title => "title", :content => "content") }
 
   it { should validate_presence_of :title }
@@ -10,6 +10,7 @@ describe Post do
   it { should validate_uniqueness_of(:shorthand) }
 
   it { should have_and_belong_to_many :post_tags }
+  it { should have_many :post_comments }
 
   it "accepts post_tags into its post_tags list" do
     post = new_valid_record
