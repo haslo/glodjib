@@ -43,7 +43,7 @@ class Post < ActiveRecord::Base
     unless value.blank?
       post_tags.destroy_all
       value.split(',').each do |tag_text|
-        post_tag = PostTag.where("tag_text = ?", tag_text).first_or_create!(:tag_text => tag_text)
+        post_tag = PostTag.where("tag_text = ?", PostTag.parse(tag_text)).first_or_create!(:tag_text => tag_text)
         post_tags << post_tag
       end
     end

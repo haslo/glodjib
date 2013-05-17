@@ -16,9 +16,9 @@ describe "posts/show.html.erb" do
     response.should contain(I18n.l(@post.created_at, :format => :short))
   end
 
-  it "should contain content of the post, with !!more!! replaced with </p><p>" do
+  it "should contain content of the post, with !!more!! replaced" do
     render
-    response.should contain(Nokogiri::HTML::DocumentFragment.parse(@post.content.gsub('!!more!!', '</p><p>')).text)
+    response.should contain(Nokogiri::HTML::DocumentFragment.parse(@post.content.gsub('!!more!!', '')).text)
   end
 
   it "should have HTML tags in the post content" do

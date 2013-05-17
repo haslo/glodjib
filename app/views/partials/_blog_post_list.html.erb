@@ -4,7 +4,7 @@
   <%= render :partial => '/partials/blog_post_tags', :locals => { :post_tags => post.post_tags } %>
   <%= Nokogiri::HTML::DocumentFragment.parse(post.content.split(Setting.post_more_separator)[0]).to_html.html_safe %>
   <% if post.content.include?(Setting.post_more_separator) %>
-    <p><%= link_to I18n.t('links.post.read_more'), post_path(:id => post.shorthand) %></p>
+    <p><%= link_to I18n.t('links.post.read_more'), "#{post_path(:id => post.shorthand)}#more-#{post.id}" %></p>
   <% end %>
   <% if user_signed_in? %>
     <p><%= link_to I18n.t('links.post.edit'), edit_post_path(:id => post.id) %> - <%= link_to I18n.t('links.post.destroy'), destroy_post_path(:id => post.id), :confirm => I18n.t('link_confirmations.destroy_post'), :method => :delete %></p>

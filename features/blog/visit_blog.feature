@@ -49,6 +49,17 @@ Feature: Visit blog
     And I should not see "!!more!!"
     And I should see "totally hidden text"
 
+  Scenario: Observe presence of tags title when there is a post with tags
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    And my "Pizza" post has the tags pizza, cheese, yummie
+    And I am on the homepage
+    Then I should see "Tags:"
+
+  Scenario: Observe absence of tags title when there is no post with tags
+    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    And I am on the homepage
+    Then I should not see "Tags:"
+
   Scenario: View several blog posts by common tag
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my "Pizza" post has the tags pizza, cheese, yummie
