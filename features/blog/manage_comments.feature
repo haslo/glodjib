@@ -1,4 +1,4 @@
-@admin @issue4
+@admin @issue29
 Feature: Visit blog
   In order to obtain information and regular updates
   as a visitor

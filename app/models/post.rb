@@ -28,11 +28,15 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def content=(value)
+    write_attribute(:content, sanitize(value))
+  end
+
   def content
     if read_attribute(:content).blank?
       return nil
     end
-    sanitize(read_attribute(:content)).html_safe
+    read_attribute(:content).html_safe
   end
 
   def tags

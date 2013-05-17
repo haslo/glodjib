@@ -9,15 +9,16 @@ Feature: Visit blog
 
   Scenario: Check for comment links
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And my post titled Pizza has 2 comments
+    And my post titled Pizza has 1 comment
     And my post titled Breadsticks has 3 comments
     And I am on the homepage
-    Then I should see "2 comments"
+    Then I should see "1 comment"
     And I should see "3 comments"
+    And I should not see "1 comments"
 
   Scenario: Check for comment form
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And my post titled Pizza has 2 comments
+    And my post titled Pizza has 1 comment
     And my post titled Breadsticks has 3 comments
     And I am on the homepage
     When I follow the only "Pizza"
@@ -26,7 +27,6 @@ Feature: Visit blog
     And I should see "Email"
     And I should see "URL"
     And I should see "Comment"
-    And I should see "Submit comment"
 
   Scenario: Post a comment
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
@@ -34,7 +34,7 @@ Feature: Visit blog
     When I follow the only "Pizza"
     And I fill in "Name" with "Some name"
     And I fill in "Comment" with "Some comment"
-    And I press "Submit comment"
+    And I press "Submit Comment"
     Then I should have 1 comment
     And I should see "Some comment"
 
@@ -45,7 +45,7 @@ Feature: Visit blog
     And I fill in "Name" with "Some name"
     And I fill in "URL" with "http://www.test.com"
     And I fill in "Comment" with "Some comment"
-    And I press "Submit comment"
+    And I press "Submit Comment"
     Then I should have 1 comment
     And I should see that "Some name" links to "http://www.test.com"
     And I should see "Some comment"
@@ -56,9 +56,9 @@ Feature: Visit blog
     When I follow the only "Pizza"
     And I fill in "Name" with "Some name"
     And I fill in "Comment" with "Some comment"
-    And I press "Submit comment"
+    And I press "Submit Comment"
     And I fill in "Name" with "Some name"
     And I fill in "Comment" with "Some comment"
-    And I press "Submit comment"
+    And I press "Submit Comment"
     Then I should have 1 comment
-    And I should see "Error message from model here"
+    And I should see "Duplicate comments are not allowed"

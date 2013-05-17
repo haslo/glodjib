@@ -1,0 +1,39 @@
+<div class="blog_post">
+  <div class="blog_post_content">
+    <p class="post_date"><%= I18n.l post.created_at, :format => :short %></p>
+    <%= render :partial => '/partials/blog_post_tags', :locals => { :post_tags => post.post_tags } %>
+    <%= post.content.gsub(Setting.post_more_separator, "<span id=\"more-#{post.id}\"></span>").html_safe %>
+  </div>
+  <% if post.post_comments.size > 0 %>
+    <div class="blog_post_comments">
+      <% post.post_comments.each do |post_comment| %>
+        <h3>
+          <% if post_comment.url.blank? %>
+            <%= post_comment.name %>
+          <% else %>
+            <%= link_to post_comment.name, post_comment.url, :rel => 'nofollow' %>
+          <% end %>
+        </h3>
+        <%= post_comment.comment %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="blog_post_comment_form">
+    <h3><%= I18n.t('titles.post_comments.leave_reply') %></h3>
+    <%= simple_form_for post_comment, :url => post_comment_path(:post_id => post.shorthand) do |f| %>
+      <div class="form-inputs">
+        <%= f.error_notification %>
+        <%= display_base_errors post_comment %>
+        <%= f.input :post_id, :as => :hidden, :input_html => { :value => post.id } %>
+        <%= f.input :name, input_html: { class: 'input-block-level' } %>
+        <%= f.input :email, input_html: { class: 'input-block-level' } %>
+        <%= f.input :url, input_html: { class: 'input-block-level' } %>
+        <%= f.input :comment, input_html: { class: 'input-block-level tinymce' }, required: false %>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, I18n.t('links.post_comment.create') %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= tinymce %>

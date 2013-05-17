@@ -14,9 +14,10 @@ Glodjib::Application.routes.draw do
   end
 
   scope '/tag' do
-    get ':id' => 'post_tag#show', :as => :post_tag
+    get ':id' => 'post_tags#show', :as => :post_tag
   end
 
   get 'portfolio' => 'flickr_images#portfolio', :as => :portfolio
   get ':id' => 'posts#show', :as => :post
+  post ':post_id' => 'post_comments#create', :as => :post_comment
 end

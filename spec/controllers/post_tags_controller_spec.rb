@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe PostTagController do
+describe PostTagsController do
   describe "routing" do
     it "routes /tag/:id to #show" do
       post_tag_path(:id => "test").should == "/tag/test"
-      expect(:get => post_tag_path(:id => "test")).to route_to(:controller => "post_tag", :action => "show", :id => "test")
+      expect(:get => post_tag_path(:id => "test")).to route_to(:controller => "post_tags", :action => "show", :id => "test")
     end
   end
 

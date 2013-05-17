@@ -1,4 +1,4 @@
-class PostTagController < ApplicationController
+class PostTagsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
 
   def show

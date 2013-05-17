@@ -1,3 +1,1 @@
-<p class="post_date"><%= I18n.l @post.created_at, :format => :short %></p>
-<%= render :partial => '/partials/blog_post_tags', :locals => { :post_tags => @post.post_tags } %>
-<%= @post.content.gsub(Setting.post_more_separator, "<span id=\"more-#{@post.id}\"></span>").html_safe %>
+<%= render :partial => '/partials/blog_post', :locals => { :post => @post, :post_comment => PostComment.new } %>

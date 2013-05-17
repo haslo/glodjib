@@ -10,9 +10,10 @@ Given(/^my "(.*?)" post has the tags (.+)$/) do |title, tags|
   end
 end
 
-Given(/^my post titled (.+) has (\d+) comments$/) do |title, number_of_comments|
+Given(/^my post titled (.+) has (\d+) comments?$/) do |title, number_of_comments|
   1.upto(number_of_comments.to_i).each do |index|
-    Post.find_by_title(title).post_comments << PostComment.create!(:name => "Random name #{index}", :comment => "Random comment #{index}")
+    post = Post.find_by_title(title)
+    post.post_comments << PostComment.create!(:post_id => post.id, :name => "Random name #{index} for #{title}", :comment => "Random comment #{index} for #{title}")
   end
 end
 
