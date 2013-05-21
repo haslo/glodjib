@@ -1,4 +1,9 @@
 @import "bootstrap";
-body { padding-top: 60px; }
-$baseFontFamily: '"museo-sans","Helvetica Neue","Helvetica","Arial",sans-serif';
+body {
+  padding-top: 60px;
+  font-family: "museo-sans","Helvetica Neue","Helvetica","Arial",sans-serif !important;
+}
+h1, h2, h3, h4, h5 {
+  font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
+}
 @import "bootstrap-responsive";
