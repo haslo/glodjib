@@ -6,6 +6,8 @@
   <title><%= I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter) %> - <%= Setting.page_title %></title>
   <meta name="description" content="">
   <meta name="author" content="">
+  <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.1.1/css/font-awesome.css" rel="stylesheet">
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>

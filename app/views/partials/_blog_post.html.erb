@@ -6,14 +6,19 @@
   </div>
   <% if post.post_comments.size > 0 %>
     <div class="blog_post_comments">
+      <% if post.post_comments.count == 1 %>
+        <h3><%= I18n.t('notices.post.number_of_comments.one', :number_of_comments => post.post_comments.count) %></h3>
+      <% elsif post.post_comments.count > 0 %>
+        <h3><%= I18n.t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.count) %></h3>
+      <% end %>
       <% post.post_comments.each do |post_comment| %>
-        <h3>
+        <h4>
           <% if post_comment.url.blank? %>
             <%= post_comment.name %>
           <% else %>
             <%= link_to post_comment.name, post_comment.url, :rel => 'nofollow' %>
           <% end %>
-        </h3>
+        </h4>
         <%= post_comment.comment %>
       <% end %>
     </div>

@@ -15,6 +15,7 @@ Feature: Visit blog
     Then I should see "1 comment"
     And I should see "3 comments"
     And I should not see "1 comments"
+    And I should see that there is a link that says "3 comments"
 
   Scenario: Check for comment form
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
@@ -36,6 +37,9 @@ Feature: Visit blog
     And I fill in "Comment" with "Some comment"
     And I press "Submit Comment"
     Then I should have 1 comment
+    And I should see "1 comment"
+    And I should not see "1 comments"
+    And I should see "Some name"
     And I should see "Some comment"
 
   Scenario: Post a comment with URL
