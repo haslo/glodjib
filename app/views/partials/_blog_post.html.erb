@@ -35,10 +35,10 @@
         <%= f.input :url, input_html: { class: 'input-block-level' } %>
         <%= f.input :comment, input_html: { class: 'input-block-level tinymce' }, required: false %>
       </div>
+      <%= tinymce %>
       <div class="form-actions">
         <%= f.button :submit, I18n.t('links.post_comment.create') %>
       </div>
     <% end %>
   </div>
 </div>
-<%= tinymce %>
