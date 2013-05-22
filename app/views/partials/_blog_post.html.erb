@@ -33,7 +33,7 @@
         <%= f.input :name %>
         <%= f.input :email %>
         <%= f.input :url %>
-        <%= f.input :comment, input_html: { class: 'tinymce' }, required: false %>
+        <%= f.input :comment, input_html: { class: 'tinymce', :rows => 5 }, required: false %>
       </div>
       <div class="form-actions">
         <%= f.button :submit, I18n.t('links.post_comment.create') %>
