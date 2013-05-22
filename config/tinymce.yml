@@ -12,3 +12,19 @@ default:
 simple:
   theme_advanced_toolbar_location: top
   theme_advanced_toolbar_align: left
+  toolbar:
+    - undo
+    - redo
+    - |
+    - bold
+    - italic
+    - |
+    - alignleft
+    - aligncenter
+    - alignright
+    - alignjustify
+    - |
+    - bullist
+    - numlist
+    - outdent
+    - indent
