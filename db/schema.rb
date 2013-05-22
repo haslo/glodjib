@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130517110305) do
+ActiveRecord::Schema.define(:version => 20130522223518) do
 
   create_table "flickr_caches", :force => true do |t|
     t.integer  "flickr_user_id"
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20130517110305) do
   create_table "post_comments", :force => true do |t|
     t.integer  "post_id"
     t.string   "name"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "email"
     t.string   "url"
     t.datetime "created_at", :null => false
