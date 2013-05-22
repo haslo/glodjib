@@ -30,10 +30,10 @@
         <%= f.error_notification %>
         <%= display_base_errors post_comment %>
         <%= f.input :post_id, :as => :hidden, :input_html => { :value => post.id } %>
-        <%= f.input :name, input_html: { class: 'input-block-level' } %>
-        <%= f.input :email, input_html: { class: 'input-block-level' } %>
-        <%= f.input :url, input_html: { class: 'input-block-level' } %>
-        <%= f.input :comment, input_html: { class: 'input-block-level tinymce' }, required: false %>
+        <%= f.input :name %>
+        <%= f.input :email %>
+        <%= f.input :url %>
+        <%= f.input :comment, input_html: { class: 'tinymce' }, required: false %>
       </div>
       <div class="form-actions">
         <%= f.button :submit, I18n.t('links.post_comment.create') %>
