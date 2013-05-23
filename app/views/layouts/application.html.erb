@@ -29,12 +29,16 @@
           <h2><%= link_to I18n.t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), params %></h2>
           <%= render 'layouts/messages' %>
           <%= yield %>
-          <% if user_signed_in? %>
-            <p class="login_notice"><%= I18n.t 'notices.logged_in_as', :user => current_user.email %></p>
-          <% end %>
         </div>
       </div>
-      <footer>
+      <footer class="navbar navbar-fixed-bottom">
+        <%= I18n.t('notices.footer') %>
+        <% if user_signed_in? %>
+          - <%= link_to I18n.t('navigation.admin'), settings_path %>
+          - <%= link_to I18n.t('navigation.logout'), destroy_user_session_path, :method => :delete %>
+        <% else %>
+          - <%= link_to I18n.t('navigation.login'), new_user_session_path  %>
+        <% end %>
       </footer>
     </div>
   </div> <!--! end of .container -->

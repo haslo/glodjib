@@ -36,3 +36,15 @@ end
 Then /^I should have ([0-9]+) post tags?$/ do |count|
   PostTag.count.should == count.to_i
 end
+
+Then(/^I should have (\d+) ham comments?$/) do |ham|
+  PostComment.ham.count.should == ham.to_i
+end
+
+Then(/^I should have (\d+) spam comments?$/) do |spam|
+  PostComment.spam.count.should == spam.to_i
+end
+
+Then(/^I should have (\d+) deleted comments?$/) do |deleted|
+  PostComment.deleted.count.should == deleted.to_i
+end

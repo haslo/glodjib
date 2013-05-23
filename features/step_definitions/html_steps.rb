@@ -26,6 +26,10 @@ Then(/^I should see that "(.*?)" links to "(.*?)"$/) do |text, link|
   page.should have_selector("a[href='#{link}']", :text => text)
 end
 
+Then(/^I should see that there is a link that says "(.*?)"$/) do |text|
+  page.should have_selector("a", :text => text)
+end
+
 Then(/^I should see ([0-9]+) field error messages$/) do |message_count|
   page.should have_selector('.field_error', :count => message_count)
 end

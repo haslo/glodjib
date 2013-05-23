@@ -6,6 +6,8 @@ Glodjib::Application.routes.draw do
   scope '/admin' do
     devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
     resources :posts, :only => [:index, :new, :create, :edit]
+    delete 'post_comment/:id' => 'post_comments#destroy', :as => 'destroy_post_comment'
+    delete 'post_comment/spam/:id' => 'post_comments#spam', :as => 'spam_post_comment'
     put 'posts/:id/edit' => 'posts#edit'
     delete 'posts/:id' => 'posts#destroy', :as => :destroy_post
     delete 'reset_caches' => 'flickr_images#reset_caches', :as => :reset_caches

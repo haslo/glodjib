@@ -7,10 +7,12 @@
     <% if post.content.include?(Setting.post_more_separator) %>
       <p><%= link_to I18n.t('links.post.read_more'), "#{post_path(:id => post.shorthand)}#more-#{post.id}" %></p>
     <% end %>
-    <% if post.post_comments.count == 1 %>
-      <div class="blog_post_comment_count"><%= I18n.t('notices.post.number_of_comments.one', :number_of_comments => post.post_comments.count) %></div>
-    <% elsif post.post_comments.count > 0 %>
-      <div class="blog_post_comment_count"><%= I18n.t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.count) %></div>
+    <% if post.post_comments.ham.count == 1 %>
+      <div class="blog_post_comment_count"><%= link_to I18n.t('notices.post.number_of_comments.one'), post_path(:id => post.shorthand, :anchor => 'comments') %></div>
+    <% elsif post.post_comments.ham.count > 0 %>
+      <div class="blog_post_comment_count"><%= link_to I18n.t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.ham.count), post_path(:id => post.shorthand, :anchor => 'comments') %></div>
+    <% else %>
+      <div class="blog_post_comment_count"><%= link_to I18n.t('notices.post.number_of_comments.zero'), post_path(:id => post.shorthand, :anchor => 'comments') %></div>
     <% end %>
   </div>
   <% if user_signed_in? %>

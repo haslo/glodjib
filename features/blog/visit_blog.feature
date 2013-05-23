@@ -20,6 +20,7 @@ Feature: Visit blog
     Then I should see "Pizza"
     And I should see "Breadsticks"
     And I should see "Dummy Text"
+    And I should see that there is a link that says "Be the first to comment!"
 
   Scenario: View post
     Given I am on the homepage
@@ -35,7 +36,7 @@ Feature: Visit blog
     Then I should see "Pizza"
     And I should see "Breadsticks"
     And I should see "Dummy Text"
-    And I should see "Read more..."
+    And I should see "Read More..."
     And I should not see "!!more!!"
     And I should not see "totally hidden text"
 
@@ -84,3 +85,8 @@ Feature: Visit blog
     Then I should not see "Edit Post"
     And I should not see "Delete Post"
     And I should not see "New Post"
+
+  Scenario: Check footer for copyright information
+    Given I am on the homepage
+    Then I should see "©"
+    And I should see "glodjib platform"

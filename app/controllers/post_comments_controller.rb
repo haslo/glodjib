@@ -13,4 +13,18 @@ class PostCommentsController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def spam
+    post_comment = PostComment.find(params[:id])
+    post_comment.is_spam = true
+    post_comment.save
+    redirect_to post_path(:id => post_comment.post.shorthand)
+  end
+
+  def destroy
+    post_comment = PostComment.find(params[:id])
+    post_comment.is_deleted = true
+    post_comment.save
+    redirect_to post_path(:id => post_comment.post.shorthand)
+  end
 end

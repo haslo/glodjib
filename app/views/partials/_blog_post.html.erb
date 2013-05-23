@@ -4,26 +4,35 @@
     <%= render :partial => '/partials/blog_post_tags', :locals => { :post_tags => post.post_tags } %>
     <%= post.content.gsub(Setting.post_more_separator, "<span id=\"more-#{post.id}\"></span>").html_safe %>
   </div>
+  <a name="comments"></a>
   <% if post.post_comments.size > 0 %>
     <div class="blog_post_comments">
-      <% if post.post_comments.count == 1 %>
+      <% if post.post_comments.ham.count == 1 %>
         <h3><%= I18n.t('notices.post.number_of_comments.one', :number_of_comments => post.post_comments.count) %></h3>
-      <% elsif post.post_comments.count > 0 %>
+      <% elsif post.post_comments.ham.count > 0 %>
         <h3><%= I18n.t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.count) %></h3>
       <% end %>
-      <% post.post_comments.each do |post_comment| %>
-        <h4>
-          <% if post_comment.url.blank? %>
-            <%= post_comment.name %>
-          <% else %>
-            <%= link_to post_comment.name, post_comment.url, :rel => 'nofollow' %>
-          <% end %>
-        </h4>
-        <%= post_comment.comment %>
+      <% post.post_comments.ham.each do |post_comment| %>
+        <div class="post_comment">
+          <h4>
+            <% if post_comment.url.blank? %>
+              <%= post_comment.name %>
+            <% else %>
+              <%= link_to post_comment.name, post_comment.url, :rel => 'nofollow' %>
+            <% end %>
+          </h4>
+          <%= post_comment.comment %>
+        </div>
+        <% if user_signed_in? %>
+          <div class="management_functionality">
+            <p><%= link_to I18n.t('links.post_comment.spam'), spam_post_comment_path(post_comment), :confirm => I18n.t('link_confirmations.spam_post_comment'), :method => :delete %> -
+              <%= link_to I18n.t('links.post_comment.destroy'), destroy_post_comment_path(post_comment), :confirm => I18n.t('link_confirmations.destroy_post_comment'), :method => :delete %></p>
+          </div>
+        <% end %>
       <% end %>
     </div>
   <% end %>
-  <div class="blog_post_comment_form">
+  <div class="blog_post_comment_form"<% if post.post_comments.size > 0 %> name="comments"<% end %>>
     <h3><%= I18n.t('titles.post_comments.leave_reply') %></h3>
     <%= simple_form_for post_comment, :url => post_comment_path(:post_id => post.shorthand) do |f| %>
       <div class="form-inputs">

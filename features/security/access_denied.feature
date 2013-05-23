@@ -10,7 +10,7 @@ Feature: Login and logout work as expected
   Scenario: Open login page
     Given I am on the homepage
     And I have no posts
-    When I follow the only "Login"
+    When I follow the only "login"
     Then I should see that "Login" is in a h2 tag
     And I should see "Email"
     And I should see "Password"
@@ -19,13 +19,12 @@ Feature: Login and logout work as expected
     Given I am on the homepage
     And I have no posts
     And there is an admin with "test@mail.com" and "password"
-    When I follow the only "Login"
+    When I follow the only "login"
     And I fill in "Email" with "test@mail.com"
     And I fill in "Password" with "password"
     And I press "Login"
-    Then I should see "test@mail.com"
-    And I should see "Logged in successfully"
-    And I should see "Logout"
+    Then I should see "Logged in successfully"
+    And I should see "logout"
 
   Scenario Outline: Check various pages for access denial with GET
     Given I am on the homepage
