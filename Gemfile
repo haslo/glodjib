@@ -24,9 +24,12 @@ group :test, :development do
   gem 'simplecov'
 end
 
-# server
+# server, deployment
 group :test, :development do
   gem 'thin'
+end
+group :development do
+  gem 'capistrano'
 end
 
 #defaults
@@ -37,4 +40,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', platforms: :ruby
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'capistrano', group: :development
+gem 'haml-rails'
+
+# deprecated, but used
+gem 'protected_attributes'

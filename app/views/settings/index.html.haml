@@ -1,4 +1,4 @@
-= simple_form_for Setting.new, :url => update_settings_path do |f|
+= simple_form_for(Setting.new, :url => update_settings_path) do |f|
   .form-inputs
     = f.error_notification
     - %w(flickr_user flickr_api_key flickr_shared_secret page_title post_more_separator admin_password admin_password_confirmation).each do |key|

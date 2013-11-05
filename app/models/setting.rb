@@ -39,7 +39,7 @@ class Setting < ActiveRecord::Base
   end
 
   def self.put(key, value)
-    setting = Setting.where("`key` = ?", key.to_s).first_or_initialize
+    setting = Setting.where(:key => key.to_s).first_or_initialize
     setting.key = key.to_s
     setting.value = value.to_s
     setting.save!
@@ -47,7 +47,7 @@ class Setting < ActiveRecord::Base
   end
 
   def self.get(key)
-    settings = Setting.where("`key` = ?", key.to_s)
+    settings = Setting.where(:key => key.to_s)
     if settings.count > 0
       settings.first.value
     else

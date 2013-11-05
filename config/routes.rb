@@ -1,10 +1,8 @@
 Glodjib::Application.routes.draw do
-  get "settings/index"
-
-  root to: 'posts#frontpage'
+  root 'posts#frontpage'
 
   scope '/admin' do
-    devise_for :users, path_names: {sign_in: "login", sign_out: "logout"}
+    devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
     resources :posts, :only => [:index, :new, :create, :edit]
     delete 'post_comment/:id' => 'post_comments#destroy', :as => 'destroy_post_comment'
     delete 'post_comment/spam/:id' => 'post_comments#spam', :as => 'spam_post_comment'
