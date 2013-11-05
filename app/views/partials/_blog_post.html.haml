@@ -1,0 +1,40 @@
+.blog_post
+  .blog_post_content
+    %p.post_date= l(post.created_at, :format => :short)
+    = render '/partials/blog_post_tags', :locals => { :post_tags => post.post_tags }
+    = post.content.gsub(Setting.post_more_separator, "<span id=\"more-#{post.id}\"></span>").html_safe
+  %a{:name => 'comments'}
+  - if post.post_comments.size > 0
+    .blog_post_comments
+      - if post.post_comments.ham.count == 1
+        %h3= t('notices.post.number_of_comments.one')
+      - elsif post.post_comments.ham.count > 0
+        %h3= t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.count)
+      - post.post_comments.ham.each do |post_comment|
+        .post_comment
+          %h4
+            - if post_comment.url.blank?
+              = post_comment.name
+            - else
+              = link_to post_comment.name, post_comment.url, :rel => 'nofollow'
+          = post_comment.commment
+        - if user_signed_in?
+          .management_functionality
+            %p
+              = link_to I18n.t('links.post_comment.spam'), spam_post_comment_path(post_comment), :confirm => I18n.t('link_confirmations.spam_post_comment'), :method => :delete
+              = '-'
+              = link_to I18n.t('links.post_comment.destroy'), destroy_post_comment_path(post_comment), :confirm => I18n.t('link_confirmations.destroy_post_comment'), :method => :delete
+
+  .blog_post_comment_form{:name => (post.post_comments.size > 0) ? 'comments' : nil}
+    = simple_form_for post_comment, :url => post_comment_path(:post_id => post.shorthand) do |f|
+      .form-inputs
+        = f.error_notification
+        = display_base_errors post_comment
+        = f.input :post_id, :as => :hidden, :input_html => { :value => post.id }
+        = f.input :name
+        = f.input :email
+        = f.input :url
+        = f.input :comment, :input_html => { :class => 'tinymce', :rows => 5 }, :required => false
+      .form-actions
+        = f.button :submit, I18n.t('links.post_comment.create')
+    = tinymce :simple

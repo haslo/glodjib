@@ -1,0 +1,4 @@
+- if post_tags.count > 0
+  %p.post_tags
+    = "#{t('titles.posts.tags')}:"
+    = post_tags.collect{|post_tag| link_to post_tag.tag_text, post_tag_path(:id => post_tag.tag_text)}.join(' - ').html_safe
