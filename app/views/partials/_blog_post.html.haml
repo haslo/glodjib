@@ -17,15 +17,16 @@
               = post_comment.name
             - else
               = link_to(post_comment.name, post_comment.url, :rel => 'nofollow')
-          = post_comment.commment
+          = post_comment.comment
         - if user_signed_in?
           .management_functionality
             %p
-              = link_to(t('links.post_comment.spam'), spam_post_comment_path(post_comment), :confirm => t('link_confirmations.spam_post_comment'), :method => :delete)
+              = link_to(t('links.post_comment.spam'), spam_post_comment_path(post_comment), :data => {:confirm => t('link_confirmations.spam_post_comment')}, :method => :delete)
               = '-'
-              = link_to(t('links.post_comment.destroy'), destroy_post_comment_path(post_comment), :confirm => t('link_confirmations.destroy_post_comment'), :method => :delete)
+              = link_to(t('links.post_comment.destroy'), destroy_post_comment_path(post_comment), :data => {:confirm => t('link_confirmations.destroy_post_comment')}, :method => :delete)
 
   .blog_post_comment_form{:name => (post.post_comments.size > 0) ? 'comments' : nil}
+    %h3= I18n.t('titles.post_comments.leave_reply')
     = simple_form_for(post_comment, :url => post_comment_path(:post_id => post.shorthand)) do |f|
       .form-inputs
         = f.error_notification

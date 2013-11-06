@@ -18,7 +18,7 @@
       %p
         = link_to(I18n.t('links.post.edit'), edit_post_path(:id => post.id))
         = '-'
-        = link_to(I18n.t('links.post.destroy'), destroy_post_path(:id => post.id), :confirm => I18n.t('link_confirmations.destroy_post'), :method => :delete)
+        = link_to(I18n.t('links.post.destroy'), destroy_post_path(:id => post.id), :data => {:confirm => I18n.t('link_confirmations.destroy_post')}, :method => :delete)
 
 - if user_signed_in?
   .management_functionality

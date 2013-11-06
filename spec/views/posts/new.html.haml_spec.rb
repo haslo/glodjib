@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "posts/new.html.erb" do
+describe "posts/new.html.haml" do
   before(:each) do
     @post = Post.create!(:title => "title of the post", :content => "content of the post")
   end

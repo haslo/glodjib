@@ -6,4 +6,4 @@
         %p= flickr_image.image_title
 
 - if user_signed_in?
-  %p= link_to(I18n.t('links.caches.reset'), reset_caches_path, :confirm => I18n.t('link_confirmations.reset_caches'), :method => :delete)
+  %p= link_to(I18n.t('links.caches.reset'), reset_caches_path, :data => {:confirm => I18n.t('link_confirmations.reset_caches')}, :method => :delete)

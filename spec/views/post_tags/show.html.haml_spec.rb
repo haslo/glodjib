@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "post_tags/show.html.erb" do
+describe "post_tags/show.html.haml" do
   before(:each) do
     @post_tag = PostTag.create!(:tag_text => "tag_text")
     @post_tag.posts << Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>")

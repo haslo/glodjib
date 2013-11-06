@@ -22,7 +22,7 @@ Feature: Login and logout work as expected
     When I follow the only "login"
     And I fill in "Email" with "test@mail.com"
     And I fill in "Password" with "password"
-    And I press "Login"
+    And I press "Sign in"
     Then I should see "Logged in successfully"
     And I should see "logout"
 

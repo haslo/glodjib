@@ -33,7 +33,10 @@ class Setting < ActiveRecord::Base
       user.password = @admin_password
       user.password_confirmation = @admin_password_confirmation
       unless user.save
-        user.errors[:password][0]
+        [
+          Array(user.errors[:password]).join(', '),
+          Array(user.errors[:password_confirmation]).join(', ')
+        ].compact.join(', ')
       end
     end
   end

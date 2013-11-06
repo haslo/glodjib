@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "posts/edit.html.erb", :issue23 => true do
+describe "posts/edit.html.haml", :issue23 => true do
   before(:each) do
     @post = Post.create!(:title => "title of the post", :content => "content of the post")
     @post.post_tags << PostTag.create!(:tag_text => "tag1")

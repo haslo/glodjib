@@ -17,7 +17,7 @@ describe Setting, :issue23 => true do
 
     it "stores the correct value for a key through #method_missing" do
       Setting.send(:key=, "value")
-      Setting.where("`key` = ?", "key").first.value.should == "value"
+      Setting.where(:key => "key").first.value.should == "value"
     end
 
     it "retreives the correct value through #method_missing" do

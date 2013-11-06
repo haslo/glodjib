@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "flickr_images/portfolio.html.erb" do
+describe "flickr_images/portfolio.html.haml" do
   before(:each) do
     @flickr_images = []
     1.upto(10).each do |index|

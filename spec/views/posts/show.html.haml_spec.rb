@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "posts/show.html.erb" do
+describe "posts/show.html.haml" do
   before(:each) do
     @post = Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>")
     Setting.post_more_separator = "!!more!!"
@@ -23,8 +23,8 @@ describe "posts/show.html.erb" do
 
   it "should have HTML tags in the post content" do
     render
-    response.should_not contain('<')
-    response.should_not contain('>')
+    response.should_not contain('<strong>')
+    response.should_not contain('<p>')
   end
 
   it "should not have missing translations" do
