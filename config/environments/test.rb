@@ -1,6 +1,4 @@
 Glodjib::Application.configure do
-  # Settings specified here will take precedence over those in config/application.rb
-
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
@@ -10,9 +8,6 @@ Glodjib::Application.configure do
   # Configure static asset server for tests with Cache-Control for performance
   config.serve_static_assets = true
   config.static_cache_control = "public, max-age=3600"
-
-  # Log error messages when you accidentally call methods on nil
-  config.whiny_nils = true
 
   # Show full error reports and disable caching
   config.consider_all_requests_local       = true
@@ -35,7 +30,5 @@ Glodjib::Application.configure do
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
 
-  config.gem "rspec-rails", :lib => false, :version => ">=2.13.1"
-  config.gem "webrat", :lib => false, :version => ">=0.7.3"
-  config.gem "cucumber-rails", :lib => false, :version => ">=1.3.0"
+  config.eager_load = false
 end

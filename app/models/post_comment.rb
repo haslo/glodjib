@@ -6,9 +6,9 @@ class PostComment < ActiveRecord::Base
 
   belongs_to :post
 
-  scope :ham, where(:is_deleted => false).where(:is_spam => false)
-  scope :spam, where(:is_spam => true)
-  scope :deleted, where(:is_deleted => true)
+  scope :ham, lambda { where(:is_deleted => false).where(:is_spam => false) }
+  scope :spam, lambda { where(:is_spam => true) }
+  scope :deleted, lambda { where(:is_deleted => true) }
 
   def name=(value)
     write_attribute(:name, strip_tags(value))

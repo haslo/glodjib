@@ -1,0 +1,10 @@
+= simple_form_for(@post) do |f|
+  .form-inputs
+    = f.error_notification
+    = display_base_errors @post
+    = f.input :title, :input_html => { :class => 'input-block-level' }, :required => false
+    = f.input :tags, :input_html => { :class => 'input-block-level' }
+    = f.input :content, :input_html => { :class => 'input-block-level tinymce' }, :required => false
+  .form-actions
+    = f.button :submit
+= tinymce :default

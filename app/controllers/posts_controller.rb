@@ -1,5 +1,3 @@
-require 'pp'
-
 class PostsController < ApplicationController
   before_filter :authenticate_user!, :except => [:frontpage, :show]
 
@@ -13,7 +11,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    posts = Post.where("id = ? or shorthand = ?", params[:id], params[:id])
+    posts = Post.where((params[:id].is_i? ? :id : :shorthand) => params[:id])
     if posts.count > 0
       @post = posts.first
       @title_parameter = @post.title
@@ -44,7 +42,7 @@ class PostsController < ApplicationController
       if request.get?
         @post = posts.first
         @title_parameter = @post.title
-      elsif request.put?
+      elsif request.patch?
         @post = Post.find(params[:id])
         if @post.update_attributes(params[:post])
           flash[:notice] = I18n.t('notices.post.updated')

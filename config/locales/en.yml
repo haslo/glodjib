@@ -35,8 +35,6 @@ en:
       read_more: Read More...
     caches:
       reset: Reset Caches
-    user:
-      login: Login
     setting:
       save: Save Settings
     post_comment:

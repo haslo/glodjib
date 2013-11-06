@@ -1,0 +1,9 @@
+.clearfix
+  - @flickr_images.each do |flickr_image|
+    .portfolio_tile
+      = link_to(flickr_image.full_flickr_url) do
+        %img{:class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => flickr_image.flickr_thumbnail_url}
+        %p= flickr_image.image_title
+
+- if user_signed_in?
+  %p= link_to(I18n.t('links.caches.reset'), reset_caches_path, :data => {:confirm => I18n.t('link_confirmations.reset_caches')}, :method => :delete)

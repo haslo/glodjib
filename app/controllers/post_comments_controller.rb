@@ -1,6 +1,6 @@
 class PostCommentsController < ApplicationController
   def create
-    posts = Post.where("id = ? or shorthand = ?", params[:post_id], params[:post_id])
+    posts = Post.where((params[:post_id].is_i? ? :id : :shorthand) => params[:post_id])
     if posts.count > 0
       post = posts.first
       @post_comment = PostComment.new(params[:post_comment])

@@ -2,7 +2,7 @@ class PostTagsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
 
   def show
-    post_tags = PostTag.where("id = ? or tag_text = ?", params[:id], params[:id])
+    post_tags = PostTag.where((params[:id].is_i? ? :id : :tag_text) => params[:id])
     if post_tags.count > 0
       @post_tag = post_tags.first
       @title_parameter = @post_tag.tag_text

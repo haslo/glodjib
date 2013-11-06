@@ -33,13 +33,16 @@ class Setting < ActiveRecord::Base
       user.password = @admin_password
       user.password_confirmation = @admin_password_confirmation
       unless user.save
-        user.errors[:password][0]
+        [
+          Array(user.errors[:password]).join(', '),
+          Array(user.errors[:password_confirmation]).join(', ')
+        ].compact.join(', ')
       end
     end
   end
 
   def self.put(key, value)
-    setting = Setting.where("`key` = ?", key.to_s).first_or_initialize
+    setting = Setting.where(:key => key.to_s).first_or_initialize
     setting.key = key.to_s
     setting.value = value.to_s
     setting.save!
@@ -47,7 +50,7 @@ class Setting < ActiveRecord::Base
   end
 
   def self.get(key)
-    settings = Setting.where("`key` = ?", key.to_s)
+    settings = Setting.where(:key => key.to_s)
     if settings.count > 0
       settings.first.value
     else

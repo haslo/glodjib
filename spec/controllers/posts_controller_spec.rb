@@ -36,7 +36,7 @@ describe PostsController, :controller => true do
       it "routes /admin/posts/:id/edit to #edit" do
         edit_post_path(:id => "test").should == "/admin/posts/test/edit"
         expect(:get => edit_post_path(:id => "test")).to route_to(:controller => "posts", :action => "edit", :id => "test")
-        expect(:put => edit_post_path(:id => "test")).to route_to(:controller => "posts", :action => "edit", :id => "test")
+        expect(:patch => edit_post_path(:id => "test")).to route_to(:controller => "posts", :action => "edit", :id => "test")
       end
 
       it "routes /admin/posts/:id to #destroy" do
@@ -159,20 +159,20 @@ describe PostsController, :controller => true do
       end
 
 
-      describe "PUT 'edit'" do
+      describe "PATCH 'edit'" do
         describe "with invalid id" do
           it "does not return http success" do
-            put 'edit', :id => -1
+            patch 'edit', :id => -1
             response.should_not be_success
           end
 
           it "redirects to the posts path" do
-            put 'edit', :id => -1
+            patch 'edit', :id => -1
             response.should redirect_to posts_path
           end
 
           it "adds a flash error" do
-            put 'edit', :id => -1
+            patch 'edit', :id => -1
             flash[:error].should_not be_nil
           end
         end
@@ -184,28 +184,28 @@ describe PostsController, :controller => true do
 
           describe "with invalid updates" do
             it "returns http success" do
-              put 'edit', :id => @post.id, :post => {:title => "", :content => "", :shorthand => "invalid % shorthand"}
+              patch 'edit', :id => @post.id, :post => {:title => "", :content => "", :shorthand => "invalid % shorthand"}
               response.should be_success
             end
 
             it "updates the displayed post with the edited values" do
-              put 'edit', :id => @post.id, :post => {:title => "new title", :content => "", :shorthand => "invalid % shorthand"}
+              patch 'edit', :id => @post.id, :post => {:title => "new title", :content => "", :shorthand => "invalid % shorthand"}
               assigns[:post].title.should == "new title"
             end
 
             it "does not create a post" do
-              expect { put('edit', { :id => @post.id, :post => {:title => "", :content => "", :shorthand => "invalid % shorthand"} }) }.to_not change(Post, :count)
+              expect { patch('edit', { :id => @post.id, :post => {:title => "", :content => "", :shorthand => "invalid % shorthand"} }) }.to_not change(Post, :count)
             end
           end
 
           describe "with valid updates" do
             it "redirects to the posts path" do
-              put 'edit', :id => @post.id, :post => {:title => "new title", :content => "new content", :shorthand => "new_shorthand"}
+              patch 'edit', :id => @post.id, :post => {:title => "new title", :content => "new content", :shorthand => "new_shorthand"}
               response.should redirect_to posts_path
             end
 
             it "updates the post with new parameters for title, content, shorthand" do
-              put 'edit', :id => @post.id, :post => {:title => "new title", :content => "new content", :shorthand => "new_shorthand"}
+              patch 'edit', :id => @post.id, :post => {:title => "new title", :content => "new content", :shorthand => "new_shorthand"}
               new_post = Post.find(@post.id)
               new_post.title.should == "new title"
               new_post.content.should == "new content"
@@ -213,7 +213,7 @@ describe PostsController, :controller => true do
             end
 
             it "does not create a post" do
-              expect { put('edit', { :id => @post.id, :post => {:title => "new title", :content => "new content", :shorthand => "new_shorthand"} }) }.to_not change(Post, :count)
+              expect { patch('edit', { :id => @post.id, :post => {:title => "new title", :content => "new content", :shorthand => "new_shorthand"} }) }.to_not change(Post, :count)
             end
           end
         end
