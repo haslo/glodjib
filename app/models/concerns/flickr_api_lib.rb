@@ -1,4 +1,5 @@
 module Concerns::FlickrAPILib
+
   extend ActiveSupport::Concern
 
   def find_or_create_cache(tag, user_id = nil)
@@ -77,4 +78,5 @@ private
     FlickRaw.api_key = api_key
     FlickRaw.shared_secret = shared_secret
   end
+
 end

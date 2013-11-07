@@ -12,6 +12,7 @@ gem 'mini_magick'
 gem 'flickraw'
 gem 'tinymce-rails'
 gem 'devise'
+gem 'decent_exposure'
 
 # testing frameworks
 group :test, :development do
