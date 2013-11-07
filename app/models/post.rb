@@ -1,9 +1,8 @@
 include ActionView::Helpers::SanitizeHelper
 
 class Post < ActiveRecord::Base
-  attr_accessible :title, :content, :shorthand, :tags
-  validates_presence_of :title, :content, :shorthand
-  validates_uniqueness_of :shorthand
+  validates :title, :content, :shorthand, :presence => true
+  validates :shorthand, :uniqueness =>  true
   validate :shorthand_starts_with_character
 
   has_and_belongs_to_many :post_tags

@@ -3,7 +3,7 @@ class PostCommentsController < ApplicationController
     posts = Post.where((params[:post_id].is_i? ? :id : :shorthand) => params[:post_id])
     if posts.count > 0
       post = posts.first
-      @post_comment = PostComment.new(params[:post_comment])
+      @post_comment = PostComment.new(comment_params)
       if @post_comment.save
         redirect_to post_path(:id => post.shorthand)
       else
@@ -26,5 +26,9 @@ class PostCommentsController < ApplicationController
     post_comment.is_deleted = true
     post_comment.save
     redirect_to post_path(:id => post_comment.post.shorthand)
+  end
+
+  def comment_params
+    params.require(:post_comment).permit(:comment, :name, :email, :url, :post_id)
   end
 end

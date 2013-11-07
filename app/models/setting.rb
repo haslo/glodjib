@@ -1,6 +1,6 @@
 class Setting < ActiveRecord::Base
-  validates_presence_of :key, :value
-  validates_uniqueness_of :key
+  validates :key, :value, :presence => true
+  validates :key, :uniqueness => true
 
   def method_missing(message, *args, &block)
     Setting.method_missing(message, *args, &block)

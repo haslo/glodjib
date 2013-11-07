@@ -1,8 +1,6 @@
 class PostComment < ActiveRecord::Base
-  attr_accessible :comment, :name, :email, :url, :post_id
-
-  validates_presence_of :post_id, :name, :comment
-  validates_uniqueness_of :comment, :message => I18n.t('notices.post_comment.duplicate')
+  validates :post_id, :name, :comment, :presence => true
+  validates :comment, :uniqueness => {:message => I18n.t('notices.post_comment.duplicate')}
 
   belongs_to :post
 

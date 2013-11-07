@@ -1,6 +1,5 @@
 class FlickrTag < ActiveRecord::Base
-  attr_accessible :tag_name
-  validates_presence_of :tag_name
+  validates :tag_name, :presence => true
 
   has_and_belongs_to_many :flickr_images
   has_many :flickr_caches, :class_name => "FlickrCache"

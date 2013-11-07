@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create(params[:post])
+    @post = Post.create(post_params)
     if @post.valid? && @post.save
       flash[:notice] = I18n.t('notices.post.created')
       redirect_to posts_path
@@ -44,7 +44,7 @@ class PostsController < ApplicationController
         @title_parameter = @post.title
       elsif request.patch?
         @post = Post.find(params[:id])
-        if @post.update_attributes(params[:post])
+        if @post.update_attributes(post_params)
           flash[:notice] = I18n.t('notices.post.updated')
           redirect_to posts_path
         end
@@ -66,5 +66,9 @@ class PostsController < ApplicationController
       flash[:error] = I18n.t('notices.post.not_found')
       redirect_to posts_path
     end
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content, :shorthand, :tags)
   end
 end

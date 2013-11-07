@@ -41,6 +41,3 @@ gem 'therubyracer', :platforms => :ruby
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'haml-rails'
-
-# deprecated, but used
-gem 'protected_attributes'

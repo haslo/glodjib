@@ -1,6 +1,5 @@
 class FlickrCache < ActiveRecord::Base
-  attr_accessible :flickr_user, :flickr_tag
-  validates_presence_of :flickr_user, :flickr_tag
+  validates :flickr_user, :flickr_tag, :presence => true
 
   belongs_to :flickr_user
   belongs_to :flickr_tag
