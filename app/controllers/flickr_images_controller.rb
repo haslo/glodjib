@@ -9,14 +9,14 @@ class FlickrImagesController < ApplicationController
     flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id)
   end
 
-  def index
-    redirect_to :action => :show, :id => 'portfolio'
+  def show
+    @title_parameter = params[:id].humanize
   end
 
   def reset_caches
     FlickrCache.destroy_all
     flash[:notice] = I18n.t('notices.flickr_images.cache_updated')
-    redirect_to portfolio_path
+    redirect_to portfolio_flickr_images_path
   end
 
 end

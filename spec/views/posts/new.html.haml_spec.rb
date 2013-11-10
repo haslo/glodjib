@@ -3,6 +3,7 @@ require 'spec_helper'
 describe "posts/new.html.haml" do
   before(:each) do
     @post = Post.create!(:title => "title of the post", :content => "content of the post")
+    view.stub(:post) { @post }
   end
 
   it "should contain title of the post" do

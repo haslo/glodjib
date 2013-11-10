@@ -1,6 +1,6 @@
 class PostComment < ActiveRecord::Base
   validates :post_id, :name, :comment, :presence => true
-  validates :comment, :uniqueness => {:message => I18n.t('notices.post_comment.duplicate')}
+  validates :comment, :uniqueness => {:message => I18n.t('notices.post_comment.duplicate'), :scope => :is_deleted}, :unless => :is_deleted?
 
   belongs_to :post
 
@@ -22,6 +22,16 @@ class PostComment < ActiveRecord::Base
 
   def comment=(value)
     write_attribute(:comment, sanitize(value))
+  end
+
+  def spam!
+    self.is_spam = true
+    save!
+  end
+
+  def deleted!
+    self.is_deleted = true
+    save!
   end
 
   def comment

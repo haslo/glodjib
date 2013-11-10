@@ -1,7 +1,7 @@
 defaults: &DEFAULTS
-  api_key: e0621d7a415e7b84a298989a776551e6
-  shared_secret: 178f91a272579454
-  user: 95789229@N03
+  api_key: 'e0621d7a415e7b84a298989a776551e6'
+  shared_secret: '178f91a272579454'
+  user: '95789229@N03'
 
 development:
   <<: *DEFAULTS

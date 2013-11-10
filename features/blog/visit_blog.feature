@@ -6,6 +6,7 @@ Feature: Visit blog
 
   Background:
     Given I am not logged in
+    And Settings are present
 
   Scenario: Check for title link
     Given I have no posts

@@ -12,5 +12,5 @@ rescue NameError
 end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Setting.page_title = "the glodjib platform"
-Setting.post_more_separator = "!!more!!"
+require 'capybara/poltergeist'
+Capybara.javascript_driver = :poltergeist

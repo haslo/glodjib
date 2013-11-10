@@ -1,4 +1,4 @@
-shared_examples_for "a model that accepts text" do |property|
+shared_examples_for 'a model that accepts text' do |property|
   let(:text_input) { "some_text" }
 
   it "accepts text input for #{property}" do
@@ -14,7 +14,7 @@ shared_examples_for "a model that accepts text" do |property|
   end
 end
 
-shared_examples_for "a model that accepts a boolean" do |property|
+shared_examples_for 'a model that accepts a boolean' do |property|
   let(:boolean_input) { true }
 
   it "accepts text input for #{property}" do
@@ -31,8 +31,8 @@ shared_examples_for "a model that accepts a boolean" do |property|
   end
 end
 
-shared_examples_for "a model that accepts html with links and formatting" do |property|
-  let(:text_input) { "some <strong>bold</strong> text <a href=\"\">with link</a>" }
+shared_examples_for 'a model that accepts html with links and formatting' do |property|
+  let(:text_input) { 'some <strong>bold</strong> text <a href="">with link</a>' }
 
   it "accepts html input for #{property}" do
     record = new_valid_record

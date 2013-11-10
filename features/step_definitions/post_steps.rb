@@ -1,3 +1,8 @@
+Given /^Settings are present$/ do
+  Setting.page_title = "the glodjib platform"
+  Setting.post_more_separator = "!!more!!"
+end
+
 Given /^I have posts titled (.+) that say "(.+)"$/ do |titles, content|
   titles.split(', ').each do |title|
     post = Post.create!(:title => title, :content => content)

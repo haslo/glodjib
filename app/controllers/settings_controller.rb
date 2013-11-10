@@ -1,6 +1,6 @@
 class SettingsController < ApplicationController
 
-  def update
+  def create
     valid_keys = %w(flickr_user flickr_api_key flickr_shared_secret page_title post_more_separator)
     if params.keys.include?("setting") && valid_keys.collect{|key| params["setting"].keys.include?(key) && !params["setting"][key].blank?}.all?
       valid_keys.each do |key|
@@ -13,6 +13,8 @@ class SettingsController < ApplicationController
     else
       flash[:error] = I18n.t('notices.settings.invalid_settings')
     end
+    flash[:notice] = I18n.t('notices.settings.saved') unless flash[:error].present?
+    redirect_to :action => :index
   end
 
 end

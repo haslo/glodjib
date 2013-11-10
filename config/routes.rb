@@ -1,19 +1,21 @@
 Glodjib::Application.routes.draw do
-  root 'posts#frontpage'
+  root 'posts#index'
 
   scope '/admin' do
     devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
-    resources :posts, :only => [:edit, :update, :destroy]
+    resources :posts, :except => :show
     resources :post_comments, :only => [:destroy] do
-      delete :spam, :path => ':id/spam'
+      delete :spam, :path => 'spam'
     end
     resources :flickr_images, :path => :portfolio, :only => [] do
       delete :reset_caches, :on => :collection
     end
-    resources :settings, :only => [:index, :update]
+    resources :settings, :only => [:index, :create]
   end
   resources :post_tags, :only => [:show]
-  resources :flickr_images, :path => :portfolio, :only => [:index, :show]
-  resources :posts, :path => '', :only => [:show], :as => :post
-  resources :post_comments, :path => 'comment', :only => [:create]
+  resources :flickr_images, :path => :portfolio, :only => [:show] do
+    get '/', :controller => 'flickr_images', :action => 'show', :id => 'portfolio', :on => :collection, :as => 'portfolio'
+  end
+  resources :posts, :path => '', :only => [:show]
+  resources :post_comments, :path => 'comment', :only => [:new, :create]
 end

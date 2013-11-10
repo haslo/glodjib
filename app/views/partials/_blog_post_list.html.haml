@@ -1,6 +1,6 @@
 - for post in posts
   .blog_post
-    %h3= link_to(post.title, post_path(:id => post.shorthand))
+    %h3= link_to(post.title, "/#{post.shorthand}")
     %p.post_date= l(post.created_at, :format => :short)
     = render('/partials/blog_post_tags', :post_tags => post.post_tags)
     = Nokogiri::HTML::DocumentFragment.parse(post.content.split(Setting.post_more_separator)[0]).to_html.html_safe
@@ -8,17 +8,17 @@
       %p= link_to(t('links.post.read_more'), "#{post_path(:id => post.shorthand)}#more-#{post.id}")
     .blog_post_comment_count
       - if post.post_comments.ham.count == 1
-        = link_to(I18n.t('notices.post.number_of_comments.one'), post_path(:id => post.shorthand, :anchor => 'comments'))
+        = link_to(I18n.t('notices.post.number_of_comments.one'), "/#{post.shorthand}#comments")
       - elsif post.post_comments.ham.count > 0
-        = link_to(I18n.t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.ham.count), post_path(:id => post.shorthand, :anchor => 'comments'))
+        = link_to(I18n.t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.ham.count), "/#{post.shorthand}#comments")
       - else
-        = link_to(I18n.t('notices.post.number_of_comments.zero'), post_path(:id => post.shorthand, :anchor => 'comments'))
+        = link_to(I18n.t('notices.post.number_of_comments.zero'), "/#{post.shorthand}#comments")
   - if user_signed_in?
     .management_functionality
       %p
         = link_to(I18n.t('links.post.edit'), edit_post_path(:id => post.id))
         = '-'
-        = link_to(I18n.t('links.post.destroy'), destroy_post_path(:id => post.id), :data => {:confirm => I18n.t('link_confirmations.destroy_post')}, :method => :delete)
+        = link_to(I18n.t('links.post.destroy'), post_path(:id => post.id), :data => {:confirm => I18n.t('link_confirmations.destroy_post')}, :method => :delete)
 
 - if user_signed_in?
   .management_functionality

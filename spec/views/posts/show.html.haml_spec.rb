@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "posts/show.html.haml" do
   before(:each) do
     @post = Post.create!(:title => "title of the post 1", :content => "<p>content of the post 1!!more!!<strong>new</strong> 1 content after the split</p>")
+    view.stub(:post) { @post }
+    view.stub(:post_comment) { PostComment.new }
     Setting.post_more_separator = "!!more!!"
   end
 

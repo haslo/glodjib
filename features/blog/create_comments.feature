@@ -6,6 +6,7 @@ Feature: Visit blog
 
   Background:
     Given I am not logged in
+    And Settings are present
 
   Scenario: Check for comment links
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"

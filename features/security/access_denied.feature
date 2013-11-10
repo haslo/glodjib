@@ -34,7 +34,6 @@ Feature: Login and logout work as expected
 
   Examples:
     |page_name   |method|id|
-    |posts       |get   |  |
     |new_post    |get   |  |
     |edit_post   |get   |X |
 
@@ -45,6 +44,6 @@ Feature: Login and logout work as expected
     Then I should see "You are being redirected"
 
   Examples:
-    |page_name   |method|id|
-    |destroy_post|delete|X |
-    |reset_caches|delete|  |
+    |page_name                 |method|id|
+    |post                      |delete|X |
+    |reset_caches_flickr_images|delete|X |

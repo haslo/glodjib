@@ -20,7 +20,6 @@ Feature: Manage the site as a whole
   Scenario Outline: Open settings page and check for fields
     Given I am on the homepage
     And I follow the only "admin"
-    Then I should see the page title as "Admin - the glodjib platform"
     And I should see the setting translation for "<fieldname>"
 
   Examples:

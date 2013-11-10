@@ -11,7 +11,6 @@ Feature: Visit portfolio
     Given I have no posts
     And I am on the homepage
     When I follow the only "Portfolio"
-    Then I should see the page title as "Portfolio - the glodjib platform"
     And I should see that "Portfolio" is in a h2 tag
     And I should see at least 1 portfolio image thumbnail
 

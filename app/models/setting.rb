@@ -7,16 +7,22 @@ class Setting < ActiveRecord::Base
   end
 
   def self.method_missing(message, *args, &block)
-    if message.to_s =~ /([a-z_]+)=/
-      return put($1, args[0])
-    elsif message.to_s =~ /([a-z_]+)/
-      return get(message) unless get(message).nil?
-      if %w(flickr_api_key flickr_shared_secret flickr_user).include?(message.to_s)
-        return put(message, FLICKR_CONFIG[message[7..message.length]])
-      end
-      return nil
+    case message.to_s
+      when /^(key|value)=$/
+        write_attribute($1, args[0])
+      when /^(key|value)$/
+        read_attribute($1)
+      when /^([a-z_]+)=$/
+        return put($1, args[0])
+      when /^([a-z_]+)$/
+        return get(message) unless get(message).nil?
+        if %w(flickr_api_key flickr_shared_secret flickr_user).include?(message.to_s)
+          return put(message, FLICKR_CONFIG[message[7..message.length]])
+        end
+        return nil
+      else
+        super
     end
-    super
   end
 
   def admin_password=(value)
