@@ -1,8 +1,7 @@
 en:
   titles:
     posts:
-      index: Edit Blog
-      frontpage: Blog
+      index: Blog
       show: '%{title_parameter}'
       new: New Blog Post
       create: New Blog Post
@@ -12,7 +11,7 @@ en:
       leave_reply: Leave a reply
       create: '%{title_parameter}'
     flickr_images:
-      portfolio: Portfolio
+      show: '%{title_parameter}'
     post_tags:
       show: 'Posts with tag "%{title_parameter}"'
     sessions:
@@ -68,6 +67,7 @@ en:
     logged_in_as: Logged in as %{user}
     settings:
       invalid_settings: Invalid settings, nothing was saved
+      saved: Settings saved
     post_comment:
       duplicate: Duplicate comments are not allowed
 

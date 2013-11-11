@@ -1,33 +1,18 @@
 class PostsController < ApplicationController
-  before_filter :authenticate_user!, :except => [:frontpage, :show]
 
-  def frontpage
-    @posts = Post.all
-  end
+  before_filter :authenticate_user!, :except => [:index, :show]
 
-  def index
-    @posts = Post.all
-    render 'frontpage'
-  end
+  expose(:posts) { Post.sorted }
+  expose(:post, :attributes => :post_params) { get_or_build_post }
+
+  before_filter :mandatory_post, :only => [:edit, :update, :destroy]
 
   def show
-    posts = Post.where((params[:id].is_i? ? :id : :shorthand) => params[:id])
-    if posts.count > 0
-      @post = posts.first
-      @title_parameter = @post.title
-    else
-      flash[:error] = I18n.t('notices.post.not_found')
-      redirect_to root_path
-    end
-  end
-
-  def new
-    @post = Post.new
+    @title_parameter = post.title
   end
 
   def create
-    @post = Post.create(params[:post])
-    if @post.valid? && @post.save
+    if post.save
       flash[:notice] = I18n.t('notices.post.created')
       redirect_to posts_path
     else
@@ -37,34 +22,46 @@ class PostsController < ApplicationController
   end
 
   def edit
-    posts = Post.where("id = ?", params[:id])
-    if posts.count > 0
-      if request.get?
-        @post = posts.first
-        @title_parameter = @post.title
-      elsif request.patch?
-        @post = Post.find(params[:id])
-        if @post.update_attributes(params[:post])
-          flash[:notice] = I18n.t('notices.post.updated')
-          redirect_to posts_path
-        end
-      end
-    else
-      flash[:error] = I18n.t('notices.post.not_found')
+    @title_parameter = post.title
+  end
+
+  def update
+    if post.update_attributes(post_params)
+      flash[:notice] = I18n.t('notices.post.updated')
       redirect_to posts_path
     end
   end
 
   def destroy
-    posts = Post.where("id = ?", params[:id])
-    if posts.count > 0
-      post = posts.first
-      post.destroy
+    if post.present? && post.destroy
       flash[:notice] = I18n.t('notices.post.destroyed')
-      redirect_to posts_path
     else
+      flash[:error] = I18n.t('notices.post.not_found')
+    end
+    redirect_to posts_path
+  end
+
+  def get_or_build_post
+    if params[:id].present?
+      Post.with_id_or_shorthand(params[:id])
+    elsif params[:post].present?
+      Post.new(post_params)
+    else
+      Post.new
+    end
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content, :shorthand, :tags)
+  end
+  private :post_params
+
+  def mandatory_post
+    if post.new_record?
       flash[:error] = I18n.t('notices.post.not_found')
       redirect_to posts_path
     end
   end
+  private :mandatory_post
+
 end

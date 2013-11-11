@@ -1,11 +1,12 @@
 require 'spec_helper'
 
-describe "flickr_images/portfolio.html.haml" do
+describe "flickr_images/show.html.haml" do
   before(:each) do
     @flickr_images = []
     1.upto(10).each do |index|
       @flickr_images << FlickrImage.new(:image_title => "image title #{index}", :full_flickr_url => "url #{index}", :flickr_thumbnail_url => "thumbnail #{index}")
     end
+    view.stub(:flickr_images) { @flickr_images }
     view.stub(:user_signed_in?) { true }
   end
 

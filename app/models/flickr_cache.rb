@@ -1,6 +1,6 @@
 class FlickrCache < ActiveRecord::Base
-  attr_accessible :flickr_user, :flickr_tag
-  validates_presence_of :flickr_user, :flickr_tag
+
+  validates :flickr_user, :flickr_tag, :presence => true
 
   belongs_to :flickr_user
   belongs_to :flickr_tag
@@ -12,4 +12,5 @@ class FlickrCache < ActiveRecord::Base
   def refresh_timeout
     write_attribute(:timeout, Time.now + 24.hours)
   end
+
 end

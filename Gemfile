@@ -12,16 +12,18 @@ gem 'mini_magick'
 gem 'flickraw'
 gem 'tinymce-rails'
 gem 'devise'
+gem 'decent_exposure'
 
 # testing frameworks
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', '~> 2.4.0'
   gem 'cucumber-rails', :require => false
   gem 'launchy'
   gem 'database_cleaner'
   gem 'webrat'
   gem 'simplecov'
+  gem 'poltergeist'
 end
 
 # server, deployment
@@ -41,6 +43,3 @@ gem 'therubyracer', :platforms => :ruby
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'haml-rails'
-
-# deprecated, but used
-gem 'protected_attributes'

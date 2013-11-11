@@ -1,6 +1,5 @@
 class FlickrUser < ActiveRecord::Base
-  attr_accessible :username
-  validates_presence_of :username
+  validates :username, :presence => true
 
   has_many :flickr_images
   has_many :flickr_caches, :class_name => "FlickrCache"

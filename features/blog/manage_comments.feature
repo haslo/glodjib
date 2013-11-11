@@ -6,6 +6,7 @@ Feature: Visit blog
 
   Background:
     Given I am logged in as an admin
+    And Settings are present
 
   Scenario: Check for comment management links
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"

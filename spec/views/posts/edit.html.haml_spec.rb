@@ -5,6 +5,7 @@ describe "posts/edit.html.haml", :issue23 => true do
     @post = Post.create!(:title => "title of the post", :content => "content of the post")
     @post.post_tags << PostTag.create!(:tag_text => "tag1")
     @post.post_tags << PostTag.create!(:tag_text => "tag2")
+    view.stub(:post) { @post }
   end
 
   it "should contain title of the post" do

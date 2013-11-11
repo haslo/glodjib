@@ -6,6 +6,7 @@ Feature: Manage posts
 
   Background:
     Given I am logged in as an admin
+    And Settings are present
 
   Scenario: Open new post form
     Given I have no posts
@@ -52,8 +53,9 @@ Feature: Manage posts
     And I should see "Rather awesome dog sauce"
     And I should have 2 posts
 
+  @javascript
   Scenario: Delete post
-    Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
+    Given I have posts titled Breadsticks, Pizza that say "Dummy Text"
     And I am on the homepage
     When I follow the first "Delete Post"
     Then I should not see that "Pizza" is in a h3 tag

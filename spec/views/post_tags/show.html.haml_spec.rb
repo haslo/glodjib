@@ -7,6 +7,8 @@ describe "post_tags/show.html.haml" do
     @post_tag.posts << Post.create!(:title => "title of the post 2", :content => "<p>content of the post 2!!more!!<strong>new</strong> 2 content after the split</p>")
     @posts = @post_tag.posts
     view.stub(:user_signed_in?) { true }
+    view.stub(:post_tag) { @post_tag }
+    view.stub(:posts) { @posts }
     Setting.post_more_separator = '!!more!!'
   end
 
