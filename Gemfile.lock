@@ -73,6 +73,9 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
+    exception_notification (4.0.1)
+      actionmailer (>= 3.0.4)
+      activesupport (>= 3.0.4)
     execjs (2.0.2)
     flickraw (0.9.6)
     gherkin (2.12.2)
@@ -221,6 +224,7 @@ DEPENDENCIES
   database_cleaner
   decent_exposure
   devise
+  exception_notification
   flickraw
   haml-rails
   jbuilder (~> 1.2)
