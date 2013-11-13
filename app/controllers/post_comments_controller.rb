@@ -4,6 +4,7 @@ class PostCommentsController < ApplicationController
   expose(:post) { post_comment.post }
 
   def create
+    # TODO https://github.com/ysbaddaden/ruby-akismet#usage-1
     if post_comment.save
       redirect_to "/#{post.shorthand}"
     end
