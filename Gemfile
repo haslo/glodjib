@@ -33,6 +33,7 @@ end
 group :development do
   gem 'capistrano'
 end
+gem 'exception_notification'
 
 #defaults
 gem 'jquery-rails'
