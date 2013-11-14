@@ -1,19 +1,27 @@
 class SettingsController < ApplicationController
 
   def create
-    valid_keys = %w(flickr_user flickr_api_key flickr_shared_secret page_title post_more_separator akismet_key)
+    valid_keys = %w(flickr_user flickr_api_key flickr_shared_secret page_title post_more_separator)
+    errors = []
     if params.keys.include?("setting") && valid_keys.collect{|key| params["setting"].keys.include?(key) && !params["setting"][key].blank?}.all?
       valid_keys.each do |key|
         Setting.put(key, params["setting"][key])
       end
       setting = Setting.new
-      setting.admin_password = params["setting"]["admin_password"]
-      setting.admin_password_confirmation = params["setting"]["admin_password_confirmation"]
-      flash[:error] = setting.save_admin_password
+      if params['setting']['akismet_key'].present?
+        setting.akismet_key = params['setting']['akismet_key']
+      end
+      setting.admin_password = params['setting']['admin_password']
+      setting.admin_password_confirmation = params['setting']['admin_password_confirmation']
+      errors << setting.save_admin_password
     else
-      flash[:error] = I18n.t('notices.settings.invalid_settings')
+      errors << I18n.t('notices.settings.invalid_settings')
     end
-    flash[:notice] = I18n.t('notices.settings.saved') unless flash[:error].present?
+    if errors.empty?
+      flash[:notice] = I18n.t('notices.settings.saved')
+    else
+      flash[:error] = errors.join(', ')
+    end
     redirect_to :action => :index
   end
 

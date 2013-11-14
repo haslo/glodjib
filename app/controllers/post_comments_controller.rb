@@ -1,6 +1,6 @@
 class PostCommentsController < ApplicationController
 
-  before_filter :configure_akismet, :only => [:create]
+  before_filter :configure_akismet, :only => [:create, :spam]
 
   expose(:post_comment, :attributes => :post_comment_params)
   expose(:post) { post_comment.post }
@@ -15,6 +15,9 @@ class PostCommentsController < ApplicationController
   end
 
   def spam
+    if Setting.akismet_key.present?
+      Akismet.submit_spam(akismet_attributes)
+    end
     post_comment.spam!
     redirect_to "/#{post.shorthand}"
   end
