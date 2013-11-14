@@ -9,19 +9,19 @@ class PostComment < ActiveRecord::Base
   scope :deleted, lambda { where(:is_deleted => true) }
 
   def name=(value)
-    write_attribute(:name, strip_tags(value))
+    write_attribute(:name, ActionController::Base.helpers.strip_tags(value))
   end
 
   def email=(value)
-    write_attribute(:email, strip_tags(value))
+    write_attribute(:email, ActionController::Base.helpers.strip_tags(value))
   end
 
   def url=(value)
-    write_attribute(:url, strip_tags(value))
+    write_attribute(:url, ActionController::Base.helpers.strip_tags(value))
   end
 
   def comment=(value)
-    write_attribute(:comment, sanitize(value))
+    write_attribute(:comment, ActionController::Base.helpers.sanitize(value))
   end
 
   def spam!
