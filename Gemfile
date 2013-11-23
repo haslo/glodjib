@@ -25,6 +25,7 @@ group :test, :development do
   gem 'simplecov'
   gem 'poltergeist'
 end
+gem 'nokogiri'
 
 # server, deployment
 group :test, :development do
