@@ -16,7 +16,7 @@
 
   %body
     %header.navbar.navbar-fixed-top
-      %nav.navbar-inner
+      %nav.navbar-inner.glodjib-nav
         .container
           = render('layouts/navigation')
 
@@ -24,7 +24,7 @@
       .container
         .content
           .row
-            .span12
+            .col-md-12
               %h2
                 = link_to(t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), params)
               = render('layouts/messages')

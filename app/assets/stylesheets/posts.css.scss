@@ -2,48 +2,9 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-body {
-  background-color: #333333;
-}
-
-.content {
-  background-color: rgba(255, 255, 255, .85);
-  padding: 20px;
-  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  box-shadow: 0 1px 2px rgba(0,0,0,.15);
-  margin-bottom: 60px;
-}
-
-.field_error {
-  display: block;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
-
 .post_date, .post_tags {
   font-size: smaller;
   position: relative;
   top: -15px;
   margin-bottom: -5px;
-}
-
-.login_notice {
-  font-size: smaller;
-}
-
-footer {
-  padding: 10px 0 10px 0;
-  text-align: center;
-  font-size: smaller;
-  background-color: rgba(51, 51, 51, .5);
-  background-image: none;
-}
-
-footer, footer a, footer a:visited {
-  color: rgba(255, 255, 255, 0.85);
 }

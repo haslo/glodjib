@@ -1,9 +1,53 @@
 @import "bootstrap";
+
 body {
   padding-top: 60px;
   font-family: "museo-sans","Helvetica Neue","Helvetica","Arial",sans-serif !important;
+  background-color: #333333;
 }
+
 h1, h2, h3, h4, h5 {
   font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
   text-shadow: 2px 1px 1px #999999;
+}
+
+.glodjib-nav {
+  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  width: 100%;
+}
+
+.content {
+  background-color: rgba(255, 255, 255, .85);
+  padding: 20px;
+  margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  box-shadow: 0 1px 2px rgba(0,0,0,.15);
+  margin-bottom: 60px;
+}
+
+.field_error {
+  display: block;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.login_notice {
+  font-size: smaller;
+}
+
+footer {
+  padding: 10px 0 10px 0;
+  text-align: center;
+  font-size: smaller;
+  background-color: rgba(51, 51, 51, .5);
+  background-image: none;
+}
+
+footer, footer a, footer a:visited {
+  color: rgba(255, 255, 255, 0.85);
 }
