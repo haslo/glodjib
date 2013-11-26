@@ -91,17 +91,17 @@ namespace :deploy do
 
   desc "Zero-downtime restart of Unicorn"
   task :restart, :except => { :no_release => true } do
-    run "sudo /etc/init.d/unicorn restart"
+    run "sudo env PATH=#{default_environment["PATH"]} /etc/init.d/unicorn restart"
   end
 
   desc "Start unicorn"
   task :start, :except => { :no_release => true } do
-    run "sudo /etc/init.d/unicorn start"
+    run "sudo env PATH=#{default_environment["PATH"]} /etc/init.d/unicorn start"
   end
 
   desc "Stop unicorn"
   task :stop, :except => { :no_release => true } do
-    run "sudo /etc/init.d/unicorn stop"
+    run "sudo env PATH=#{default_environment["PATH"]} /etc/init.d/unicorn stop"
   end
 end
 
