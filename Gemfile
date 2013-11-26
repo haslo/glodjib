@@ -35,7 +35,7 @@ group :production do
   gem 'unicorn'
 end
 group :development do
-  gem 'capistrano'
+  gem 'capistrano', "~> 2.15.0"
 end
 gem 'exception_notification'
 
