@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:index, :show, :feed]
 
   expose(:posts) { Post.sorted }
   expose(:post, :attributes => :post_params) { get_or_build_post }
 
-  before_filter :mandatory_post, :only => [:edit, :update, :destroy]
+  before_filter :mandatory_post, :only => [:show, :edit, :update, :destroy]
 
   def show
     @title_parameter = post.title
@@ -43,13 +43,22 @@ class PostsController < ApplicationController
 
   def get_or_build_post
     if params[:id].present?
-      Post.with_id_or_shorthand(params[:id])
-    elsif params[:post].present?
+      post = Post.with_id_or_shorthand(params[:id])
+      post || build_post
+    else
+      build_post
+    end
+  end
+  private :get_or_build_post
+
+  def build_post
+    if params[:post].present?
       Post.new(post_params)
     else
       Post.new
     end
   end
+  private :build_post
 
   def post_params
     params.require(:post).permit(:title, :content, :shorthand, :tags)
@@ -57,9 +66,9 @@ class PostsController < ApplicationController
   private :post_params
 
   def mandatory_post
-    if post.new_record?
+    if post.class.name != 'Post' || post.new_record?
       flash[:error] = I18n.t('notices.post.not_found')
-      redirect_to posts_path
+      redirect_to root_path
     end
   end
   private :mandatory_post
