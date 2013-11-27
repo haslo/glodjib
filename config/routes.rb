@@ -1,6 +1,7 @@
 Glodjib::Application.routes.draw do
   root 'posts#index'
 
+  get '/feed' => 'posts#feed', :as => :feed, :defaults => { :format => 'atom' }
   scope '/admin' do
     devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
     resources :posts, :except => :show
