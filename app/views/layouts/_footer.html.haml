@@ -1,0 +1,9 @@
+%footer.navbar.navbar-fixed-bottom
+  = t('notices.footer')
+  = '-'
+  - if user_signed_in?
+    = link_to(t('navigation.admin'), settings_path)
+    = '-'
+    = link_to(t('navigation.logout'), destroy_user_session_path, :method => :delete)
+  - else
+    = link_to(t('navigation.login'), new_user_session_path)

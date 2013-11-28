@@ -19,7 +19,7 @@ module Concerns::FlickrAPILib
       images_from_remote = get_images_from_remote(flickr_cache)
       if images_from_remote.count > 0
         images_from_remote.each do |portfolio_image|
-          photo_info = flickr.photos.getInfo :photo_id => portfolio_image.id, :secret => portfolio_image.secret
+          photo_info = flickr.photos.getInfo(:photo_id => portfolio_image.id, :secret => portfolio_image.secret)
           flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
           extract_basic_image_info(flickr_cache, flickr_image, photo_info)
           extract_exif_info(flickr_image, portfolio_image)

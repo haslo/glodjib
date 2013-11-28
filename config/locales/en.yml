@@ -18,6 +18,8 @@ en:
       new: Login
     settings:
       index: Admin
+    home:
+      index: ''
 
   navigation:
     home: Blog
