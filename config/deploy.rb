@@ -57,6 +57,7 @@ namespace :deploy do
   task :update do
     transaction do
       update_code
+      migrations
       precompile_assets
     end
   end
@@ -67,11 +68,6 @@ namespace :deploy do
     finalize_update
   end
 
-  desc "Precompile assets"
-  task :precompile_assets do
-    run_rake "assets:precompile"
-  end
-
   desc "Update the database"
   task :migrations do
     transaction do
@@ -79,6 +75,11 @@ namespace :deploy do
     end
     migrate
     restart
+  end
+
+  desc "Precompile assets"
+  task :precompile_assets do
+    run_rake "assets:precompile"
   end
 
   task :finalize_update, :except => { :no_release => true } do
