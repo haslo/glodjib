@@ -19,7 +19,9 @@ Glodjib::Application.routes.draw do
   resources :flickr_images, :path => :portfolio, :only => [:show] do
     get '/', :controller => 'flickr_images', :action => 'show', :id => 'portfolio', :on => :collection, :as => 'portfolio'
   end
-  resources :posts, :path => '', :only => [:show]
+  resources :posts, :path => '', :only => [:show] do
+    get 'blog', :action => 'index', :on => :collection, :as => 'blog'
+  end
   resources :post_comments, :path => 'comment', :only => [:new, :create]
 
 end

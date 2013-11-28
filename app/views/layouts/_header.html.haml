@@ -1,5 +1,5 @@
-%header.navbar.navbar-fixed-top
-  %nav.navbar-inner.glodjib-nav
-    .container
-      = link_to(I18n.t('navigation.home'), root_path, :class => 'navbar-brand')
-      = link_to(I18n.t('navigation.portfolio'), portfolio_flickr_images_path, :class => 'navbar-brand')
+#menu
+  = link_to(I18n.t('navigation.home'), blog_posts_path)
+  = link_to(I18n.t('navigation.portfolio'), portfolio_flickr_images_path)
+#logo
+  = link_to(Setting.page_title_short, root_path)
