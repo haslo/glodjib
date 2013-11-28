@@ -11,4 +11,8 @@ module ApplicationHelper
     HTML
     html.html_safe
   end
+
+  def page_title
+    [t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), Setting.page_title].reject{|item| item.blank?}.join(' - ')
+  end
 end

@@ -19,7 +19,7 @@ module Concerns::FlickrAPILib
       images_from_remote = get_images_from_remote(flickr_cache)
       if images_from_remote.count > 0
         images_from_remote.each do |portfolio_image|
-          photo_info = flickr.photos.getInfo :photo_id => portfolio_image.id, :secret => portfolio_image.secret
+          photo_info = flickr.photos.getInfo(:photo_id => portfolio_image.id, :secret => portfolio_image.secret)
           flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
           extract_basic_image_info(flickr_cache, flickr_image, photo_info)
           extract_exif_info(flickr_image, portfolio_image)
@@ -48,6 +48,7 @@ module Concerns::FlickrAPILib
     flickr_image.image_description = photo_info.description
     flickr_image.full_flickr_url = FlickRaw.url_photopage(photo_info) + "/lightbox/"
     flickr_image.flickr_thumbnail_url = FlickRaw.url_q(photo_info) # square 150 format
+    flickr_image.flickr_original_url = FlickRaw.url_o(photo_info) # original format
   end
 
   def extract_exif_info(flickr_image, portfolio_image)

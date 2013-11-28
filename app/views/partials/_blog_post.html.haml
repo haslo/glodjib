@@ -9,7 +9,7 @@
       - if post.post_comments.ham.count == 1
         %h3= t('notices.post.number_of_comments.one')
       - elsif post.post_comments.ham.count > 0
-        %h3= t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.count)
+        %h3= t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.ham.count)
       - post.post_comments.ham.each do |post_comment|
         .post_comment
           %h4

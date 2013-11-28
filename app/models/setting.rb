@@ -3,20 +3,23 @@ class Setting < ActiveRecord::Base
   validates :key, :uniqueness => true
 
   def method_missing(message, *args, &block)
-    Setting.method_missing(message, *args, &block)
-  end
-
-  def self.method_missing(message, *args, &block)
     case message.to_s
       when /^(key|value)=$/
         write_attribute($1, args[0])
       when /^(key|value)$/
         read_attribute($1)
+      else
+        Setting.method_missing(message, *args, &block)
+    end
+  end
+
+  def self.method_missing(message, *args, &block)
+    case message.to_s
       when /^([a-z_]+)=$/
         return put($1, args[0])
       when /^([a-z_]+)$/
         return get(message) unless get(message).nil?
-        if %w(flickr_api_key flickr_shared_secret flickr_user).include?(message.to_s)
+        if %w(flickr_api_key flickr_shared_secret flickr_user flickr_front_page_tag).include?(message.to_s)
           return put(message, FLICKR_CONFIG[message[7..message.length]])
         end
         return nil

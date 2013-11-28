@@ -1,7 +1,8 @@
 Glodjib::Application.routes.draw do
-  root 'posts#index'
 
+  root 'home#index'
   get '/feed' => 'posts#feed', :as => :feed, :defaults => { :format => 'atom' }
+
   scope '/admin' do
     devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
     resources :posts, :except => :show
@@ -13,10 +14,14 @@ Glodjib::Application.routes.draw do
     end
     resources :settings, :only => [:index, :create]
   end
+
   resources :post_tags, :only => [:show]
   resources :flickr_images, :path => :portfolio, :only => [:show] do
     get '/', :controller => 'flickr_images', :action => 'show', :id => 'portfolio', :on => :collection, :as => 'portfolio'
   end
-  resources :posts, :path => '', :only => [:show]
+  resources :posts, :path => '', :only => [:show] do
+    get 'blog', :action => 'index', :on => :collection, :as => 'blog'
+  end
   resources :post_comments, :path => 'comment', :only => [:new, :create]
+
 end

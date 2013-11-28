@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106204614) do
+ActiveRecord::Schema.define(version: 20131128191605) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,7 @@ ActiveRecord::Schema.define(version: 20131106204614) do
     t.string   "camera"
     t.string   "full_flickr_url"
     t.string   "flickr_thumbnail_url"
+    t.string   "flickr_original_url"
   end
 
   create_table "flickr_images_tags", id: false, force: true do |t|

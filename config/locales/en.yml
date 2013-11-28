@@ -18,6 +18,8 @@ en:
       new: Login
     settings:
       index: Admin
+    home:
+      index: ''
 
   navigation:
     home: Blog
@@ -85,6 +87,7 @@ en:
         flickr_api_key: Flickr API key
         flickr_shared_secret: Flickr shared secret
         page_title: Page title (displayed in the title bar)
+        page_title_short: Page title (displayed top right)
         post_more_separator: Separator for "Read more..." in posts
         admin_password: Admin password
         admin_password_confirmation: Admin password confirmation
