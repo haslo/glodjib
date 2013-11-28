@@ -1,4 +1,5 @@
 - for post in posts
+  %hr
   .blog_post
     %h3= link_to(post.title, "/#{post.shorthand}")
     %p.post_date= l(post.created_at, :format => :short)
