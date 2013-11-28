@@ -1,0 +1,7 @@
+%sidebar-wrapper.navbar-fixed-side
+  %sidebar.navbar-inner.glodjib-nav
+    .container
+      = link_to(I18n.t('navigation.home'), root_path, :class => 'navbar-brand')
+      = link_to(I18n.t('navigation.portfolio'), portfolio_flickr_images_path, :class => 'navbar-brand')
+
+- # see http://startbootstrap.com/simple-sidebar
