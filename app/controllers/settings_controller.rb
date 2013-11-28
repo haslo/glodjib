@@ -1,7 +1,7 @@
 class SettingsController < ApplicationController
 
   def create
-    valid_keys = %w(flickr_user flickr_api_key flickr_shared_secret page_title page_title_short post_more_separator)
+    valid_keys = %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag post_more_separator akismet_key)
     errors = []
     if params.keys.include?("setting") && valid_keys.collect{|key| params["setting"].keys.include?(key) && !params["setting"][key].blank?}.all?
       valid_keys.each do |key|
