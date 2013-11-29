@@ -4,13 +4,13 @@ class FlickrImagesController < ApplicationController
 
   expose(:flickr_images) do
     flickr_api = FlickrAPI.new
-    flickr_cache = flickr_api.find_or_create_cache(params[:id])
+    flickr_cache = flickr_api.find_or_create_cache(params[:portfolio])
     flickr_api.update_cache(flickr_cache)
     flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id)
   end
 
-  def show
-    @title_parameter = params[:id].humanize
+  def index
+    @title_parameter = [I18n.t('titles.flickr_images.portfolio'), params[:portfolio].humanize].uniq.join(': ')
   end
 
   def reset_caches
