@@ -13,6 +13,7 @@ en:
     flickr_images:
       portfolio: 'Portfolio'
       index: '%{title_parameter}'
+      show: '%{title_parameter}'
     post_tags:
       show: 'Posts with tag "%{title_parameter}"'
     sessions:

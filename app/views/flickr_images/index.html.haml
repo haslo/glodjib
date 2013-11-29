@@ -2,7 +2,7 @@
 .clearfix
   - flickr_images.each do |flickr_image|
     .portfolio_tile
-      = link_to(flickr_image.full_flickr_url) do
+      = link_to(flickr_image_path(:id => flickr_image.flickr_id, :portfolio => portfolio, :anchor => 'full_image')) do
         %img{:class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => flickr_image.flickr_thumbnail_url}
 
 - if user_signed_in?

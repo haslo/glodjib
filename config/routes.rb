@@ -16,7 +16,7 @@ Glodjib::Application.routes.draw do
   end
 
   resources :post_tags, :only => [:show]
-  resources :flickr_images, :path => 'gallery/:portfolio', :portfolio => 'portfolio', :only => [:index]
+  resources :flickr_images, :path => 'gallery/:portfolio', :portfolio => 'portfolio', :only => [:index, :show]
   resources :posts, :path => '', :only => [:show] do
     get 'blog', :action => 'index', :on => :collection, :as => 'blog'
   end
