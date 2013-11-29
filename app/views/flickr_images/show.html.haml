@@ -1,0 +1,11 @@
+%hr
+#full_image
+  - if previous_flickr_image.present?
+    .previous_image
+      = link_to(flickr_image_path(:id => previous_flickr_image.flickr_id, :portfolio => portfolio, :anchor => 'full_image')) do
+        ᑅ
+  - if next_flickr_image.present?
+    .next_image
+      = link_to(flickr_image_path(:id => next_flickr_image.flickr_id, :portfolio => portfolio, :anchor => 'full_image')) do
+        ᑀ
+  %img{ :src => flickr_image.flickr_large_url }

@@ -8,9 +8,18 @@ class FlickrImagesController < ApplicationController
     flickr_api.update_cache(flickr_cache)
     flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id)
   end
+  expose(:flickr_image) { FlickrImage.where(:flickr_id => params[:id]).first_or_initialize }
+  expose(:previous_flickr_image) { flickr_images[flickr_images.find_index(flickr_image) - 1]}
+  expose(:next_flickr_image) { flickr_images[flickr_images.find_index(flickr_image) + 1]}
+  expose(:portfolio) { params[:portfolio] }
 
   def index
-    @title_parameter = [I18n.t('titles.flickr_images.portfolio'), params[:portfolio].humanize].uniq.join(': ')
+    @title_parameter = [I18n.t('titles.flickr_images.portfolio'), portfolio.humanize].uniq.join(': ')
+  end
+
+  def show
+    redirect_to(:action => 'index', :portfolio => portfolio) if flickr_image.new_record?
+    @title_parameter = flickr_image.image_title
   end
 
   def reset_caches
