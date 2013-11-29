@@ -47,7 +47,6 @@ module Concerns::FlickrAPILib
     flickr_image.flickr_user = flickr_cache.flickr_user
     flickr_image.image_description = photo_info.description
     flickr_image.full_flickr_url = FlickRaw.url_photopage(photo_info)
-    flickr_image.flickr_id = flickr_image.full_flickr_url.split('/')[-1]
     flickr_image.flickr_thumbnail_url = FlickRaw.url_q(photo_info) # square 150 format
     flickr_image.flickr_original_url = FlickRaw.url_o(photo_info) # original format
     flickr_image.flickr_large_url = FlickRaw.url_b(photo_info) # large = 1024px
