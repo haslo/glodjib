@@ -2,7 +2,7 @@
 = simple_form_for(Setting.new) do |f|
   .form-inputs
     = f.error_notification
-    - %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag post_more_separator akismet_key admin_password admin_password_confirmation).each do |key|
+    - %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_background_tag post_more_separator akismet_key admin_password admin_password_confirmation).each do |key|
       = f.input key, :input_html => { :class => 'input-block-level' }
   .form-actions
     = f.button :submit, :value => I18n.t('links.setting.save')

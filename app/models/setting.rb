@@ -19,7 +19,7 @@ class Setting < ActiveRecord::Base
         return put($1, args[0])
       when /^([a-z_]+)$/
         return get(message) unless get(message).nil?
-        if %w(flickr_api_key flickr_shared_secret flickr_user flickr_front_page_tag).include?(message.to_s)
+        if %w(flickr_api_key flickr_shared_secret flickr_user flickr_front_page_tag flickr_background_tag).include?(message.to_s)
           return put(message, FLICKR_CONFIG[message[7..message.length]])
         end
         return nil

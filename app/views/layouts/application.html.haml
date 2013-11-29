@@ -4,6 +4,8 @@
   %body
     = render :partial => 'layouts/header'
 
+    #background_cover
+      %img.translucent{ :src => background_image.flickr_original_url }
     .main{:role => 'main'}
       .container
         .content
