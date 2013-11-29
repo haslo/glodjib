@@ -2,6 +2,10 @@ class Setting < ActiveRecord::Base
   validates :key, :value, :presence => true
   validates :key, :uniqueness => true
 
+  STANDARD_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_background_tag portfolio_tags post_more_separator akismet_key)
+  KEYS_WITH_DEFAULT = %w(flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_background_tag)
+  KEYS_FOR_AUTHENTICATION = %w(admin_password admin_password_confirmation)
+
   def method_missing(message, *args, &block)
     case message.to_s
       when /^(key|value)=$/
@@ -19,7 +23,7 @@ class Setting < ActiveRecord::Base
         return put($1, args[0])
       when /^([a-z_]+)$/
         return get(message) unless get(message).nil?
-        if %w(flickr_api_key flickr_shared_secret flickr_user flickr_front_page_tag flickr_background_tag).include?(message.to_s)
+        if KEYS_WITH_DEFAULT.include?(message.to_s)
           return put(message, FLICKR_CONFIG[message[7..message.length]])
         end
         return nil

@@ -11,7 +11,8 @@ en:
       leave_reply: Leave a reply
       create: '%{title_parameter}'
     flickr_images:
-      show: '%{title_parameter}'
+      portfolio: 'Portfolio'
+      index: '%{title_parameter}'
     post_tags:
       show: 'Posts with tag "%{title_parameter}"'
     sessions:
@@ -88,6 +89,7 @@ en:
         flickr_shared_secret: Flickr shared secret
         page_title: Page title (displayed in the title bar)
         page_title_short: Page title (displayed top right)
+        portfolio_tags: Tags for portfolio (in addition to 'portfolio'), comma-separated
         post_more_separator: Separator for "Read more..." in posts
         admin_password: Admin password
         admin_password_confirmation: Admin password confirmation
