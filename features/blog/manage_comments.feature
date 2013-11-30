@@ -12,7 +12,7 @@ Feature: Visit blog
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my post titled Pizza has 2 comments
     And my post titled Breadsticks has 3 comments
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "Pizza"
     Then I should see "Spam Comment"
     And I should see "Delete Comment"
@@ -20,7 +20,7 @@ Feature: Visit blog
   Scenario: Spam comment
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my post titled Pizza has 1 comment
-    And I am on the homepage
+    And I am on the blog page
     When I follow the first "Pizza"
     And I follow the first "Spam Comment"
     Then I should have 0 ham comments
@@ -29,7 +29,7 @@ Feature: Visit blog
   Scenario: Delete comment
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my post titled Pizza has 1 comment
-    And I am on the homepage
+    And I am on the blog page
     When I follow the first "Pizza"
     And I follow the first "Delete Comment"
     Then I should have 0 ham comments

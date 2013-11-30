@@ -2,6 +2,10 @@ Given(/^I am on the homepage$/) do
   visit root_path
 end
 
+Given(/^I am on the blog page$/) do
+  visit posts_path
+end
+
 When(/^I go to the homepage$/) do
   visit root_path
 end

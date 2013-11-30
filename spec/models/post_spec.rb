@@ -7,8 +7,6 @@ describe Post, :issue4 => true do
   it { should validate_presence_of :shorthand }
   it { should validate_presence_of :content }
 
-  it { should validate_uniqueness_of(:shorthand) }
-
   it { should have_and_belong_to_many :post_tags }
   it { should have_many :post_comments }
 

@@ -10,7 +10,7 @@ Feature: Manage posts
 
   Scenario: Open new post form
     Given I have no posts
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "New Post"
     Then I should see that "New Blog Post" is in a h2 tag
     And I should see "Title"
@@ -18,7 +18,7 @@ Feature: Manage posts
 
   Scenario: Create valid post
     Given I have no posts
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "New Post"
     And I fill in "Title" with "Spuds"
     And I fill in "Content" with "Delicious potato wedges!"
@@ -31,7 +31,7 @@ Feature: Manage posts
 
   Scenario: Attempt to create invalid post
     Given I have no posts
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "New Post"
     And I press "Create Post"
     Then I should see "Invalid post"
@@ -42,7 +42,7 @@ Feature: Manage posts
 
   Scenario: Edit post
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And I am on the homepage
+    And I am on the blog page
     When I follow the first "Edit Post"
     And I fill in "Title" with "Potatoes"
     And I fill in "Content" with "Rather awesome dog sauce"
@@ -56,14 +56,14 @@ Feature: Manage posts
   @javascript
   Scenario: Delete post
     Given I have posts titled Breadsticks, Pizza that say "Dummy Text"
-    And I am on the homepage
+    And I am on the blog page
     When I follow the first "Delete Post"
     Then I should not see that "Pizza" is in a h3 tag
     And I should see that "Breadsticks" is in a h3 tag
 
   Scenario: Add tag to post in edit
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And I am on the homepage
+    And I am on the blog page
     And I follow the first "Edit Post"
     And I fill in "Tags" with "pizza, cheese, yummie"
     And I press "Update Post"
