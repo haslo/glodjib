@@ -3,7 +3,6 @@ defaults: &DEFAULTS
   shared_secret: '178f91a272579454'
   user: '95789229@N03'
   front_page_tag: 'portfolio'
-  background_tag: 'portfolio'
 
 development:
   <<: *DEFAULTS

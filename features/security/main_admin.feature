@@ -38,7 +38,8 @@ Feature: Manage the site as a whole
     When I fill in "Flickr user" with "0x0x"
     And I fill in "Flickr API key" with "1234"
     And I fill in "Flickr shared secret" with "5678"
-    And I fill in "Page title" with "9012"
+    And I fill in "Page title (displayed top right)" with "9013"
+    And I fill in "Page title (displayed in the title bar)" with "9012"
     And I fill in "Separator" with "3456"
     And I press "Save Settings"
     Then my settings should be as follows:
@@ -46,5 +47,6 @@ Feature: Manage the site as a whole
       |flickr_user                |0x0x |
       |flickr_api_key             |1234 |
       |flickr_shared_secret       |5678 |
+      |page_title_short           |9013 |
       |page_title                 |9012 |
       |post_more_separator        |3456 |

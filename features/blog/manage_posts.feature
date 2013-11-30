@@ -49,7 +49,7 @@ Feature: Manage posts
     And I press "Update Post"
     Then I should see "Post updated"
     And I should see "Potatoes"
-    And I should see that "Potatoes" is in a h3 tag
+    And I should see that "Potatoes" is in a h2 tag
     And I should see "Rather awesome dog sauce"
     And I should have 2 posts
 
