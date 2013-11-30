@@ -6,4 +6,5 @@
         %img{:class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => flickr_image.flickr_thumbnail_url}
 
 - if user_signed_in?
-  %p= link_to(I18n.t('links.caches.reset'), reset_caches_flickr_images_path, :data => {:confirm => I18n.t('link_confirmations.reset_caches')}, :method => :delete)
+  .management_functionality
+    %p= link_to(I18n.t('links.caches.reset'), reset_caches_flickr_images_path, :data => {:confirm => I18n.t('link_confirmations.reset_caches')}, :method => :delete)

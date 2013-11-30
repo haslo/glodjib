@@ -8,6 +8,9 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :post_tags
   has_many :post_comments
 
+  scope :without_pages, lambda { where(:is_page => false) }
+  scope :only_pages, lambda { where(:is_page => true) }
+
   scope :sorted, lambda { order(:created_at => :desc) }
   scope :with_id_or_shorthand, lambda { |id_or_shorthand|
     if id_or_shorthand.to_s.is_i?
@@ -64,7 +67,13 @@ class Post < ActiveRecord::Base
 private
 
   def auto_shorthand(original_value)
-    original_value.blank? ? nil : original_value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
+    added_index = 0
+    current_shorthand = generated_shorthand = original_value.blank? ? nil : original_value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
+    while Post.where(:shorthand => current_shorthand).count > 0
+      current_shorthand = "#{generated_shorthand}_#{added_index}"
+      added_index += 1
+    end
+    current_shorthand
   end
 
   def shorthand_starts_with_character

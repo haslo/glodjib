@@ -1,8 +1,5 @@
 #menu
-  = link_to(I18n.t('navigation.home'), blog_posts_path)
-  = link_to(I18n.t('navigation.portfolio'), flickr_images_path)
-  - (Setting.portfolio_tags || '').split(',').map(&:strip).each do |portfolio_tag|
-    = link_to(portfolio_tag.humanize, flickr_images_path(:portfolio => portfolio_tag))
+  = render :partial => 'layouts/navigation'
 
 #logo
   = link_to(Setting.page_title_short, root_path)

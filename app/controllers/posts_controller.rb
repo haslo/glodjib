@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show, :feed]
 
-  expose(:posts) { Post.sorted }
+  expose(:posts) { Post.without_pages.sorted }
   expose(:post, :attributes => :post_params) { get_or_build_post }
 
   before_filter :mandatory_post, :only => [:show, :edit, :update, :destroy]
@@ -21,14 +21,10 @@ class PostsController < ApplicationController
     end
   end
 
-  def edit
-    @title_parameter = post.title
-  end
-
   def update
     if post.update_attributes(post_params)
       flash[:notice] = I18n.t('notices.post.updated')
-      redirect_to posts_path
+      redirect_to post_path(:id => post.shorthand)
     end
   end
 

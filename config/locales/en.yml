@@ -1,5 +1,10 @@
 en:
   titles:
+    pages:
+      show: '%{title_parameter}'
+      new: New Page
+      create: New page
+      edit: Edit Page
     posts:
       index: Blog
       show: '%{title_parameter}'
@@ -36,6 +41,10 @@ en:
       edit: Edit Post
       destroy: Delete Post
       read_more: Read More...
+    page:
+      new: New Page
+      edit: Edit Page
+      destroy: Delete Page
     caches:
       reset: Reset Caches
     setting:
@@ -44,6 +53,14 @@ en:
       create: Submit Comment
       destroy: Delete Comment
       spam: Spam Comment
+
+  buttons:
+    post:
+      update: Update Post
+      create: Create Post
+    page:
+      update: Update Page
+      create: Create Page
 
   link_confirmations:
     destroy_post: Are you certain that you want to delete this post?
@@ -63,6 +80,10 @@ en:
         zero: Be the first to comment!
         one: 1 comment
         other: '%{number_of_comments} comments'
+    page:
+      created: New page created
+      invalid: Invalid page
+      updated: Page updated
     tag:
       no_posts: Tag not found (it has no posts assigned)
       not_found: Tag not found

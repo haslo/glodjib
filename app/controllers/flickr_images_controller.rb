@@ -6,7 +6,7 @@ class FlickrImagesController < ApplicationController
     flickr_api = FlickrAPI.new
     flickr_cache = flickr_api.find_or_create_cache(params[:portfolio])
     flickr_api.update_cache(flickr_cache)
-    flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).ordered
+    flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).sorted
   end
   expose(:flickr_image) { FlickrImage.where(:flickr_id => params[:id]).first_or_initialize }
   expose(:previous_flickr_image) { flickr_images[flickr_images.find_index(flickr_image) - 1] }

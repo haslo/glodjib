@@ -1,0 +1,13 @@
+.management_functionality a {
+  font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
+  font-size: 15px !important;
+  font-weight: bold !important;
+  text-shadow: 2px 1px 1px #cccccc;
+
+  &:before {
+    content: '<  ';
+  }
+  &:after {
+    content: '  >';
+  }
+}
