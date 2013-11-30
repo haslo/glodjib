@@ -1,0 +1,9 @@
+.form-inputs
+  = f.error_notification
+  = display_base_errors post
+  = f.hidden_field :is_page
+  = f.input :title, :input_html => { :class => 'input-block-level' }, :required => false
+  - unless post.is_page?
+    = f.input :tags, :input_html => { :class => 'input-block-level' }
+  = f.input :content, :input_html => { :class => 'input-block-level tinymce' }, :required => false
+= tinymce :default

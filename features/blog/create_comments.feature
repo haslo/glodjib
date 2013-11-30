@@ -12,7 +12,7 @@ Feature: Visit blog
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my post titled Pizza has 1 comment
     And my post titled Breadsticks has 3 comments
-    And I am on the homepage
+    And I am on the blog page
     Then I should see "1 comment"
     And I should see "3 comments"
     And I should not see "1 comments"
@@ -22,7 +22,7 @@ Feature: Visit blog
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
     And my post titled Pizza has 1 comment
     And my post titled Breadsticks has 3 comments
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "Pizza"
     Then I should see "Leave a reply"
     And I should see "Name"
@@ -32,7 +32,7 @@ Feature: Visit blog
 
   Scenario: Post a comment
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "Pizza"
     And I fill in "Name" with "Some name"
     And I fill in "Comment" with "Some comment"
@@ -45,7 +45,7 @@ Feature: Visit blog
 
   Scenario: Post a comment with URL
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "Pizza"
     And I fill in "Name" with "Some name"
     And I fill in "URL" with "http://www.test.com"
@@ -57,7 +57,7 @@ Feature: Visit blog
 
   Scenario: Post the same comment twice
     Given I have posts titled Pizza, Breadsticks that say "Dummy Text"
-    And I am on the homepage
+    And I am on the blog page
     When I follow the only "Pizza"
     And I fill in "Name" with "Some name"
     And I fill in "Comment" with "Some comment"

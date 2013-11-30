@@ -10,7 +10,7 @@ class PostCommentsController < ApplicationController
       post_comment.is_spam = Akismet.spam?(akismet_attributes, request)
     end
     if post_comment.save
-      redirect_to "/#{post.shorthand}"
+      redirect_to post_path(:id => post.shorthand)
     end
   end
 
@@ -19,12 +19,12 @@ class PostCommentsController < ApplicationController
       Akismet.submit_spam(akismet_attributes)
     end
     post_comment.spam!
-    redirect_to "/#{post.shorthand}"
+    redirect_to post_path(:id => post.shorthand)
   end
 
   def destroy
     post_comment.deleted!
-    redirect_to "/#{post.shorthand}"
+    redirect_to post_path(:id => post.shorthand)
   end
 
   def post_comment_params
@@ -45,7 +45,7 @@ class PostCommentsController < ApplicationController
       :comment_author_url   => post_comment.url,
       :comment_author_email => post_comment.email,
       :comment_content      => post_comment.comment,
-      :permalink            => "#{root_url}#{post.shorthand}"
+      :permalink            => post_url(:id => post.shorthand)
     }
   end
   private :akismet_attributes

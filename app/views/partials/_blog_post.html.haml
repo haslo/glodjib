@@ -23,7 +23,6 @@
           .management_functionality
             %p
               = link_to(t('links.post_comment.spam'), post_comment_spam_path(post_comment), :data => {:confirm => t('link_confirmations.spam_post_comment')}, :method => :delete)
-              = '-'
               = link_to(t('links.post_comment.destroy'), post_comment_path(post_comment), :data => {:confirm => t('link_confirmations.destroy_post_comment')}, :method => :delete)
 
   .blog_post_comment_form{:name => (post.post_comments.size > 0) ? 'comments' : nil}

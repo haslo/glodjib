@@ -15,8 +15,6 @@ class FlickrAPI
     @api_key ||= Setting.flickr_api_key
     @shared_secret ||= Setting.flickr_shared_secret
     @flickr_user ||= FlickrUser.where("username = ?", Setting.flickr_user).first_or_create!(:username => Setting.flickr_user)
-
-    puts "#{@flickr_user} uses #{@api_key} and #{@shared_secret}"
   end
 
   def persisted?

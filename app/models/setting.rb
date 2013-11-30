@@ -2,8 +2,9 @@ class Setting < ActiveRecord::Base
   validates :key, :value, :presence => true
   validates :key, :uniqueness => true
 
-  STANDARD_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_background_tag portfolio_tags post_more_separator akismet_key)
-  KEYS_WITH_DEFAULT = %w(flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_background_tag)
+  MANDATORY_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag post_more_separator)
+  STANDARD_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag portfolio_tags post_more_separator akismet_key)
+  KEYS_WITH_DEFAULT = %w(flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag)
   KEYS_FOR_AUTHENTICATION = %w(admin_password admin_password_confirmation)
 
   def method_missing(message, *args, &block)
