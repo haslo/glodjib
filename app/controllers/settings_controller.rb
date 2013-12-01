@@ -5,7 +5,7 @@ class SettingsController < ApplicationController
     errors = []
     if params.keys.include?("setting") && Setting::MANDATORY_KEYS.collect{|key| params["setting"].keys.include?(key) && !params["setting"][key].blank?}.all?
       valid_keys.each do |key|
-        Setting.put(key, params["setting"][key]) if params["setting"][key].present?
+        Setting.put(key, params["setting"][key] || '')
       end
       setting = Setting.new
       if params['setting']['akismet_key'].present?

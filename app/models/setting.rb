@@ -1,5 +1,5 @@
 class Setting < ActiveRecord::Base
-  validates :key, :value, :presence => true
+  validates :key, :presence => true
   validates :key, :uniqueness => true
 
   MANDATORY_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag post_more_separator)
