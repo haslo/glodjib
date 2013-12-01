@@ -32,6 +32,7 @@ module Concerns::FlickrAPILib
         flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
         extract_basic_image_info(flickr_cache, flickr_image, photo_info)
         extract_exif_info(flickr_image, portfolio_image)
+        extract_size_info(flickr_image, flickr.photos.getSizes(:photo_id => image_from_api.id))
         extract_tags(flickr_image, photo_info)
         flickr_image.position = FlickrImage.maximum('position') + 1
         flickr_image.save
@@ -53,9 +54,6 @@ module Concerns::FlickrAPILib
     flickr_image.flickr_user = flickr_cache.flickr_user
     flickr_image.image_description = photo_info.description
     flickr_image.full_flickr_url = FlickRaw.url_photopage(photo_info)
-    flickr_image.flickr_thumbnail_url = FlickRaw.url_q(photo_info) # square 150 format
-    flickr_image.flickr_original_url = FlickRaw.url_o(photo_info) # original format
-    flickr_image.flickr_large_url = FlickRaw.url_b(photo_info) # large = 1024px
   end
 
   def extract_exif_info(flickr_image, portfolio_image)
@@ -71,7 +69,19 @@ module Concerns::FlickrAPILib
 
   def extract_individual_exif(flickr_image, property, exif_line, key)
     if exif_line["tag"] == key
-      flickr_image.send("#{property}=".to_sym, (exif_line["clean"].nil? ? exif_line["raw"] : exif_line["clean"]))
+      flickr_image.send("#{property}=", (exif_line["clean"] || exif_line["raw"]))
+    end
+  end
+
+  def extract_size_info(flickr_image, api_sizes)
+    fields_from_api = %w(label width height source url media)
+    flickr_image.flickr_image_sizes.destroy_all
+    api_sizes.each do |api_size|
+      flickr_image_size = FlickrImageSize.new(:flickr_image => flickr_image)
+      fields_from_api.each do |field_from_api|
+        flickr_image_size.send("#{field_from_api}=", api_size[field_from_api])
+      end
+      flickr_image_size.save
     end
   end
 

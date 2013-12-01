@@ -131,7 +131,7 @@ describe FlickrAPI, :flickr_api => true do
       shared_flickr_api.reset_cache(shared_flickr_api.find_or_create_cache('portfolio'))
     end
 
-    %w(image_description aperture shutter iso focal_length camera full_flickr_url flickr_thumbnail_url).each do |property|
+    %w(image_description aperture shutter iso focal_length camera).each do |property|
       it "stores #{property}" do
         FlickrImage.first.send(property.to_sym).should_not be_nil
       end

@@ -8,4 +8,4 @@
     .next_image
       = link_to(flickr_image_path(:id => next_flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
         ᑀ
-  %img{ :src => flickr_image.flickr_large_url }
+  %img{ :src => flickr_image.size_for('Large').source }

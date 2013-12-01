@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201152753) do
+ActiveRecord::Schema.define(version: 20131201191515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20131201152753) do
     t.integer  "flickr_user_id"
     t.integer  "flickr_tag_id"
     t.datetime "timeout"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flickr_image_sizes", force: true do |t|
+    t.integer  "flickr_image_id"
+    t.string   "label"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "source"
+    t.string   "url"
+    t.string   "media"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,9 +48,6 @@ ActiveRecord::Schema.define(version: 20131201152753) do
     t.integer  "flickr_user_id"
     t.string   "camera"
     t.string   "full_flickr_url"
-    t.string   "flickr_thumbnail_url"
-    t.string   "flickr_original_url"
-    t.string   "flickr_large_url"
     t.string   "flickr_id"
     t.integer  "position"
   end

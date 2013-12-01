@@ -3,7 +3,7 @@
   - flickr_images.each do |flickr_image|
     .portfolio_tile
       = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
-        %img{:class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => flickr_image.flickr_thumbnail_url}
+        %img{:class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => flickr_image.size_for('Large Square').source}
 
 - if user_signed_in?
   .management_functionality
