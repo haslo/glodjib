@@ -33,6 +33,7 @@ module Concerns::FlickrAPILib
         extract_basic_image_info(flickr_cache, flickr_image, photo_info)
         extract_exif_info(flickr_image, portfolio_image)
         extract_tags(flickr_image, photo_info)
+        flickr_image.position = FlickrImage.maximum('position') + 1
         flickr_image.save
       end
     end
