@@ -3,10 +3,8 @@
   %meta{:name => 'viewport', :content => 'width=device-width, initial-scale=1.0'}
   %title
     = page_title
-  = javascript_include_tag('//use.typekit.net/ubz0eup.js')
-  :javascript
-    Typekit.load();
   = stylesheet_link_tag('application', :media => 'all')
+  = javascript_include_tag('//use.typekit.net/ubz0eup.js')
   = javascript_include_tag('application')
   = auto_discovery_link_tag(:atom, '/feed')
   = csrf_meta_tags
