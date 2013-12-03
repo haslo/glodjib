@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201191515) do
+ActiveRecord::Schema.define(version: 20131203214944) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20131201191515) do
   create_table "flickr_caches", force: true do |t|
     t.integer  "flickr_user_id"
     t.integer  "flickr_tag_id"
-    t.datetime "timeout"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

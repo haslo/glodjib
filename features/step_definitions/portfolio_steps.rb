@@ -1,6 +1,6 @@
 Given(/^I have at least (\d+) Flickr cache entries$/) do |count|
   1.upto(count.to_i).each do |index|
-    FlickrAPI.new.find_or_create_cache("testtag#{index}", "test-user #{index}")
+    Flickr::CacheService.find_or_create_cache("testtag#{index}", "test-user #{index}")
   end
 end
 

@@ -3,8 +3,8 @@
   - flickr_images.each do |flickr_image|
     .portfolio_tile
       = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
-        %img{:class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => flickr_image.size_for('Large Square').source}
+        %img{ :class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => Flickr::ImageService.get_image_size_url(flickr_image, 'Large Square') }
 
 - if user_signed_in?
   .management_functionality
-    %p= link_to(I18n.t('links.caches.reset'), reset_caches_flickr_images_path, :data => {:confirm => I18n.t('link_confirmations.reset_caches')}, :method => :delete)
+    %p= link_to(I18n.t('links.caches.reset'), reset_caches_flickr_images_path, :method => :delete)

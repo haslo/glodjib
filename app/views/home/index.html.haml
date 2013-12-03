@@ -1,2 +1,2 @@
 #background_cover
-  %img{ :src => background_image.size_for('Original').source }
+  %img{ :src => Flickr::ImageService.get_image_size_url(background_image, 'Original') }
