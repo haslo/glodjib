@@ -15,10 +15,11 @@ Glodjib::Application.routes.draw do
   resources :post_comments, :path => 'comment', :only => [:new, :create, :destroy] do
     delete :spam, :path => 'spam'
   end
-  resources :flickr_images, :path => 'gallery/:portfolio', :portfolio => 'portfolio', :only => [:index, :show] do
+  resources :flickr_images, :path => 'gallery/:portfolio', :portfolio => 'portfolio', :only => [:index, :show]
+  resources :flickr_images, :path => 'gallery', :only => [] do
     delete :reset_caches, :on => :collection
   end
-  resources :post_tags, :path => 'tags', :only => [:show]
+  resources :post_tags, :path => 'blog/tags', :only => [:show]
 
   # admin stuff
 

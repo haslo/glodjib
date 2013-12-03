@@ -5,7 +5,6 @@ class FlickrImagesController < ApplicationController
   expose(:flickr_images) do
     flickr_api = FlickrAPI.new
     flickr_cache = flickr_api.find_or_create_cache(params[:portfolio])
-    flickr_api.update_cache(flickr_cache)
     flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).sorted
   end
   expose(:flickr_image) { FlickrImage.where(:flickr_id => params[:id]).first_or_initialize }
@@ -23,7 +22,7 @@ class FlickrImagesController < ApplicationController
   end
 
   def reset_caches
-    FlickrCache.destroy_all
+    flickr_api.reset_caches
     flash[:notice] = I18n.t('notices.flickr_images.cache_updated')
     redirect_to flickr_images_path
   end
