@@ -5,12 +5,4 @@ class FlickrCache < ActiveRecord::Base
   belongs_to :flickr_user
   belongs_to :flickr_tag
 
-  def timeout_over?
-    timeout.nil? || timeout < Time.now
-  end
-
-  def refresh_timeout
-    write_attribute(:timeout, Time.now + 24.hours)
-  end
-
 end

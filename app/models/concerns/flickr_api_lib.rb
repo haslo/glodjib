@@ -9,29 +9,34 @@ module Concerns::FlickrAPILib
     FlickrCache.where("flickr_user_id = ? and flickr_tag_id = ?", flickr_user.id, flickr_tag.id).first_or_create!(:flickr_user => flickr_user, :flickr_tag => flickr_tag)
   end
 
-  def update_cache(flickr_cache)
+  def reset_caches
+    FlickrCache.all.each do |flickr_cache|
+      if flickr_cache.flickr_user_id == Setting.flickr_user_id
+        reset_cache(flickr_cache)
+      else
+        flickr_cache.destroy
+      end
+    end
+  end
+
+  def reset_cache(flickr_cache)
     assure_connection
-    if flickr_cache.timeout_over?
-      flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).each do |flickr_image|
-        flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
+    flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).each do |flickr_image|
+      flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
+      flickr_image.save
+    end
+    images_from_remote = get_images_from_remote(flickr_cache)
+    if images_from_remote.count > 0
+      images_from_remote.each do |portfolio_image|
+        photo_info = flickr.photos.getInfo(:photo_id => portfolio_image.id, :secret => portfolio_image.secret)
+        flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
+        extract_basic_image_info(flickr_cache, flickr_image, photo_info)
+        extract_exif_info(flickr_image, portfolio_image)
+        extract_tags(flickr_image, photo_info)
         flickr_image.save
       end
-      images_from_remote = get_images_from_remote(flickr_cache)
-      if images_from_remote.count > 0
-        images_from_remote.each do |portfolio_image|
-          photo_info = flickr.photos.getInfo(:photo_id => portfolio_image.id, :secret => portfolio_image.secret)
-          flickr_image = FlickrImage.where("flickr_id = ?", portfolio_image.id).first_or_initialize(:flickr_id => portfolio_image.id)
-          extract_basic_image_info(flickr_cache, flickr_image, photo_info)
-          extract_exif_info(flickr_image, portfolio_image)
-          extract_tags(flickr_image, photo_info)
-          flickr_image.save
-        end
-      end
-      flickr_cache.refresh_timeout
-      flickr_cache.save
-      return true
     end
-    false
+    flickr_cache.save
   end
 
   def extract_tags(flickr_image, photo_info)
