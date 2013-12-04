@@ -57,7 +57,7 @@ namespace :deploy do
   task :update do
     transaction do
       update_code
-      migrations
+      migrate
       precompile_assets
     end
   end

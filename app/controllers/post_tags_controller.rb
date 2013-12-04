@@ -3,7 +3,7 @@ class PostTagsController < ApplicationController
   before_filter :authenticate_user!, :except => [:show]
 
   expose(:post_tag) { PostTag.where((params[:id].is_i? ? :id : :tag_text) => params[:id]).first }
-  expose(:posts) { post_tag.posts }
+  expose(:posts) { post_tag.posts.sorted }
 
   def show
     @title_parameter = post_tag.tag_text

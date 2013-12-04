@@ -1,12 +1,12 @@
 module Flickr::ImageService
   class << self
 
-    def get_blog_post_image_url(image_id)
+    def get_url_from_id(image_id, size)
       image = FlickrImage.where(:id => image_id).first
-      get_image_size_url(image, 'Small 320')
+      get_url_from_image(image, size)
     end
 
-    def get_image_size_url(image, size)
+    def get_url_from_image(image, size)
       return nil unless image
       return nil unless image.size_for(size).present?
       image.size_for(size).source
