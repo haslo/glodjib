@@ -1,7 +1,7 @@
 %hr
 .blog_post
   .blog_post_content
-    = post.content.gsub(Setting.post_more_separator, "<span id=\"more-#{post.id}\"></span>").html_safe
+    = Blog::PostService.sanitized_blog_content(post, true)
 
   - if user_signed_in?
     .management_functionality

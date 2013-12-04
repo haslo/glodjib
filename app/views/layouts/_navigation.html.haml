@@ -6,4 +6,5 @@
   = link_to(page.title, page_path(:id => page.shorthand))
 - if user_signed_in?
   .management_functionality
+    %p= link_to(I18n.t('links.flickr_images.blog_images'), flickr_images_path(:portfolio => Setting.flickr_blog_images_tag))
     %p= link_to(I18n.t('links.page.new'), new_page_path)

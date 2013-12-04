@@ -2,9 +2,9 @@ class Setting < ActiveRecord::Base
   validates :key, :presence => true
   validates :key, :uniqueness => true
 
-  MANDATORY_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag post_more_separator)
-  STANDARD_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag portfolio_tags post_more_separator akismet_key)
-  KEYS_WITH_DEFAULT = %w(flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag)
+  MANDATORY_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag post_more_separator)
+  STANDARD_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag portfolio_tags post_more_separator akismet_key)
+  KEYS_WITH_DEFAULT = %w(flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag)
   KEYS_FOR_AUTHENTICATION = %w(admin_password admin_password_confirmation)
 
   def method_missing(message, *args, &block)
@@ -23,7 +23,7 @@ class Setting < ActiveRecord::Base
       when /^([a-z_]+)=$/
         return put($1, args[0])
       when /^([a-z_]+)$/
-        return get(message) unless get(message).nil?
+        return get(message) if get(message).present?
         if KEYS_WITH_DEFAULT.include?(message.to_s)
           return put(message, FLICKR_CONFIG[message[7..message.length]])
         end

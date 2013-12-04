@@ -3,3 +3,19 @@
   position: relative;
   margin-bottom: 0;
 }
+
+.blog_post {
+  .pull-left, .pull-right, .center-block {
+    margin-bottom: 5px;
+  }
+  .pull-left {
+    margin-right: 10px;
+  }
+  .pull-right {
+    margin-left: 10px;
+  }
+  .center-block {
+    margin-top: 10px;
+    text-align: center;
+  }
+}

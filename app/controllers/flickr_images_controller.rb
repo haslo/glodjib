@@ -3,13 +3,12 @@ class FlickrImagesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   expose(:flickr_images) do
-    flickr_api = FlickrAPI.new
-    flickr_cache = flickr_api.find_or_create_cache(params[:portfolio])
+    flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
     flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).sorted
   end
-  expose(:flickr_image) { FlickrImage.where(:flickr_id => params[:id]).first_or_initialize }
-  expose(:previous_flickr_image) { flickr_images[flickr_images.find_index(flickr_image) - 1] }
-  expose(:next_flickr_image) { flickr_images[flickr_images.find_index(flickr_image) + 1] || flickr_images[0] }
+  expose(:flickr_image) { FlickrImage.where(:id => params[:id]).first_or_initialize }
+  expose(:previous_flickr_image) { flickr_images.find_index(flickr_image).present? ? flickr_images[flickr_images.find_index(flickr_image) - 1] : nil }
+  expose(:next_flickr_image) { flickr_images.find_index(flickr_image).present? ? (flickr_images[flickr_images.find_index(flickr_image) + 1] || flickr_images[0]) : nil }
   expose(:portfolio) { params[:portfolio] }
 
   def index
@@ -22,7 +21,7 @@ class FlickrImagesController < ApplicationController
   end
 
   def reset_caches
-    flickr_api.reset_caches
+    Flickr::CacheService.reset_caches
     flash[:notice] = I18n.t('notices.flickr_images.cache_updated')
     redirect_to flickr_images_path
   end

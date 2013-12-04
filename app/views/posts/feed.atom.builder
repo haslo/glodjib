@@ -4,7 +4,7 @@ atom_feed do |feed|
   posts.each do |post|
     feed.entry(post, :url => post_url(:id => post.shorthand)) do |entry|
       entry.title(post.title)
-      entry.content(Nokogiri::HTML::DocumentFragment.parse(post.content.split(Setting.post_more_separator)[0]).to_html.html_safe, :type => 'html')
+      entry.content(Blog::PostService.sanitized_blog_content(post, false), :type => 'html')
       entry.author do |author|
         author.name(User.first.email)
       end
