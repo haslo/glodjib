@@ -3,7 +3,7 @@
   .blog_post_content
     %p.post_date= l(post.created_at, :format => :short)
     = render('/partials/blog_post_tags', :post_tags => post.post_tags)
-    = post.content.gsub(Setting.post_more_separator, "<span id=\"more-#{post.id}\"></span>").html_safe
+    = Blog::PostService.sanitized_blog_content(post, true)
   %a{:name => 'comments'}
   - if post.post_comments.size > 0
     .blog_post_comments

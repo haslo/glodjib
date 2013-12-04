@@ -36,6 +36,8 @@ en:
     admin: admin
 
   links:
+    flickr_images:
+      blog_images: Blog Images
     post:
       new: New Post
       edit: Edit Post
