@@ -29,6 +29,7 @@ The application uses state-of-the-art frameworks and technology. Among them (as 
 * [jQuery](http://jquery.com/) 1.10.2
 * [Bootstrap](http://getbootstrap.com/) 3.0.2
 * [JustifiedGallery](http://miromannino.com/projects/justified-gallery/)
+* [Colorbox](http://www.jacklmoore.com/colorbox/)
 
 It seamlessly integrates with Flickr through the [Flickr API](http://www.flickr.com/services/api/).
 
