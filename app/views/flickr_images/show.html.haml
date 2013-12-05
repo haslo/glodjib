@@ -8,4 +8,16 @@
     .next_image
       = link_to(flickr_image_path(:id => next_flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
         ᑀ
-  %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large') }
+  = link_to(Flickr::ImageService.get_url_from_image(flickr_image, 'Original'), :class => 'lightbox') do
+    %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large') }
+
+:javascript
+  $(".lightbox").colorbox({
+    transition: 'elastic',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    closeButton: true,
+    className: 'lightbox-display',
+    overlayClose: true,
+    onOpen: function(){$('.lightbox-display').click(function(){$.colorbox.close()})}
+  });
