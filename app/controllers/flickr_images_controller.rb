@@ -1,22 +1,18 @@
 class FlickrImagesController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :authenticate_user!, :except => [:show]
 
   expose(:flickr_images) do
     flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
     flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).sorted
   end
-  expose(:flickr_image) { FlickrImage.where(:id => params[:id]).first_or_initialize }
-  expose(:previous_flickr_image) { flickr_images.find_index(flickr_image).present? ? flickr_images[flickr_images.find_index(flickr_image) - 1] : nil }
-  expose(:next_flickr_image) { flickr_images.find_index(flickr_image).present? ? (flickr_images[flickr_images.find_index(flickr_image) + 1] || flickr_images[0]) : nil }
+  expose(:flickr_image) { FlickrImage.where(:id => params[:id]).first }
+  expose(:previous_flickr_image) { portfolio.present? ? flickr_images[flickr_images.find_index(flickr_image) - 1] : nil }
+  expose(:next_flickr_image) { portfolio.present? ? (flickr_images[flickr_images.find_index(flickr_image) + 1] || flickr_images[0]) : nil }
   expose(:portfolio) { params[:portfolio] }
 
-  def index
-    @title_parameter = [I18n.t('titles.flickr_images.portfolio'), portfolio.humanize].uniq.join(': ')
-  end
-
   def show
-    redirect_to(:action => 'index', :portfolio => portfolio) if flickr_image.new_record?
+    redirect_to(root_path) unless flickr_image.present?
     @title_parameter = flickr_image.image_title
   end
 

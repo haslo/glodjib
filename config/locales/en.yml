@@ -16,9 +16,10 @@ en:
       leave_reply: Leave a reply
       create: '%{title_parameter}'
     flickr_images:
-      portfolio: 'Portfolio'
-      index: '%{title_parameter}'
       show: '%{title_parameter}'
+    portfolios:
+      show: '%{title_parameter}'
+      portfolio: 'Portfolio'
     post_tags:
       show: 'Posts with tag "%{title_parameter}"'
     sessions:
