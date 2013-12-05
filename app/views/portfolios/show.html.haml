@@ -1,9 +1,16 @@
 %hr
 .clearfix
-  - flickr_images.each do |flickr_image|
-    .portfolio_tile
-      = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
-        %img{ :class => 'portfolio_thumbnail', :width => 150, :height => 150, :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large Square') }
+  #portfolio-gallery
+    - flickr_images.each do |flickr_image|
+      = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio, :anchor => 'full_image'), :title => flickr_image.image_title) do
+        %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Small 320'), :alt => flickr_image.image_title }
+
+:javascript
+  $("#portfolio-gallery").justifiedGallery({
+    rowHeight: 300,
+    justifyLastRow: true,
+    fixedHeight: false
+  });
 
 - if user_signed_in?
   .management_functionality
