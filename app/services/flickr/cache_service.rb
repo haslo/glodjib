@@ -9,12 +9,20 @@ module Flickr::CacheService
       flickr_cache
     end
 
-    def reset_caches
+    def destroy_all_caches
       FlickrCache.all.each do |flickr_cache|
-        if flickr_cache.flickr_user.username == Flickr::ParameterService.flickr_user
-          reset_cache(flickr_cache)
-        else
-          flickr_cache.destroy
+        destroy_cache(flickr_cache)
+      end
+    end
+
+    def reset_caches_by_tag(tag_name)
+      FlickrCache.all.each do |flickr_cache|
+        if flickr_cache.flickr_tag.tag_name == tag_name
+          if flickr_cache.flickr_user == Flickr::ParameterService.flickr_user
+            reset_cache(flickr_cache)
+          else
+            destroy_cache(flickr_cache)
+          end
         end
       end
     end
@@ -40,7 +48,19 @@ module Flickr::CacheService
             extract_size_info(flickr_image, flickr.photos.getSizes(:photo_id => image_from_api.id))
           end
         end
+        flickr_cache.updated_at = Time.now
         flickr_cache.save
+      end
+    end
+
+    def destroy_cache(flickr_cache)
+      ActiveRecord::Base.transaction do
+        assure_connection
+        flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).each do |flickr_image|
+          flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
+          flickr_image.save
+        end
+        flickr_cache.destroy
       end
     end
 

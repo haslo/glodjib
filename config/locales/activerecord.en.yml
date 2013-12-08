@@ -1,0 +1,25 @@
+en:
+  activerecord:
+    attributes:
+      post:
+        title:
+          one: Title
+          other: Titles
+        content:
+          one: Content
+          other: Contents
+      setting:
+        flickr_user: Flickr user
+        flickr_api_key: Flickr API key
+        flickr_shared_secret: Flickr shared secret
+        page_title: Page title (displayed in the title bar)
+        page_title_short: Page title (displayed top right)
+        portfolio_tags: Tags for portfolio (in addition to 'portfolio'), comma-separated
+        post_more_separator: Separator for "Read more..." in posts
+        admin_password: Admin password
+        admin_password_confirmation: Admin password confirmation
+      post_comment:
+        name: Name
+        email: Email
+        url: URL
+        comment: Comment

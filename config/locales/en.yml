@@ -1,40 +1,13 @@
 en:
-  titles:
-    pages:
-      show: '%{title_parameter}'
-      new: New Page
-      create: New page
-      edit: Edit Page
-    posts:
-      index: Blog
-      show: '%{title_parameter}'
-      new: New Blog Post
-      create: New Blog Post
-      edit: Edit Blog Post
-      tags: Tags
-    post_comments:
-      leave_reply: Leave a reply
-      create: '%{title_parameter}'
-    flickr_images:
-      show: '%{title_parameter}'
-    portfolios:
-      show: '%{title_parameter}'
-      portfolio: 'Portfolio'
-    post_tags:
-      show: 'Posts with tag "%{title_parameter}"'
-    sessions:
-      new: Login
-    settings:
-      index: Admin
-    home:
-      index: ''
-
   navigation:
     home: Blog
     portfolio: Portfolio
     login: login
     logout: logout
     admin: admin
+    admin_tabs:
+      parameters: Parameters
+      images: Image Caches
 
   links:
     flickr_images:
@@ -48,8 +21,6 @@ en:
       new: New Page
       edit: Edit Page
       destroy: Delete Page
-    caches:
-      reset: Reset Caches
     setting:
       save: Save Settings
     post_comment:
@@ -90,36 +61,10 @@ en:
     tag:
       no_posts: Tag not found (it has no posts assigned)
       not_found: Tag not found
-    flickr_images:
-      cache_updated: Flickr image cache updated
     logged_in_as: Logged in as %{user}
     settings:
       invalid_settings: Invalid settings, nothing was saved
       saved: Settings saved
+      cache_updated: Flickr image cache updated
     post_comment:
       duplicate: Duplicate comments are not allowed
-
-  activerecord:
-    attributes:
-      post:
-        title:
-          one: Title
-          other: Titles
-        content:
-          one: Content
-          other: Contents
-      setting:
-        flickr_user: Flickr user
-        flickr_api_key: Flickr API key
-        flickr_shared_secret: Flickr shared secret
-        page_title: Page title (displayed in the title bar)
-        page_title_short: Page title (displayed top right)
-        portfolio_tags: Tags for portfolio (in addition to 'portfolio'), comma-separated
-        post_more_separator: Separator for "Read more..." in posts
-        admin_password: Admin password
-        admin_password_confirmation: Admin password confirmation
-      post_comment:
-        name: Name
-        email: Email
-        url: URL
-        comment: Comment
