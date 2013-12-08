@@ -25,8 +25,9 @@ Glodjib::Application.routes.draw do
   resources :settings, :only => [:index, :update] do
     get :parameters, :on => :collection
     get :images, :on => :collection
-    delete :reset_caches, :path => 'reset_caches/:tag', :on => :collection
-    delete :destroy_caches, :path => 'reset_caches', :on => :collection
+    delete :reset_cache, :path => 'reset_cache/:tag', :on => :collection
+    delete :destroy_cache, :path => 'destroy_cache/:tag', :on => :collection
+    delete :destroy_caches, :path => 'destroy_caches', :on => :collection
   end
 
 end

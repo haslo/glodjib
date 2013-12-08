@@ -4,12 +4,14 @@
     %tr
       %th= t('.tag_name')
       %th= t('.reset_time')
-      %th= t('.actions')
+      %th= t('.reset')
+      %th= t('.destroy')
   - all_caches.each do |flickr_cache|
     - tag_name = flickr_cache.flickr_tag.tag_name
     %tr
       %td= tag_name
       %td= time_ago_in_words(flickr_cache.updated_at)
-      %td= link_to(t('.reset_cache', :tag_name => tag_name), reset_caches_settings_path(:tag => tag_name), :method => :delete)
+      %td= link_to(t('.reset_cache', :tag_name => tag_name), reset_cache_settings_path(:tag => tag_name), :method => :delete)
+      %td= link_to(t('.destroy_cache', :tag_name => tag_name), destroy_cache_settings_path(:tag => tag_name), :method => :delete)
 
 %p= link_to(t('.destroy_caches'), destroy_caches_settings_path, :method => :delete)

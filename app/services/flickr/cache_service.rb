@@ -9,21 +9,33 @@ module Flickr::CacheService
       flickr_cache
     end
 
-    def destroy_all_caches
+    def cleanup_caches
       FlickrCache.all.each do |flickr_cache|
-        destroy_cache(flickr_cache)
+        if flickr_cache.flickr_user != Flickr::ParameterService.flickr_user
+          destroy_cache(flickr_cache)
+        end
       end
     end
 
     def reset_caches_by_tag(tag_name)
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_tag.tag_name == tag_name
-          if flickr_cache.flickr_user == Flickr::ParameterService.flickr_user
-            reset_cache(flickr_cache)
-          else
-            destroy_cache(flickr_cache)
-          end
+          reset_cache(flickr_cache)
         end
+      end
+    end
+
+    def destroy_caches_by_tag(tag_name)
+      FlickrCache.all.each do |flickr_cache|
+        if flickr_cache.flickr_tag.tag_name == tag_name
+          destroy_cache(flickr_cache)
+        end
+      end
+    end
+
+    def destroy_all_caches
+      FlickrCache.all.each do |flickr_cache|
+        destroy_cache(flickr_cache)
       end
     end
 

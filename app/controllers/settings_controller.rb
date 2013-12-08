@@ -2,6 +2,8 @@ class SettingsController < ApplicationController
 
   expose(:all_caches) { FlickrCache.all.uniq.sort{|a,b| a.flickr_tag.tag_name <=> b.flickr_tag.tag_name} }
 
+  before_filter :cleanup_caches
+
   def index
     redirect_to :action => :parameters
   end
@@ -35,8 +37,14 @@ class SettingsController < ApplicationController
     redirect_to :action => :index
   end
 
-  def reset_caches
+  def reset_cache
     Flickr::CacheService.reset_caches_by_tag(params[:tag])
+    flash[:notice] = I18n.t('notices.settings.cache_updated')
+    redirect_to images_settings_path
+  end
+
+  def destroy_cache
+    Flickr::CacheService.destroy_caches_by_tag(params[:tag])
     flash[:notice] = I18n.t('notices.settings.cache_updated')
     redirect_to images_settings_path
   end
@@ -50,5 +58,10 @@ class SettingsController < ApplicationController
       redirect_to images_settings_path
     end
   end
+
+  def cleanup_caches
+    Flickr::CacheService.cleanup_caches
+  end
+  private :cleanup_caches
 
 end
