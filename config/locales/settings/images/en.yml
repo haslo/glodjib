@@ -1,0 +1,8 @@
+en:
+  settings:
+    images:
+      tag_name: Tag Name
+      reset_time: Time since last Reset
+      actions: Actions
+      reset_cache: 'Reset Cache for %{tag_name}'
+      destroy_caches: Destroy all Caches

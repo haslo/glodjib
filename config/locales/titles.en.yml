@@ -1,0 +1,31 @@
+en:
+  titles:
+    pages:
+      show: '%{title_parameter}'
+      new: New Page
+      create: New page
+      edit: Edit Page
+    posts:
+      index: Blog
+      show: '%{title_parameter}'
+      new: New Blog Post
+      create: New Blog Post
+      edit: Edit Blog Post
+      tags: Tags
+    post_comments:
+      leave_reply: Leave a reply
+      create: '%{title_parameter}'
+    flickr_images:
+      show: '%{title_parameter}'
+    portfolios:
+      show: '%{title_parameter}'
+      portfolio: 'Portfolio'
+    post_tags:
+      show: 'Posts with tag "%{title_parameter}"'
+    sessions:
+      new: Login
+    settings:
+      parameters: Parameters Admin
+      images: Image Cache Admin
+    home:
+      index: ''

@@ -1,13 +1,13 @@
 class SettingsController < ApplicationController
 
-  expose(:all_tags_with_caches) { FlickrCache.all.map{|cache|cache.flickr_tag.tag_name}.uniq.sort }
+  expose(:all_caches) { FlickrCache.all.uniq.sort{|a,b| a.flickr_tag.tag_name <=> b.flickr_tag.tag_name} }
 
   def index
     redirect_to :action => :parameters
   end
 
   def images
-    redirect_to settings_path if all_tags_with_caches.empty?
+    redirect_to settings_path if all_caches.empty?
   end
 
   def update

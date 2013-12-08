@@ -18,7 +18,7 @@ module Flickr::CacheService
     def reset_caches_by_tag(tag_name)
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_tag.tag_name == tag_name
-          if flickr_cache.flickr_user.username == Flickr::ParameterService.flickr_user
+          if flickr_cache.flickr_user == Flickr::ParameterService.flickr_user
             reset_cache(flickr_cache)
           else
             destroy_cache(flickr_cache)
@@ -48,6 +48,7 @@ module Flickr::CacheService
             extract_size_info(flickr_image, flickr.photos.getSizes(:photo_id => image_from_api.id))
           end
         end
+        flickr_cache.updated_at = Time.now
         flickr_cache.save
       end
     end
