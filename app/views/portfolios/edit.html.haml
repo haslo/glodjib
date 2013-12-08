@@ -1,0 +1,9 @@
+%hr
+%ul#portfolio-images.sortable
+  - flickr_images.each do |flickr_image|
+    %li.ui-state-default{:data => {:tag => params[:tag]}}
+      .row
+        .col-xs-2.image-container
+          %img{:src => Flickr::ImageService.get_url_from_image(flickr_image, 'Thumbnail')}
+        .col-xs-10
+          = flickr_image.image_title

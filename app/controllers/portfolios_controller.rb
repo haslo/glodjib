@@ -12,4 +12,10 @@ class PortfoliosController < ApplicationController
     @title_parameter = [I18n.t('titles.portfolios.portfolio'), portfolio.humanize].uniq.join(': ')
   end
 
+  def sort
+    # see http://stackoverflow.com/questions/7664317/implement-ajax-sortable-lists-with-jquery-and-rails-3
+    raise params.inspect
+    render :nothing => true
+  end
+
 end

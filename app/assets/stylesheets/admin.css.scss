@@ -11,3 +11,20 @@
     content: '  >';
   }
 }
+
+.sortable {
+  list-style-type: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0.4em;
+    margin: 0 3px 3px 3px;
+    vertical-align: middle;
+
+    .image-container {
+      text-align: center;
+    }
+  }
+}

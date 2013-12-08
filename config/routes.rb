@@ -15,7 +15,9 @@ Glodjib::Application.routes.draw do
   resources :post_comments, :path => 'blog/comment', :only => [:new, :create, :destroy] do
     delete :spam, :path => 'spam'
   end
-  resources :portfolios, :path => 'gallery', :portfolio => 'portfolio', :only => [:show]
+  resources :portfolios, :path => 'gallery', :portfolio => 'portfolio', :only => [:show, :edit] do
+    patch :sort
+  end
   resources :flickr_images, :path => 'image', :only => [:show]
   resources :post_tags, :path => 'blog/tags', :only => [:show]
 
