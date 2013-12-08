@@ -16,10 +16,4 @@ class FlickrImagesController < ApplicationController
     @title_parameter = flickr_image.image_title
   end
 
-  def reset_caches
-    Flickr::CacheService.reset_caches
-    flash[:notice] = I18n.t('notices.flickr_images.cache_updated')
-    redirect_to flickr_images_path
-  end
-
 end

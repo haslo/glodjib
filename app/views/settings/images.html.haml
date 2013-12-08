@@ -1,0 +1,7 @@
+= render 'tabs'
+- all_tags_with_caches.each do |flickr_tag_name|
+  %ul
+    %li= link_to(I18n.t('links.caches.reset', :tag_name => flickr_tag_name), reset_caches_settings_path(:tag => flickr_tag_name), :method => :delete)
+
+- if all_tags_with_caches.any?
+  %p= link_to(I18n.t('links.caches.destroy'), destroy_caches_settings_path, :method => :delete)

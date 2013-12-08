@@ -25,7 +25,8 @@ en:
     sessions:
       new: Login
     settings:
-      index: Admin
+      parameters: Parameters Admin
+      images: Image Cache Admin
     home:
       index: ''
 
@@ -35,6 +36,9 @@ en:
     login: login
     logout: logout
     admin: admin
+    admin_tabs:
+      parameters: Parameters
+      images: Images
 
   links:
     flickr_images:
@@ -49,7 +53,8 @@ en:
       edit: Edit Page
       destroy: Delete Page
     caches:
-      reset: Reset Caches
+      reset: 'Reset Cache for tag %{tag_name}'
+      destroy: 'Destroy all Caches'
     setting:
       save: Save Settings
     post_comment:
@@ -90,12 +95,11 @@ en:
     tag:
       no_posts: Tag not found (it has no posts assigned)
       not_found: Tag not found
-    flickr_images:
-      cache_updated: Flickr image cache updated
     logged_in_as: Logged in as %{user}
     settings:
       invalid_settings: Invalid settings, nothing was saved
       saved: Settings saved
+      cache_updated: Flickr image cache updated
     post_comment:
       duplicate: Duplicate comments are not allowed
 

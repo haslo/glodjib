@@ -16,14 +16,17 @@ Glodjib::Application.routes.draw do
     delete :spam, :path => 'spam'
   end
   resources :portfolios, :path => 'gallery', :portfolio => 'portfolio', :only => [:show]
-  resources :flickr_images, :path => 'image', :only => [:show] do
-    delete :reset_caches, :on => :collection
-  end
+  resources :flickr_images, :path => 'image', :only => [:show]
   resources :post_tags, :path => 'blog/tags', :only => [:show]
 
   # admin stuff
 
   devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
-  resources :settings, :only => [:index, :create]
+  resources :settings, :only => [:index, :update] do
+    get :parameters, :on => :collection
+    get :images, :on => :collection
+    delete :reset_caches, :path => 'reset_caches/:tag', :on => :collection
+    delete :destroy_caches, :path => 'reset_caches', :on => :collection
+  end
 
 end
