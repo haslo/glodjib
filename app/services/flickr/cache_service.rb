@@ -4,7 +4,7 @@ module Flickr::CacheService
     def find_or_create_cache(tag)
       flickr_user = Flickr::ParameterService.flickr_user
       flickr_tag = FlickrTag.where("tag_name = ?", tag).first_or_create!(:tag_name => tag)
-      flickr_cache = FlickrCache.where("flickr_user_id = ? and flickr_tag_id = ?", flickr_user.id, flickr_tag.id).first_or_initialize(:flickr_user => flickr_user, :flickr_tag => flickr_tag)
+      flickr_cache = FlickrCache.where("flickr_caches.flickr_user_id = ? and flickr_caches.flickr_tag_id = ?", flickr_user.id, flickr_tag.id).first_or_initialize(:flickr_user => flickr_user, :flickr_tag => flickr_tag)
       reset_cache(flickr_cache) if flickr_cache.new_record?
       flickr_cache
     end
@@ -43,10 +43,7 @@ module Flickr::CacheService
       ActiveRecord::Base.transaction do
         assure_connection
         flickr_cache.save if flickr_cache.new_record?
-        flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).each do |flickr_image|
-          flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
-          flickr_image.save
-        end
+        FlickrTagImage.where("flickr_tag_id = ? and flickr_user_id = ?", flickr_cache.flickr_tag.id, flickr_cache.flickr_user.id)
         images_from_remote = get_images_from_remote(flickr_cache)
         if images_from_remote.count > 0
           images_from_remote.each do |image_from_api|
@@ -54,7 +51,6 @@ module Flickr::CacheService
             flickr_image = FlickrImage.where("flickr_id = ?", image_from_api.id).first_or_initialize(:flickr_id => image_from_api.id)
             extract_basic_image_info(flickr_cache, flickr_image, photo_info)
             extract_exif_info(flickr_image, image_from_api)
-            flickr_image.position = (FlickrImage.maximum('position') || -1) + 1
             flickr_image.save
             extract_tags(flickr_image, photo_info)
             extract_size_info(flickr_image, flickr.photos.getSizes(:photo_id => image_from_api.id))
@@ -68,7 +64,7 @@ module Flickr::CacheService
     def destroy_cache(flickr_cache)
       ActiveRecord::Base.transaction do
         assure_connection
-        flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).each do |flickr_image|
+        flickr_cache.flickr_tag.flickr_images.where(:flickr_user_id => flickr_cache.flickr_user.id).each do |flickr_image|
           flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
           flickr_image.save
         end
@@ -79,8 +75,11 @@ module Flickr::CacheService
     def extract_tags(flickr_image, photo_info)
       photo_info.tags.each do |tag_name|
         flickr_tag = FlickrTag.where("tag_name = ?", tag_name.to_s).first_or_create!(:tag_name => tag_name.to_s)
-        flickr_tag.flickr_images << flickr_image unless flickr_tag.flickr_images.include?(flickr_image)
-        flickr_tag.save
+        FlickrTagImage.create! do |new_tag_link|
+          new_tag_link.flickr_image = flickr_image
+          new_tag_link.flickr_tag = flickr_tag
+          new_tag_link.flickr_user = flickr_image.flickr_user
+        end
       end
     end
     private :extract_tags

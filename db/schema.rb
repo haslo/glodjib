@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20131208233930) do
     t.string   "camera"
     t.string   "full_flickr_url"
     t.string   "flickr_id"
+    t.integer  "flickr_user_id"
   end
 
   create_table "flickr_tag_images", force: true do |t|

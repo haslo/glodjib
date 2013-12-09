@@ -4,7 +4,7 @@ class FlickrImagesController < ApplicationController
 
   expose(:flickr_images) do
     flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
-    flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).sorted
+    flickr_cache.flickr_tag.flickr_images.where(:flickr_user_id => flickr_cache.flickr_user.id).sorted
   end
   expose(:flickr_image) { FlickrImage.where(:id => params[:id]).first }
   expose(:previous_flickr_image) { portfolio.present? ? flickr_images[flickr_images.find_index(flickr_image) - 1] : nil }

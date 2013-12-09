@@ -19,8 +19,10 @@ class PortfoliosController < ApplicationController
   def sort
     params['positions'].each do |id, position|
       FlickrImage.where(:id => id).each do |image|
-        image.position = position
-        image.save!
+        image.flickr_tag_images.where(:flickr_user => image.flickr_user).each do |tag_link|
+          tag_link.position = position
+          tag_link.save!
+        end
       end
     end
     render :nothing => true
