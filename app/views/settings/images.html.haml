@@ -15,6 +15,8 @@
         - if caches_to_refresh.include?(flickr_cache) && flickr_cache.reset_pending?
           %span.loading-spinner{:id => "spinner-#{tag_name}", :data => {:cache => tag_name}}
             %i{:class => 'fa fa-spinner fa-spin'}
+          %span{:id => "success-#{tag_name}", :style => 'display:none'}
+            %i.fa.fa-check
         = time_ago_in_words(flickr_cache.updated_at)
       %td= link_to(t('.edit_portfolio', :tag_name => tag_name), edit_portfolio_path(:id => tag_name))
       %td= link_to(t('.reset_cache', :tag_name => tag_name), reset_cache_settings_path(:tag => tag_name), :method => :delete)

@@ -36,6 +36,7 @@ $(document).ready(function(){
         complete: function(response){
           if (response.responseText == 'true'){
             $('#spinner-' + cacheTag).hide();
+            $('#success-' + cacheTag).show();
           }
           else{
             setTimeout(function(){triggerTimeout(cacheTag);}, 2000);

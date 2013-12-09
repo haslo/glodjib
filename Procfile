@@ -1,1 +1,1 @@
-worker: RAILS_ENV=production bundle exec rake qc:work
+worker: rake qc:work RAILS_ENV=production
