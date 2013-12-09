@@ -21,11 +21,16 @@ module Flickr::CacheService
     end
 
     def reset_caches_by_tag(tag_name)
+      updated_caches = []
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_tag.tag_name == tag_name
+          flickr_cache.reset_pending = true
+          flickr_cache.save!
           QC.enqueue('Flickr::CacheService.reset_cache', flickr_cache.id)
+          updated_caches << flickr_cache.id
         end
       end
+      updated_caches
     end
 
     def destroy_caches_by_tag(tag_name)
@@ -37,9 +42,14 @@ module Flickr::CacheService
     end
 
     def reset_all_caches
+      updated_caches = []
       FlickrCache.all.each do |flickr_cache|
+        flickr_cache.reset_pending = true
+        flickr_cache.save!
         QC.enqueue('Flickr::CacheService.reset_cache', flickr_cache.id)
+        updated_caches << flickr_cache.id
       end
+      updated_caches
     end
 
     def destroy_all_caches
@@ -49,6 +59,7 @@ module Flickr::CacheService
     end
 
     def reset_cache(flickr_cache_id)
+      puts "starting reset for #{flickr_cache_id}"
       ActiveRecord::Base.transaction do
         flickr_cache = FlickrCache.find(flickr_cache_id)
         assure_connection
@@ -67,8 +78,10 @@ module Flickr::CacheService
           end
         end
         flickr_cache.updated_at = Time.now
+        flickr_cache.reset_pending = false
         flickr_cache.save
       end
+      puts "reset complete for #{flickr_cache_id}"
     end
 
     def destroy_cache(flickr_cache_id)

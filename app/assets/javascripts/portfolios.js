@@ -24,3 +24,26 @@ $(document).ready(function(){
     }
   });
 });
+
+$(document).ready(function(){
+  $('.loading-spinner').each(function(){
+    var cacheTag = $(this).data('cache');
+    var triggerTimeout = function(cacheId){
+      $.ajax({
+        url: '/gallery/' + cacheTag + '/check_reset',
+        type: 'get',
+        dataType: 'script',
+        complete: function(response){
+          if (response.responseText == 'true'){
+            $('#spinner-' + cacheTag).hide();
+          }
+          else{
+            setTimeout(function(){triggerTimeout(cacheTag);}, 2000);
+          }
+        }
+      });
+    };
+    triggerTimeout(cacheTag);
+  });
+});
+

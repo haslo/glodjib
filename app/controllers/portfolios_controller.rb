@@ -6,7 +6,7 @@ class PortfoliosController < ApplicationController
     flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
     flickr_cache.flickr_tag.flickr_tag_images.where(:flickr_user_id => flickr_cache.flickr_user.id).sorted.map(&:flickr_image)
   end
-  expose(:portfolio) { params[:id] || 'portfolio' }
+  expose(:portfolio) { (params[:id].present? ? params[:id] : params[:portfolio_id]) || 'portfolio' }
 
   def show
     @title_parameter = [I18n.t('titles.portfolios.portfolio'), portfolio.humanize].uniq.join(': ')
@@ -26,6 +26,12 @@ class PortfoliosController < ApplicationController
       end
     end
     render :nothing => true
+  end
+
+  def check_reset
+    flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
+    puts "pending? #{flickr_cache.reset_pending?} (for #{portfolio})"
+    render :json => !(flickr_cache.reset_pending?)
   end
 
 end

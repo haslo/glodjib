@@ -17,6 +17,7 @@ Glodjib::Application.routes.draw do
   end
   resources :portfolios, :path => 'gallery', :portfolio => 'portfolio', :only => [:show, :edit] do
     patch :sort
+    get :check_reset
   end
   resources :flickr_images, :path => 'image', :only => [:show]
   resources :post_tags, :path => 'blog/tags', :only => [:show]
