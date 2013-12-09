@@ -1,9 +1,14 @@
 %footer.navbar.navbar-fixed-bottom
-  %p.icons
-    = link_to(fa_icon("flickr"), 'http://flickr.com/glodjib')
-    = link_to(fa_icon("twitter-square"), 'https://twitter.com/haslo')
-    = link_to(fa_icon("facebook-square"), 'https://www.facebook.com/guido.gloor')
-    = link_to(fa_icon("google-plus-square"), 'https://plus.google.com/+GuidoGloorModjib')
+  - if [Setting.flickr_url, Setting.twitter_url, Setting.facebook_url, Setting.google_plus_icon].reject(&:blank?).any?
+    %p.icons
+      - if Setting.flickr_url.present?
+        = link_to(fa_icon('flickr'), Setting.flickr_url)
+      - if Setting.twitter_url.present?
+        = link_to(fa_icon('twitter-square'), Setting.twitter_url)
+      - if Setting.facebook_url.present?
+        = link_to(fa_icon('facebook-square'), Setting.facebook_url)
+      - if Setting.google_plus_url.present?
+        = link_to(fa_icon('google-plus-square'), Setting.google_plus_url)
   %p
     = t('notices.footer')
     = '-'

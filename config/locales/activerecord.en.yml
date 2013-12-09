@@ -16,6 +16,11 @@ en:
         page_title_short: Page title (displayed top right)
         portfolio_tags: Tags for portfolio (in addition to 'portfolio'), comma-separated
         post_more_separator: Separator for "Read more..." in posts
+        akismet_key: Akismet key (go to akismet.com to get one for free)
+        flickr_url: Complete Flickr URL
+        twitter_url: Complete Twitter URL
+        facebook_url: Complete Facebook URL
+        google_plus_url: Complete Google+ URL
         admin_password: Admin password
         admin_password_confirmation: Admin password confirmation
       post_comment:
