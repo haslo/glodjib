@@ -11,6 +11,18 @@
   = link_to(Flickr::ImageService.get_url_from_image(flickr_image, 'Original'), :class => 'lightbox') do
     %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large') }
 
+.row.image-description
+  .col-md-8
+    %p= flickr_image.image_description
+    %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
+  .col-md-4
+    %table.table.table-striped.table-bordered.table-condensed
+      - %w(camera focal_length aperture shutter iso).each do |field|
+        - if flickr_image.send(field.to_sym).present?
+          %tr
+            %td= t(".#{field}")
+            %td= flickr_image.send(field.to_sym)
+
 :javascript
   $(".lightbox").colorbox({
     transition: 'elastic',
