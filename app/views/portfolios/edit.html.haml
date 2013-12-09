@@ -1,0 +1,11 @@
+%hr
+%table#portfolio-images.table.table-striped.table-bordered.table-condensed.sortable{:data => {:portfolio => params[:portfolio]}}
+  %tr
+    %th= t('.image')
+    %th= t('.title')
+  - flickr_images.each do |flickr_image|
+    %tr{:id => flickr_image.id}
+      %td.image-container
+        %img{:src => Flickr::ImageService.get_url_from_image(flickr_image, 'Thumbnail')}
+      %td
+        = flickr_image.image_title

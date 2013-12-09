@@ -1,4 +1,5 @@
 class PostComment < ActiveRecord::Base
+
   validates :post_id, :name, :comment, :presence => true
   validates :comment, :uniqueness => {:message => I18n.t('notices.post_comment.duplicate'), :scope => :is_deleted}, :unless => :is_deleted?
 
@@ -40,4 +41,5 @@ class PostComment < ActiveRecord::Base
     end
     read_attribute(:comment).html_safe
   end
+
 end

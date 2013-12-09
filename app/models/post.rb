@@ -1,6 +1,7 @@
 include ActionView::Helpers::SanitizeHelper
 
 class Post < ActiveRecord::Base
+
   validates :title, :content, :shorthand, :presence => true
   validates :shorthand, :uniqueness =>  true
   validate :shorthand_starts_with_character
@@ -81,4 +82,5 @@ private
       errors.add(:shorthand, I18n.t('errors.custom_messages.shorthand_start_with_character'))
     end
   end
+
 end
