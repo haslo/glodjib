@@ -4,7 +4,7 @@ class PortfoliosController < ApplicationController
 
   expose(:flickr_images) do
     flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
-    flickr_cache.flickr_tag.flickr_images.where("flickr_user_id = ?", flickr_cache.flickr_user.id).sorted
+    flickr_cache.flickr_tag.flickr_tag_images.where(:flickr_user_id => flickr_cache.flickr_user.id).sorted.map(&:flickr_image)
   end
   expose(:portfolio) { params[:id] || 'portfolio' }
 
@@ -17,8 +17,12 @@ class PortfoliosController < ApplicationController
   end
 
   def sort
-    # see http://stackoverflow.com/questions/7664317/implement-ajax-sortable-lists-with-jquery-and-rails-3
-    raise params.inspect
+    params['positions'].each do |id, position|
+      FlickrImage.where(:id => id).each do |image|
+        image.position = position
+        image.save!
+      end
+    end
     render :nothing => true
   end
 

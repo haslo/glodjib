@@ -8,4 +8,5 @@
       %td.image-container
         %img{:src => Flickr::ImageService.get_url_from_image(flickr_image, 'Thumbnail')}
       %td
+        = flickr_image.flickr_tag_images.first.position
         = flickr_image.image_title

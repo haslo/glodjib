@@ -1,4 +1,5 @@
 class PostTag < ActiveRecord::Base
+
   validates :tag_text, :presence => true, :uniqueness => true
 
   has_and_belongs_to_many :posts
@@ -10,4 +11,5 @@ class PostTag < ActiveRecord::Base
   def self.parse(value)
     value.blank? ? nil : value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
   end
+
 end
