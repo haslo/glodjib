@@ -43,6 +43,7 @@ module Flickr::CacheService
       ActiveRecord::Base.transaction do
         assure_connection
         flickr_cache.save if flickr_cache.new_record?
+        FlickrTagImage.where("flickr_tag_id = ? and flickr_user_id = ?", flickr_cache.flickr_tag.id, flickr_cache.flickr_user.id).destroy_all
         images_from_remote = get_images_from_remote(flickr_cache)
         if images_from_remote.count > 0
           images_from_remote.each do |image_from_api|
