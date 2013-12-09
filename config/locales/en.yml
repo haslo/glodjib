@@ -66,5 +66,6 @@ en:
       invalid_settings: Invalid settings, nothing was saved
       saved: Settings saved
       cache_updated: Flickr image cache updated
+      cache_update_queued: Flickr image cache will be updated - please allow a minute for the background job to complete
     post_comment:
       duplicate: Duplicate comments are not allowed

@@ -39,7 +39,13 @@ class SettingsController < ApplicationController
 
   def reset_cache
     Flickr::CacheService.reset_caches_by_tag(params[:tag])
-    flash[:notice] = I18n.t('notices.settings.cache_updated')
+    flash[:notice] = I18n.t('notices.settings.cache_update_queued')
+    redirect_to images_settings_path
+  end
+
+  def reset_caches
+    Flickr::CacheService.reset_all_caches
+    flash[:notice] = I18n.t('notices.settings.cache_update_queued')
     redirect_to images_settings_path
   end
 
