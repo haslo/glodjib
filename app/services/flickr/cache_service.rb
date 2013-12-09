@@ -5,7 +5,10 @@ module Flickr::CacheService
       flickr_user = Flickr::ParameterService.flickr_user
       flickr_tag = FlickrTag.where("tag_name = ?", tag).first_or_create!(:tag_name => tag)
       flickr_cache = FlickrCache.where("flickr_caches.flickr_user_id = ? and flickr_caches.flickr_tag_id = ?", flickr_user.id, flickr_tag.id).first_or_initialize(:flickr_user => flickr_user, :flickr_tag => flickr_tag)
-      reset_cache(flickr_cache) if flickr_cache.new_record?
+      if flickr_cache.new_record?
+        flickr_cache.save
+        reset_cache(flickr_cache.id)
+      end
       flickr_cache
     end
 
