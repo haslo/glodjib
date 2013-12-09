@@ -17,11 +17,16 @@
     %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
   .col-md-4
     %table.table.table-striped.table-bordered.table-condensed
-      - %w(camera focal_length aperture shutter iso).each do |field|
-        - if flickr_image.send(field.to_sym).present?
+      - %w(camera focal_length aperture shutter iso date_taken date_posted).each do |field|
+        - value = flickr_image.send(field.to_sym)
+        - if value.present?
           %tr
             %td= t(".#{field}")
-            %td= flickr_image.send(field.to_sym)
+            %td
+              - if value.class == ActiveSupport::TimeWithZone
+                = l(value, :format => :long)
+              - else
+                = value
 
 :javascript
   $(".lightbox").colorbox({

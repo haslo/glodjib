@@ -43,7 +43,6 @@ module Flickr::CacheService
       ActiveRecord::Base.transaction do
         assure_connection
         flickr_cache.save if flickr_cache.new_record?
-        FlickrTagImage.where("flickr_tag_id = ? and flickr_user_id = ?", flickr_cache.flickr_tag.id, flickr_cache.flickr_user.id)
         images_from_remote = get_images_from_remote(flickr_cache)
         if images_from_remote.count > 0
           images_from_remote.each do |image_from_api|
@@ -88,6 +87,8 @@ module Flickr::CacheService
       flickr_image.image_title = photo_info.title
       flickr_image.flickr_user = flickr_cache.flickr_user
       flickr_image.image_description = photo_info.description
+      flickr_image.date_taken = photo_info.dates.taken
+      flickr_image.date_posted = Time.at(photo_info.dates.posted.to_i).to_datetime
       flickr_image.full_flickr_url = FlickRaw.url_photopage(photo_info)
     end
     private :extract_basic_image_info

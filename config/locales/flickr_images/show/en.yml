@@ -2,3 +2,10 @@ en:
   flickr_images:
     show:
       link_to_flickr: View this image on Flickr
+      camera: Camera
+      focal_length: Focal Length
+      aperture: Aperture
+      shutter: Shutter
+      iso: ISO
+      date_taken: Date Taken
+      date_posted: Date Posted (to Flickr)
