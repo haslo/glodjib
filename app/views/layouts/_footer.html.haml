@@ -1,9 +1,20 @@
 %footer.navbar.navbar-fixed-bottom
-  = t('notices.footer')
-  = '-'
-  - if user_signed_in?
-    = link_to(t('navigation.admin'), settings_path)
+  - if [Setting.flickr_url, Setting.twitter_url, Setting.facebook_url, Setting.google_plus_icon].reject(&:blank?).any?
+    %p.icons
+      - if Setting.flickr_url.present?
+        = link_to(fa_icon('flickr'), Setting.flickr_url)
+      - if Setting.twitter_url.present?
+        = link_to(fa_icon('twitter-square'), Setting.twitter_url)
+      - if Setting.facebook_url.present?
+        = link_to(fa_icon('facebook-square'), Setting.facebook_url)
+      - if Setting.google_plus_url.present?
+        = link_to(fa_icon('google-plus-square'), Setting.google_plus_url)
+  %p
+    = t('notices.footer')
     = '-'
-    = link_to(t('navigation.logout'), destroy_user_session_path, :method => :delete)
-  - else
-    = link_to(t('navigation.login'), new_user_session_path)
+    - if user_signed_in?
+      = link_to(t('navigation.admin'), settings_path)
+      = '-'
+      = link_to(t('navigation.logout'), destroy_user_session_path, :method => :delete)
+    - else
+      = link_to(t('navigation.login'), new_user_session_path)

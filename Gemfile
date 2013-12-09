@@ -39,7 +39,7 @@ group :development do
 end
 gem 'exception_notification'
 
-#defaults
+# standard stuff
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'sass-rails', '~> 4.0.0'
@@ -49,3 +49,4 @@ gem 'therubyracer', :platforms => :ruby
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'haml-rails'
+gem "font-awesome-rails"
