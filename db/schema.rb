@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209155120) do
+ActiveRecord::Schema.define(version: 20131209201424) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20131209155120) do
     t.integer  "flickr_tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "reset_pending",  default: false
   end
 
   create_table "flickr_image_sizes", force: true do |t|
@@ -105,6 +106,15 @@ ActiveRecord::Schema.define(version: 20131209155120) do
     t.boolean  "custom_shorthand", default: false
     t.boolean  "is_page",          default: false
   end
+
+  create_table "queue_classic_jobs", force: true do |t|
+    t.text     "q_name",    null: false
+    t.text     "method",    null: false
+    t.json     "args",      null: false
+    t.datetime "locked_at"
+  end
+
+  add_index "queue_classic_jobs", ["q_name", "id"], name: "idx_qc_on_name_only_unlocked", where: "(locked_at IS NULL)", using: :btree
 
   create_table "settings", force: true do |t|
     t.string   "key"

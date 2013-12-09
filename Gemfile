@@ -14,6 +14,16 @@ gem 'tinymce-rails'
 gem 'devise'
 gem 'decent_exposure'
 
+# delayed jobs
+gem 'queue_classic'
+gem 'foreman'
+
+# layout
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'haml-rails'
+gem "font-awesome-rails"
+
 # testing frameworks
 group :test, :development do
   gem 'rspec-rails', '~> 2.0'
@@ -39,14 +49,10 @@ group :development do
 end
 gem 'exception_notification'
 
-# standard stuff
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
+# standards
 gem 'sass-rails', '~> 4.0.0'
 gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'therubyracer', :platforms => :ruby
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'haml-rails'
-gem "font-awesome-rails"

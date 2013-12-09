@@ -15,35 +15,53 @@ module Flickr::CacheService
     def cleanup_caches
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_user != Flickr::ParameterService.flickr_user
-          destroy_cache(flickr_cache)
+          destroy_cache(flickr_cache.id)
         end
       end
     end
 
     def reset_caches_by_tag(tag_name)
+      updated_caches = []
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_tag.tag_name == tag_name
-          reset_cache(flickr_cache)
+          flickr_cache.reset_pending = true
+          flickr_cache.save!
+          QC.enqueue('Flickr::CacheService.reset_cache', flickr_cache.id)
+          updated_caches << flickr_cache.id
         end
       end
+      updated_caches
     end
 
     def destroy_caches_by_tag(tag_name)
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_tag.tag_name == tag_name
-          destroy_cache(flickr_cache)
+          destroy_cache(flickr_cache.id)
         end
       end
     end
 
+    def reset_all_caches
+      updated_caches = []
+      FlickrCache.all.each do |flickr_cache|
+        flickr_cache.reset_pending = true
+        flickr_cache.save!
+        QC.enqueue('Flickr::CacheService.reset_cache', flickr_cache.id)
+        updated_caches << flickr_cache.id
+      end
+      updated_caches
+    end
+
     def destroy_all_caches
       FlickrCache.all.each do |flickr_cache|
-        destroy_cache(flickr_cache)
+        destroy_cache(flickr_cache.id)
       end
     end
 
-    def reset_cache(flickr_cache)
+    def reset_cache(flickr_cache_id)
+      puts "starting reset for #{flickr_cache_id}"
       ActiveRecord::Base.transaction do
+        flickr_cache = FlickrCache.find(flickr_cache_id)
         assure_connection
         flickr_cache.save if flickr_cache.new_record?
         FlickrTagImage.where("flickr_tag_id = ? and flickr_user_id = ?", flickr_cache.flickr_tag.id, flickr_cache.flickr_user.id).destroy_all
@@ -60,13 +78,16 @@ module Flickr::CacheService
           end
         end
         flickr_cache.updated_at = Time.now
+        flickr_cache.reset_pending = false
         flickr_cache.save
       end
+      puts "reset complete for #{flickr_cache_id}"
     end
 
-    def destroy_cache(flickr_cache)
+    def destroy_cache(flickr_cache_id)
       ActiveRecord::Base.transaction do
         assure_connection
+        flickr_cache = FlickrCache.find(flickr_cache_id)
         flickr_cache.flickr_tag.flickr_images.where(:flickr_user_id => flickr_cache.flickr_user.id).each do |flickr_image|
           flickr_image.flickr_tags.delete(flickr_cache.flickr_tag)
           flickr_image.save
