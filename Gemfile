@@ -13,7 +13,10 @@ gem 'flickraw'
 gem 'tinymce-rails'
 gem 'devise'
 gem 'decent_exposure'
+
+# delayed jobs
 gem 'queue_classic'
+gem 'foreman'
 
 # layout
 gem 'jquery-rails'

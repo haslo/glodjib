@@ -46,7 +46,7 @@ namespace :deploy do
     dirs = [deploy_to, shared_path]
     dirs += shared_children.map { |d| File.join(shared_path, d) }
     run "sudo mkdir -p #{dirs.join(' ')} && #{try_sudo} chmod g+w #{dirs.join(' ')}"
-    run "git clone #{repository} /srv/glodjib/current"
+    run "git clone #{repository} #{current_path}"
   end
 
   task :cold do
@@ -64,7 +64,7 @@ namespace :deploy do
 
   desc "Update the deployed code."
   task :update_code, :except => { :no_release => true } do
-    run "cd /srv/glodjib/current; git fetch origin; git reset --hard #{branch}"
+    run "cd #{current_path}; git fetch origin; git reset --hard #{branch}"
     finalize_update
   end
 
@@ -103,6 +103,38 @@ namespace :deploy do
   desc "Stop unicorn"
   task :stop, :except => { :no_release => true } do
     run "sudo env PATH=#{default_environment["PATH"]} /etc/init.d/unicorn stop"
+  end
+end
+
+namespace :foreman do
+  after "deploy:update", "foreman:export"    # Export foreman scripts
+  after "deploy:restart", "foreman:restart"   # Restart application scripts
+  after "deploy:stop", "foreman:stop"   # Restart application scripts
+  after "deploy:start", "foreman:start"
+
+# Foreman tasks
+
+  desc 'Export the Procfile to Ubuntu upstart scripts'
+  task :export, :roles => :queue do
+    run "cd #{release_path}; sudo $(rbenv which foreman) export upstart /etc/init -f ./Procfile -a #{application} -u #{user} -l #{release_path}/log/foreman"
+  end
+
+  desc "Start the application services"
+  task :start, :roles => :queue do
+    run "sudo start #{application}"
+  end
+
+  desc "Stop the application services"
+
+  task :stop, :roles => :queue do
+    run "sudo stop #{application}"
+  end
+
+  desc "Restart the application services"
+  task :restart, :roles => :queue do
+    run "sudo stop #{application}"
+    run "sudo start #{application}"
+    #run "sudo start #{application} || sudo restart #{application}"
   end
 end
 
