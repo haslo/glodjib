@@ -1,9 +1,15 @@
 %footer.navbar.navbar-fixed-bottom
-  = t('notices.footer')
-  = '-'
-  - if user_signed_in?
-    = link_to(t('navigation.admin'), settings_path)
+  %p.icons
+    = link_to(fa_icon("flickr"), 'http://flickr.com/glodjib')
+    = link_to(fa_icon("twitter-square"), 'https://twitter.com/haslo')
+    = link_to(fa_icon("facebook-square"), 'https://www.facebook.com/guido.gloor')
+    = link_to(fa_icon("google-plus-square"), 'https://plus.google.com/+GuidoGloorModjib')
+  %p
+    = t('notices.footer')
     = '-'
-    = link_to(t('navigation.logout'), destroy_user_session_path, :method => :delete)
-  - else
-    = link_to(t('navigation.login'), new_user_session_path)
+    - if user_signed_in?
+      = link_to(t('navigation.admin'), settings_path)
+      = '-'
+      = link_to(t('navigation.logout'), destroy_user_session_path, :method => :delete)
+    - else
+      = link_to(t('navigation.login'), new_user_session_path)

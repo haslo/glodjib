@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5 {
 .content {
   background-color: rgba(255, 255, 255, .95);
   padding: 20px;
-  margin: 100px 0 100px 0;
+  margin: 100px 0 130px 0;
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
@@ -37,11 +37,23 @@ h1, h2, h3, h4, h5 {
 }
 
 footer {
-  padding: 20px 0 20px 0;
+  padding: 15px 0 15px 0;
   text-align: center;
   font-size: smaller;
   background-color: rgba(51, 51, 51, .5);
   background-image: none;
+
+  a, a:hover, a:visited {
+    color: white;
+  }
+
+  .icons {
+    font-size: x-large;
+
+    a:hover {
+      font-size: xx-large;
+    }
+  }
 }
 
 footer, footer a, footer a:visited {
