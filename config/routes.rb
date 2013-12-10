@@ -20,7 +20,7 @@ Glodjib::Application.routes.draw do
     get :check_reset
   end
   resources :flickr_images, :path => 'image', :only => [:show]
-  resources :post_tags, :path => 'blog/tags', :only => [:show]
+  resources :post_tags, :path => 'tags', :only => [:show]
 
   # admin stuff
 
