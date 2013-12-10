@@ -1,6 +1,10 @@
 module Flickr::APIService
   class << self
 
+    def get_recent_images_from_remote(number_of_images)
+      flickr.photos.search(:user_id => Flickr::ParameterService.flickr_user, :per_page => number_of_images)
+    end
+
     def fetch_images_by_tag(target_gallery, tag_name)
       ActiveRecord::Base.transaction do
         target_gallery.pending_udates += 1
