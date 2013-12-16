@@ -12,11 +12,6 @@ en:
   links:
     flickr_images:
       blog_images: Blog Images
-    post:
-      new: New Post
-      edit: Edit Post
-      destroy: Delete Post
-      read_more: Read More...
     page:
       new: New Page
       edit: Edit Page
@@ -31,10 +26,6 @@ en:
     page:
       update: Update Page
       create: Create Page
-
-  link_confirmations:
-    destroy_post: Are you certain that you want to delete this post?
-    reset_caches: Are you certain that you want to reset all Flickr caches? This will make loading pages slow until they're refilled.
 
   notices:
     footer: © 2013 - the glodjib platform - built by haslo
