@@ -4,7 +4,7 @@ class Setting < ActiveRecord::Base
 
   # TODO improve key handling, maybe with a service?
   MANDATORY_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag post_more_separator)
-  STANDARD_KEYS =  %w(page_title_short page_title flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag portfolio_tags post_more_separator akismet_key disqus_shortname flickr_url twitter_url facebook_url google_plus_url)
+  STANDARD_KEYS =  %w(page_title_short page_title posts_per_page flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag portfolio_tags post_more_separator akismet_key disqus_shortname flickr_url twitter_url facebook_url google_plus_url)
   KEYS_WITH_DEFAULT = %w(flickr_user flickr_api_key flickr_shared_secret flickr_front_page_tag flickr_blog_images_tag)
   KEYS_FOR_AUTHENTICATION = %w(admin_password admin_password_confirmation)
 

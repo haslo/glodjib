@@ -21,7 +21,9 @@ gem 'queue_classic'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'haml-rails'
-gem "font-awesome-rails"
+gem 'font-awesome-rails'
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap'
 
 # testing frameworks
 group :test, :development do
