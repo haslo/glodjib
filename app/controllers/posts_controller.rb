@@ -2,7 +2,9 @@ class PostsController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:index, :show, :feed]
 
-  expose(:posts) { Post.without_pages.sorted }
+  DEFAULT_POSTS_PER_PAGE = 10
+
+  expose(:posts) { Post.without_pages.sorted.paginate(:page => params[:page], :per_page => Setting.posts_per_page || DEFAULT_POSTS_PER_PAGE) }
   expose(:post, :attributes => :post_params) { get_or_build_post }
 
   before_filter :mandatory_post, :only => [:show, :edit, :update, :destroy]
