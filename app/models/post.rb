@@ -65,6 +65,10 @@ class Post < ActiveRecord::Base
     end
   end
 
+  def published_at
+    created_at
+  end
+
 private
 
   def auto_shorthand(original_value)

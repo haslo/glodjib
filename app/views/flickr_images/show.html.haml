@@ -15,6 +15,10 @@
   .col-md-8
     %p= flickr_image.image_description
     %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
+    - Blog::ImageLinkService.pages_with_images(flickr_image.id).each do |page|
+      %p= link_to(fa_icon('link', :text => t('.link_to_page', :title => page.title)), post_path(:id => page.shorthand))
+    - Blog::ImageLinkService.blog_posts_with_images(flickr_image.id).each do |post|
+      %p= link_to(fa_icon('link', :text => t('.link_to_post', :title => post.title, :date => l(post.published_at, :format => :short))), post_path(:id => post.shorthand))
   .col-md-4
     %table.table.table-striped.table-bordered.table-condensed
       - %w(camera focal_length aperture shutter iso date_taken date_posted).each do |field|
