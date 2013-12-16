@@ -1,0 +1,14 @@
+en:
+  partials:
+    blog_post:
+      number_of_comments:
+        zero: Be the first to comment!
+        one: 1 comment
+        other: '%{number_of_comments} comments'
+      post_comment:
+        create: Submit Comment
+        destroy: Delete Comment
+        spam: Spam Comment
+      destroy_post_comment: Are you certain that you want to delete this comment?
+      spam_post_comment: Are you certain that you want to mark this comment as spam?
+      disqus_warning: 'Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>'

@@ -4,38 +4,58 @@
     %p.post_date= l(post.created_at, :format => :short)
     = render('/partials/blog_post_tags', :post_tags => post.post_tags)
     = Blog::PostService.sanitized_blog_content(post, true)
-  %a{:name => 'comments'}
-  - if post.post_comments.size > 0
-    .blog_post_comments
-      - if post.post_comments.ham.count == 1
-        %h3= t('notices.post.number_of_comments.one')
-      - elsif post.post_comments.ham.count > 0
-        %h3= t('notices.post.number_of_comments.other', :number_of_comments => post.post_comments.ham.count)
-      - post.post_comments.ham.each do |post_comment|
-        .post_comment
-          %h4
-            - if post_comment.url.blank?
-              = post_comment.name
-            - else
-              = link_to(post_comment.name, post_comment.url, :rel => 'nofollow')
-          = post_comment.comment
-        - if user_signed_in?
-          .management_functionality
-            %p
-              = link_to(t('links.post_comment.spam'), post_comment_spam_path(post_comment), :data => {:confirm => t('link_confirmations.spam_post_comment')}, :method => :delete)
-              = link_to(t('links.post_comment.destroy'), post_comment_path(post_comment), :data => {:confirm => t('link_confirmations.destroy_post_comment')}, :method => :delete)
 
-  .blog_post_comment_form{:name => (post.post_comments.size > 0) ? 'comments' : nil}
-    %h3= I18n.t('titles.post_comments.leave_reply')
-    = simple_form_for(post_comment, :url => post_comments_path(post_comment), :method => :post) do |f|
-      .form-inputs
-        = f.error_notification
-        = display_base_errors post_comment
-        = f.input :post_id, :as => :hidden, :input_html => {:value => post.id}
-        = f.input :name
-        = f.input :email
-        = f.input :url
-        = f.input :comment, :input_html => {:class => 'tinymce', :rows => 5}, :required => false
-      .form-actions
-        = f.button :submit, I18n.t('links.post_comment.create')
-    = tinymce :simple
+  %a{:name => 'comments'}
+
+  - if Setting.disqus_shortname.present?
+
+    #disqus_thread
+    :javascript
+      var disqus_shortname = 'glodjib';
+      var disqus_identifier = '#{post.id}';
+      var disqus_title = '#{post.title}';
+      var disqus_url = '#{post_url(:id => post.shorthand)}';
+      (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+    %noscript
+      = t('.disqus_warning').html_safe
+
+  - else
+
+    - if post.post_comments.size > 0
+      .blog_post_comments
+        - if post.post_comments.ham.count == 1
+          %h3= t('.number_of_comments.one')
+        - elsif post.post_comments.ham.count > 0
+          %h3= t('.number_of_comments.other', :number_of_comments => post.post_comments.ham.count)
+        - post.post_comments.ham.each do |post_comment|
+          .post_comment
+            %h4
+              - if post_comment.url.blank?
+                = post_comment.name
+              - else
+                = link_to(post_comment.name, post_comment.url, :rel => 'nofollow')
+            = post_comment.comment
+          - if user_signed_in?
+            .management_functionality
+              %p
+                = link_to(t('.post_comment.spam'), post_comment_spam_path(post_comment), :data => {:confirm => t('.spam_post_comment')}, :method => :delete)
+                = link_to(t('.post_comment.destroy'), post_comment_path(post_comment), :data => {:confirm => t('.destroy_post_comment')}, :method => :delete)
+
+    .blog_post_comment_form{:name => (post.post_comments.size > 0) ? 'comments' : nil}
+      %h3= t('titles.post_comments.leave_reply')
+      = simple_form_for(post_comment, :url => post_comments_path(post_comment), :method => :post) do |f|
+        .form-inputs
+          = f.error_notification
+          = display_base_errors post_comment
+          = f.input :post_id, :as => :hidden, :input_html => {:value => post.id}
+          = f.input :name
+          = f.input :email
+          = f.input :url
+          = f.input :comment, :input_html => {:class => 'tinymce', :rows => 5}, :required => false
+        .form-actions
+          = f.button :submit, t('.post_comment.create')
+      = tinymce :simple

@@ -1,0 +1,13 @@
+en:
+  partials:
+    blog_post_list:
+      new_post: New Post
+      edit_post: Edit Post
+      destroy_post: Delete Post
+      read_more: Read More...
+      destroy_confirmation: Are you certain that you want to delete this post?
+      comment: Add Comment
+      number_of_comments:
+        zero: Be the first to comment!
+        one: 1 comment
+        other: '%{number_of_comments} comments'
