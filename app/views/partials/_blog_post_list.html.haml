@@ -2,7 +2,7 @@
   %hr
   .blog_post
     %h3= link_to(post.title, post_path(:id => post.shorthand))
-    %p.post_date= l(post.created_at, :format => :short)
+    %p.post_date= l(post.published_at, :format => :short)
     = render('/partials/blog_post_tags', :post_tags => post.post_tags)
     = Blog::PostService.sanitized_blog_content(post, false)
     - if post.content.include?(Setting.post_more_separator)
