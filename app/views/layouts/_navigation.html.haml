@@ -1,4 +1,4 @@
-%nav.navbar.navbar-default{:role => 'navigation'}
+%nav.navbar.navbar-default.navbar-static-top.navbar-inverse{:role => 'navigation'}
   .navbar-header
     %button.navbar-toggle{:type => 'button', :data => {:toggle => 'collapse', :target => '#navigation'}}
       %span.sr-only
@@ -6,15 +6,21 @@
       %span.icon-bar
       %span.icon-bar
       %span.icon-bar
-    = link_to(Setting.page_title_short, root_path, :class => 'navbar-brand')
+    %ul.nav.navbar-nav
+      %li{:class => active_class(:root)}
+        = link_to(Setting.page_title_short, root_path, :class => 'navbar-brand')
   .collapse.navbar-collapse#navigation
     %ul.nav.navbar-nav
-      %li= link_to(t('.home'), posts_path)
-      %li= link_to(t('.portfolio'), portfolio_path(:id => 'portfolio'))
+      %li{:class => active_class(:home)}
+        = link_to(t('.home'), posts_path)
+      %li{:class => active_class('portfolio:portfolio')}
+        = link_to(t('.portfolio'), portfolio_path(:id => 'portfolio'))
       - (Setting.portfolio_tags || '').split(',').map(&:strip).each do |portfolio_tag|
-        %li= link_to(portfolio_tag.humanize, portfolio_path(:id => portfolio_tag))
+        %li{:class => active_class("portfolio:#{portfolio_tag}")}
+          = link_to(portfolio_tag.humanize, portfolio_path(:id => portfolio_tag))
       - Post.only_pages.sorted.each do |page|
-        %li= link_to(page.title, page_path(:id => page.shorthand))
+        %li{:class => active_class("page:#{page.shorthand}")}
+          = link_to(page.title, page_path(:id => page.shorthand))
       - if user_signed_in?
         %li.dropdown
           %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
@@ -23,3 +29,5 @@
           %ul.dropdown-menu
             %li= link_to(t('.admin.blog_images'), portfolio_path(:id => Setting.flickr_blog_images_tag))
             %li= link_to(t('.admin.new_page'), new_page_path)
+  - if Setting.tagline.present?
+    %p.tagline= Setting.tagline

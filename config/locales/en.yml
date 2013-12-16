@@ -8,10 +8,7 @@ en:
       images: Image Caches
 
   links:
-    flickr_images:
-      blog_images: Blog Images
     page:
-      new: New Page
       edit: Edit Page
       destroy: Delete Page
     setting:
