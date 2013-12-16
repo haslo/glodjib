@@ -1,11 +1,25 @@
-#navigation
-  = link_to(I18n.t('navigation.home'), posts_path)
-  = link_to(I18n.t('navigation.portfolio'), portfolio_path(:id => 'portfolio'))
-  - (Setting.portfolio_tags || '').split(',').map(&:strip).each do |portfolio_tag|
-    = link_to(portfolio_tag.humanize, portfolio_path(:id => portfolio_tag))
-  - Post.only_pages.sorted.each do |page|
-    = link_to(page.title, page_path(:id => page.shorthand))
-  - if user_signed_in?
-    .management_functionality
-      %p= link_to(I18n.t('links.flickr_images.blog_images'), portfolio_path(:id => Setting.flickr_blog_images_tag))
-      %p= link_to(I18n.t('links.page.new'), new_page_path)
+%nav.navbar.navbar-default{:role => 'navigation'}
+  .navbar-header
+    %button.navbar-toggle{:type => 'button', :data => {:toggle => 'collapse', :target => '#navigation'}}
+      %span.sr-only
+        Toggle navigation
+      %span.icon-bar
+      %span.icon-bar
+      %span.icon-bar
+    = link_to(Setting.page_title_short, root_path, :class => 'navbar-brand')
+  .collapse.navbar-collapse#navigation
+    %ul.nav.navbar-nav
+      %li= link_to(t('.home'), posts_path)
+      %li= link_to(t('.portfolio'), portfolio_path(:id => 'portfolio'))
+      - (Setting.portfolio_tags || '').split(',').map(&:strip).each do |portfolio_tag|
+        %li= link_to(portfolio_tag.humanize, portfolio_path(:id => portfolio_tag))
+      - Post.only_pages.sorted.each do |page|
+        %li= link_to(page.title, page_path(:id => page.shorthand))
+      - if user_signed_in?
+        %li.dropdown
+          %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
+            = t('.dropdown_admin')
+            %b.caret
+          %ul.dropdown-menu
+            %li= link_to(t('.admin.blog_images'), portfolio_path(:id => Setting.flickr_blog_images_tag))
+            %li= link_to(t('.admin.new_page'), new_page_path)

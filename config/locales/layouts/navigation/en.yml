@@ -1,0 +1,9 @@
+en:
+  layouts:
+    navigation:
+      home: Blog
+      portfolio: Portfolio
+      dropdown_admin: Admin
+      admin:
+        blog_images: Blog images
+        new_page: New page
