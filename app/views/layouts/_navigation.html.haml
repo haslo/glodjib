@@ -1,4 +1,5 @@
 %nav.navbar.navbar-default.navbar-static-top.navbar-inverse{:role => 'navigation'}
+
   .navbar-header
     %button.navbar-toggle{:type => 'button', :data => {:toggle => 'collapse', :target => '#navigation'}}
       %span.sr-only
@@ -9,6 +10,7 @@
     %ul.nav.navbar-nav
       %li{:class => active_class(:root)}
         = link_to(Setting.page_title_short, root_path, :class => 'navbar-brand')
+
   .collapse.navbar-collapse#navigation
     %ul.nav.navbar-nav
       %li{:class => active_class(:home)}
@@ -21,6 +23,7 @@
       - Post.only_pages.sorted.each do |page|
         %li{:class => active_class("page:#{page.shorthand}")}
           = link_to(page.title, page_path(:id => page.shorthand))
+
       - if user_signed_in?
         %li.dropdown
           %a.dropdown-toggle{:href => '#', :data => {:toggle => 'dropdown'}}
@@ -29,6 +32,7 @@
           %ul.dropdown-menu
             %li= link_to(t('.admin.blog_images'), portfolio_path(:id => Setting.flickr_blog_images_tag))
             %li= link_to(t('.admin.new_page'), new_page_path)
+
     - if [Setting.flickr_url, Setting.twitter_url, Setting.facebook_url, Setting.google_plus_icon].reject(&:blank?).any?
       %ul.nav.navbar-nav.navbar-right.icons
         - if Setting.flickr_url.present?
@@ -39,5 +43,6 @@
           %li= link_to(fa_icon('facebook-square'), Setting.facebook_url)
         - if Setting.google_plus_url.present?
           %li= link_to(fa_icon('google-plus-square'), Setting.google_plus_url)
+
   - if Setting.tagline.present?
     %p.tagline= Setting.tagline
