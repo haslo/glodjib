@@ -15,4 +15,19 @@ module ApplicationHelper
   def page_title
     [t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), Setting.page_title].reject{|item| item.blank?}.join(' - ')
   end
+
+  def active_class(nav_item)
+    case nav_item
+      when :root
+        current_page?(root_path)
+      when :home
+        current_page?(posts_path)
+      when /portfolio:(.*)/
+        current_page?(portfolio_path(:id => $1))
+      when /page:(.*)/
+        current_page?(page_path(:id => $1))
+      else
+        false
+    end ? 'active' : ''
+  end
 end

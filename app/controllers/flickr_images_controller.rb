@@ -1,5 +1,7 @@
 class FlickrImagesController < ApplicationController
 
+  layout 'minimal'
+
   before_filter :authenticate_user!, :except => [:show]
 
   expose(:flickr_images) do
