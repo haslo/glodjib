@@ -1,36 +1,45 @@
-%hr
-#full_image
-  - if previous_flickr_image.present?
-    .previous_image
-      = link_to(flickr_image_path(:id => previous_flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
-        ᑅ
-  - if next_flickr_image.present?
-    .next_image
-      = link_to(flickr_image_path(:id => next_flickr_image.id, :portfolio => portfolio, :anchor => 'full_image')) do
-        ᑀ
-  = link_to(Flickr::ImageService.get_url_from_image(flickr_image, 'Original'), :class => 'lightbox') do
-    %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large') }
+.main{:role => 'main'}
+  .container
+    .content
+      .row
+        .col-md-12
+          #full_image
+            - if previous_flickr_image.present?
+              .previous_image
+                = link_to(flickr_image_path(:id => previous_flickr_image.id, :portfolio => portfolio)) do
+                  ᑅ
+            - if next_flickr_image.present?
+              .next_image
+                = link_to(flickr_image_path(:id => next_flickr_image.id, :portfolio => portfolio)) do
+                  ᑀ
+            = link_to(Flickr::ImageService.get_url_from_image(flickr_image, 'Original'), :class => 'lightbox') do
+              %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large') }
 
-.row.image-description
-  .col-md-8
-    %p= flickr_image.image_description
-    %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
-    - Blog::ImageLinkService.pages_with_images(flickr_image.id).each do |page|
-      %p= link_to(fa_icon('link', :text => t('.link_to_page', :title => page.title)), post_path(:id => page.shorthand))
-    - Blog::ImageLinkService.blog_posts_with_images(flickr_image.id).each do |post|
-      %p= link_to(fa_icon('link', :text => t('.link_to_post', :title => post.title, :date => l(post.published_at, :format => :short))), post_path(:id => post.shorthand))
-  .col-md-4
-    %table.table.table-striped.table-bordered.table-condensed
-      - %w(camera focal_length aperture shutter iso date_taken date_posted).each do |field|
-        - value = flickr_image.send(field.to_sym)
-        - if value.present?
-          %tr
-            %td= t(".#{field}")
-            %td
-              - if value.class == ActiveSupport::TimeWithZone
-                = l(value, :format => :long)
-              - else
-                = value
+        .col-md-12
+          %h2.image_title
+            = link_to(t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), params)
+          = render :partial => 'layouts/messages'
+
+          .row.image-description
+            .col-md-8
+              %p= flickr_image.image_description
+              %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
+              - Blog::ImageLinkService.pages_with_images(flickr_image.id).each do |page|
+                %p= link_to(fa_icon('link', :text => t('.link_to_page', :title => page.title)), post_path(:id => page.shorthand))
+              - Blog::ImageLinkService.blog_posts_with_images(flickr_image.id).each do |post|
+                %p= link_to(fa_icon('link', :text => t('.link_to_post', :title => post.title, :date => l(post.published_at, :format => :short))), post_path(:id => post.shorthand))
+            .col-md-4
+              %table.table.table-striped.table-bordered.table-condensed
+                - %w(camera focal_length aperture shutter iso date_taken date_posted).each do |field|
+                  - value = flickr_image.send(field.to_sym)
+                  - if value.present?
+                    %tr
+                      %td= t(".#{field}")
+                      %td
+                        - if value.class == ActiveSupport::TimeWithZone
+                          = l(value, :format => :long)
+                        - else
+                          = value
 
 :javascript
   $(".lightbox").colorbox({

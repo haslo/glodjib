@@ -29,5 +29,15 @@
           %ul.dropdown-menu
             %li= link_to(t('.admin.blog_images'), portfolio_path(:id => Setting.flickr_blog_images_tag))
             %li= link_to(t('.admin.new_page'), new_page_path)
+    - if [Setting.flickr_url, Setting.twitter_url, Setting.facebook_url, Setting.google_plus_icon].reject(&:blank?).any?
+      %ul.nav.navbar-nav.navbar-right.icons
+        - if Setting.flickr_url.present?
+          %li= link_to(fa_icon('flickr'), Setting.flickr_url)
+        - if Setting.twitter_url.present?
+          %li= link_to(fa_icon('twitter-square'), Setting.twitter_url)
+        - if Setting.facebook_url.present?
+          %li= link_to(fa_icon('facebook-square'), Setting.facebook_url)
+        - if Setting.google_plus_url.present?
+          %li= link_to(fa_icon('google-plus-square'), Setting.google_plus_url)
   - if Setting.tagline.present?
     %p.tagline= Setting.tagline

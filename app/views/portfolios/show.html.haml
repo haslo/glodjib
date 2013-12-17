@@ -2,7 +2,7 @@
 .clearfix
   #portfolio-gallery
     - flickr_images.each do |flickr_image|
-      = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio, :anchor => 'full_image'), :title => flickr_image.image_title) do
+      = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio), :title => flickr_image.image_title) do
         %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Small 320'), :alt => flickr_image.image_title }
 
 :javascript
