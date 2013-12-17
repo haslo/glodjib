@@ -47,11 +47,11 @@ module Blog::PostService
     private :add_center_images
 
     def remove_gallery_tags(post_content)
-      post_content.gsub(Regexp.new("\\<p\\>\\[gallery=([a-z\\_]+)\\]"), '')
+      post_content.gsub(Regexp.new("\\<p\\>\\[gallery=([a-z0-9\\_]+)\\]"), '')
     end
 
     def portfolio(post_content)
-      if post_content =~ Regexp.new("\\<p\\>\\[gallery=([a-z\\_]+)\\]")
+      if post_content =~ Regexp.new("\\<p\\>\\[gallery=([a-z0-9\\_]+)\\]")
         $1
       else
         nil

@@ -74,7 +74,7 @@ private
   def auto_shorthand(original_value)
     added_index = 0
     current_shorthand = generated_shorthand = original_value.blank? ? nil : original_value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
-    while Post.where(:shorthand => current_shorthand).count > 0
+    while Post.where(:shorthand => current_shorthand).any?{|post| post.id != id}
       current_shorthand = "#{generated_shorthand}_#{added_index}"
       added_index += 1
     end
