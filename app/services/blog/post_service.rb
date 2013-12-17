@@ -24,7 +24,7 @@ module Blog::PostService
         flickr_image_id = matching_tag[/\d+/]
         flickr_image_path = Flickr::ImageService.get_url_from_id(flickr_image_id, 'Small 320')
         gallery_page_path = "/image/#{flickr_image_id}" # single_image_flickr_images_path(:id => flickr_image_id)
-        float_with_image = "<div class='pull-#{position}'><a href='#{gallery_page_path}#full_image'><img src='#{flickr_image_path}'/></a></div>"
+        float_with_image = "<div class='blog-float-image pull-#{position}'><a href='#{gallery_page_path}'><img src='#{flickr_image_path}'/></a></div>"
         new_post_content = new_post_content.gsub(matching_tag, "#{float_with_image}<p>")
       end
       new_post_content
@@ -36,9 +36,9 @@ module Blog::PostService
       post_content.scan(Regexp.new("\\[imagecenter=.*\\]")).each do |matching_tag|
         # TODO replace with partial rendering
         flickr_image_id = matching_tag[/\d+/]
-        flickr_image_path = Flickr::ImageService.get_url_from_id(flickr_image_id, 'Medium')
+        flickr_image_path = Flickr::ImageService.get_url_from_id(flickr_image_id, 'Large')
         gallery_page_path = "/image/#{flickr_image_id}" # single_image_flickr_images_path(:id => flickr_image_id)
-        center_with_image = "<div class='center-block'><div><a href='#{gallery_page_path}#full_image'><img src='#{flickr_image_path}'/></a></div></div>"
+        center_with_image = "<div class='blog-image-center center-block'><div><a href='#{gallery_page_path}'><img src='#{flickr_image_path}'/></a></div></div>"
         new_post_content = new_post_content.gsub(matching_tag, center_with_image)
       end
       Nokogiri::HTML::DocumentFragment.parse(new_post_content).to_html.gsub('<p></p>', '')
