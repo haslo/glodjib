@@ -5,8 +5,9 @@ class PostsController < ApplicationController
   DEFAULT_POSTS_PER_PAGE = 10
 
   expose(:posts) { Post.without_pages.sorted.paginate(:page => params[:page], :per_page => Setting.posts_per_page || DEFAULT_POSTS_PER_PAGE) }
-  expose(:portfolio) { Blog::PostService.portfolio(post.content) }
   expose(:post, :attributes => :post_params) { get_or_build_post }
+  expose(:portfolio) { Blog::PostService.portfolio(post.content) }
+  expose(:portfolios) { Hash[posts.map{|post| [post.id, Blog::PostService.portfolio(post.content)]}] }
 
   before_filter :mandatory_post, :only => [:show, :edit, :update, :destroy]
 
