@@ -7,7 +7,7 @@
     - if portfolio.present?
       #post-gallery
         = render :partial => 'portfolios/gallery', :locals => {:flickr_images => Flickr::PortfolioService.images_for_portfolio(portfolio), :portfolio => portfolio}
-      = render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => 'post-gallery', :row_height => 300}
+      = render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => 'post-gallery', :row_height => 200}
 
   %a{:name => 'comments'}
 
