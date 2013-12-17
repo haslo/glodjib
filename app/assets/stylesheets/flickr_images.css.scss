@@ -16,6 +16,22 @@ div#full_image {
   }
 }
 
+.blog-image-center img {
+  max-width: 100%;
+  max-height: 80%;
+}
+.blog-float-image img {
+  max-width: 100%;
+}
+@media screen and (max-width: 650px){
+  .blog-float-image.pull-left, .blog-float-image.pull-right {
+    display: block;
+    float: none !important;
+    text-align: center;
+  }
+}
+
+
 .previous_image, .next_image {
   position: absolute;
   width: 20%;
