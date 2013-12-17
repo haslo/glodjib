@@ -23,11 +23,18 @@
           .row.image-description
             .col-md-8
               %p= flickr_image.image_description
-              %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
               - Blog::ImageLinkService.pages_with_images(flickr_image.id).each do |page|
                 %p= link_to(fa_icon('link', :text => t('.link_to_page', :title => page.title)), page_path(:id => page.shorthand))
               - Blog::ImageLinkService.blog_posts_with_images(flickr_image.id).each do |post|
                 %p= link_to(fa_icon('link', :text => t('.link_to_post', :title => post.title, :date => l(post.published_at, :format => :short))), post_path(:id => post.shorthand))
+              - Flickr::PortfolioService.portfolios_for_image(flickr_image).each do |portfolio|
+                %p= link_to(fa_icon('picture-o', :text => t('.link_to_portfolio', :portfolio => portfolio.humanize)), portfolio_path(:id => portfolio))
+              - Flickr::PortfolioService.pages_with_portfolio_for_image(flickr_image).each do |page|
+                %p= link_to(fa_icon('sitemap', :text => t('.link_to_portfolio_page', :title => page.title)), page_path(:id => page.shorthand))
+              - Flickr::PortfolioService.posts_with_portfolio_for_image(flickr_image).each do |post|
+                %p= link_to(fa_icon('sitemap', :text => t('.link_to_portfolio_post', :title => post.title)), post_path(:id => post.shorthand))
+              %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
+
             .col-md-4
               %table.table.table-striped.table-bordered.table-condensed
                 - %w(camera focal_length aperture shutter iso date_taken date_posted).each do |field|
@@ -41,13 +48,4 @@
                         - else
                           = value
 
-:javascript
-  $(".lightbox").colorbox({
-    transition: 'elastic',
-    maxWidth: '100%',
-    maxHeight: '100%',
-    closeButton: true,
-    className: 'lightbox-display',
-    overlayClose: true,
-    onOpen: function(){$('.lightbox-display').click(function(){$.colorbox.close()})}
-  });
+= render :partial => 'lightbox_js'

@@ -1,9 +1,12 @@
 en:
   flickr_images:
     show:
-      link_to_flickr: View this image on Flickr
-      link_to_page: 'Page "%{title}"'
-      link_to_post: 'Blog post "%{title}" from %{date}'
+      link_to_flickr: 'on Flickr'
+      link_to_page: 'on page "%{title}"'
+      link_to_post: 'in blog post "%{title}" from %{date}'
+      link_to_portfolio: 'in portfolio "%{portfolio}"'
+      link_to_portfolio_page: 'on page "%{title}" with gallery'
+      link_to_portfolio_post: 'in blog post "%{title}" with gallery'
       camera: Camera
       focal_length: Focal Length
       aperture: Aperture

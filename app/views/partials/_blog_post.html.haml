@@ -4,6 +4,10 @@
     %p.post_date= l(post.published_at, :format => :short)
     = render('/partials/blog_post_tags', :post_tags => post.post_tags)
     = Blog::PostService.sanitized_blog_content(post, true)
+    - if portfolio.present?
+      #post-gallery
+        = render :partial => 'portfolios/gallery', :locals => {:flickr_images => Flickr::PortfolioService.images_for_portfolio(portfolio), :portfolio => portfolio}
+      = render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => 'post-gallery', :row_height => 300}
 
   %a{:name => 'comments'}
 

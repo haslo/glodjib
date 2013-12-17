@@ -1,0 +1,10 @@
+:javascript
+  $(".lightbox").colorbox({
+    transition: 'elastic',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    closeButton: true,
+    className: 'lightbox-display',
+    overlayClose: true,
+    onOpen: function(){$('.lightbox-display').click(function(){$.colorbox.close()})}
+  });

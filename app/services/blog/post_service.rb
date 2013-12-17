@@ -13,7 +13,8 @@ module Blog::PostService
       %w(left right).each do |position|
         post_content = add_float_images(post_content, position)
       end
-      add_center_images(post_content)
+      post_content = add_center_images(post_content)
+      remove_gallery_tags(post_content)
     end
     private :add_images
 
@@ -44,6 +45,18 @@ module Blog::PostService
       Nokogiri::HTML::DocumentFragment.parse(new_post_content).to_html.gsub('<p></p>', '')
     end
     private :add_center_images
+
+    def remove_gallery_tags(post_content)
+      post_content.gsub(Regexp.new("\\<p\\>\\[gallery=([a-z0-9\\_]+)\\]"), '')
+    end
+
+    def portfolio(post_content)
+      if post_content =~ Regexp.new("\\<p\\>\\[gallery=([a-z0-9\\_]+)\\]")
+        $1
+      else
+        nil
+      end
+    end
 
   end
 end

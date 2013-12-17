@@ -12,6 +12,12 @@ module Flickr::CacheService
       flickr_cache
     end
 
+    def find_cache(tag)
+      flickr_user = Flickr::ParameterService.flickr_user
+      flickr_tag = FlickrTag.where("tag_name = ?", tag).first_or_create!(:tag_name => tag)
+      FlickrCache.where("flickr_caches.flickr_user_id = ? and flickr_caches.flickr_tag_id = ?", flickr_user.id, flickr_tag.id).first
+    end
+
     def cleanup_caches
       FlickrCache.all.each do |flickr_cache|
         if flickr_cache.flickr_user != Flickr::ParameterService.flickr_user
