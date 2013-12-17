@@ -1,13 +1,6 @@
 %hr
 .clearfix
   #portfolio-gallery
-    - flickr_images.each do |flickr_image|
-      = link_to(flickr_image_path(:id => flickr_image.id, :portfolio => portfolio), :title => flickr_image.image_title) do
-        %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Small 320'), :alt => flickr_image.image_title }
+    = render :partial => 'portfolios/gallery', :locals => {:flickr_images => flickr_images, :portfolio => portfolio}
 
-:javascript
-  $("#portfolio-gallery").justifiedGallery({
-    rowHeight: 300,
-    justifyLastRow: true,
-    fixedHeight: false
-  });
+= render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => 'portfolio-gallery'}

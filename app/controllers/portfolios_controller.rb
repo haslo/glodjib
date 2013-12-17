@@ -2,10 +2,7 @@ class PortfoliosController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
 
-  expose(:flickr_images) do
-    flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
-    flickr_cache.flickr_tag.flickr_tag_images.where(:flickr_user_id => flickr_cache.flickr_user.id).sorted.map(&:flickr_image)
-  end
+  expose(:flickr_images) { Flickr::PortfolioService.images_for_portfolio(portfolio) }
   expose(:portfolio) { (params[:id].present? ? params[:id] : params[:portfolio_id]) || 'portfolio' }
 
   def show
