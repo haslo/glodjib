@@ -28,6 +28,7 @@ The application uses state-of-the-art frameworks and technology. Among them (as 
 * [Ruby on Rails](http://rubyonrails.org/) 4.0.1
 * [jQuery](http://jquery.com/) 1.10.2
 * [Bootstrap](http://getbootstrap.com/) 3.0.2
+* [TinyMCE](http://www.tinymce.com/)
 * [JustifiedGallery](http://miromannino.com/projects/justified-gallery/)
 * [Colorbox](http://www.jacklmoore.com/colorbox/)
 * [SpinKit](https://github.com/tobiasahlin/SpinKit)
