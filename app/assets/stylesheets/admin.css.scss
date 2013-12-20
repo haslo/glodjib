@@ -1,14 +1,21 @@
-.management_functionality a {
-  font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
-  font-size: 15px !important;
-  font-weight: bold !important;
-  text-shadow: 2px 1px 1px #cccccc;
+.management_functionality {
+  padding-top: 15px;
 
-  &:before {
-    content: '<  ';
-  }
-  &:after {
-    content: '  >';
+  a {
+    background-color: rgba(200, 200, 200, 0.5);
+    border: 1px solid white;
+    padding: 5px;
+
+    font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+
+    &:before {
+      content: '<  ';
+    }
+    &:after {
+      content: '  >';
+    }
   }
 }
 
