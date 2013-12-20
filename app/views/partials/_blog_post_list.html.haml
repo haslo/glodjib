@@ -1,9 +1,9 @@
 - for post in posts
-  %hr
-  .blog_post
+  .blog-post-header
     %h3= link_to(post.title, post_path(:id => post.shorthand))
-    %p.post_date= l(post.published_at, :format => :short)
+    %p.post-date= l(post.published_at, :format => :short)
     = render('/partials/blog_post_tags', :post_tags => post.post_tags)
+  .blog-post
     = Blog::PostService.sanitized_blog_content(post, false)
     - if portfolios[post.id].present?
       %div{:id => "post-gallery-#{post.id}"}
@@ -27,7 +27,6 @@
         = link_to(t('.edit_post'), edit_post_path(:id => post.id))
         = link_to(t('.destroy_post'), post_path(:id => post.id), :data => {:confirm => t('.destroy_confirmation')}, :method => :delete)
 
-%hr
 = will_paginate posts, :renderer => BootstrapPagination::Rails
 
 - if user_signed_in?

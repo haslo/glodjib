@@ -1,6 +1,4 @@
-- if all_caches.empty?
-  %hr
-- else
+- unless all_caches.empty?
   %ul.nav.nav-tabs
     %li{:class => params[:action] == 'parameters' ? 'active' : ''}
       = link_to(I18n.t('navigation.admin_tabs.parameters'), parameters_settings_path)

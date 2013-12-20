@@ -22,7 +22,7 @@ can use the platform is not decided at this point, but I plan to offer that Q1 2
 
 ### Technology
 
-The application uses state-of-the-art frameworks and technology. Among them (as of 2013-11-12):
+The application uses state-of-the-art frameworks and technology. Among them:
 
 * [Ruby](https://www.ruby-lang.org/en/) 2.1.0
 * [Ruby on Rails](http://rubyonrails.org/) 4.0.1
@@ -38,6 +38,8 @@ It seamlessly integrates with Flickr through the [Flickr API](http://www.flickr.
 It runs on a variety of databases and server platforms, though of course they have to provide Rails stack.
 My plan is to offer deployment support and automated deployment with platforms such as [Heroku](https://www.heroku.com/)
 and [EngineYard](https://www.engineyard.com/).
+
+CSS gradients were created with [Ultimate CSS Gradient Generator](http://www.colorzilla.com/gradient-editor/).
 
 ### License
 

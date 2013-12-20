@@ -1,4 +1,3 @@
-%hr
 = simple_form_for(post, :url => post.is_page? ? pages_path : posts_path) do |f|
   = render :partial => 'form', :locals => {:f => f}
   .form-actions

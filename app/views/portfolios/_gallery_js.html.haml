@@ -1,6 +1,6 @@
 :javascript
   $("##{gallery_name}").justifiedGallery({
     rowHeight: #{row_height},
-    justifyLastRow: false,
+    justifyLastRow: #{row_height < 150 ? 'true' : 'false'},
     fixedHeight: false
   });

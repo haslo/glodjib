@@ -30,6 +30,12 @@ div#full_image {
     text-align: center;
   }
 }
+.blog-float-image.pull-left {
+  margin-right: 15px;
+}
+.blog-float-image.pull-right {
+  margin-left: 15px;
+}
 
 
 .previous_image, .next_image {
