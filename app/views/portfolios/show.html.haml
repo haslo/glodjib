@@ -1,4 +1,4 @@
 .clearfix
   #portfolio-gallery
     = render :partial => 'portfolios/gallery', :locals => {:flickr_images => flickr_images, :portfolio => portfolio}
-= render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => 'portfolio-gallery', :row_height => 300}
+= render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => 'portfolio-gallery', :row_height => 300, :justify_last_row => true}
