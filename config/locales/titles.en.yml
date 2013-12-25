@@ -22,10 +22,11 @@ en:
       portfolio: 'Portfolio'
     post_tags:
       show: 'Posts with tag "%{title_parameter}"'
-    sessions:
-      new: Login
     home:
       index: ''
+    devise:
+      sessions:
+        new: Login
     admin:
       settings:
         index: Parameters Admin

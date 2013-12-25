@@ -33,6 +33,7 @@ The application uses state-of-the-art frameworks and technology. Among them:
 * [Colorbox](http://www.jacklmoore.com/colorbox/)
 * [SpinKit](https://github.com/tobiasahlin/SpinKit)
 * [BestInPlace](http://bernatfarrero.com/in-place-editing-with-javascript-jquery-and-rails-3/)
+* [DropzoneJS](https://github.com/ncuesta/dropzonejs-rails)
 
 It seamlessly integrates with Flickr through the [Flickr API](http://www.flickr.com/services/api/).
 

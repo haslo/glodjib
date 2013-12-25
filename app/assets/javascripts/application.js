@@ -5,4 +5,5 @@
 //= require tinymce-jquery
 //= require analytics
 //= require best_in_place
+//= require dropzone
 //= require_tree .
