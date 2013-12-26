@@ -7,10 +7,10 @@ class FlickrImage < ActiveRecord::Base
   belongs_to :flickr_user
   has_many :flickr_tag_images
   has_many :flickr_tags, :through => :flickr_tag_images
-  has_many :flickr_image_sizes
+  has_many :image_sizes, :as => :linked_image
 
   def size_for(label)
-    flickr_image_sizes.where(:label => label).first
+    image_sizes.where(:label => label).first
   end
 
 end
