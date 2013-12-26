@@ -1,8 +1,8 @@
-module Flickr::ImageService
+module Images::ImageService
   class << self
 
     def get_url_from_id(image_id, size)
-      image = FlickrImage.where(:id => image_id).first
+      image = Image.where(:id => image_id).first
       get_url_from_image(image, size)
     end
 

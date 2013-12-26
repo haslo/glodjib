@@ -2,7 +2,7 @@ class PortfoliosController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
 
-  expose(:flickr_images) { Flickr::PortfolioService.images_for_portfolio(portfolio) }
+  expose(:images) { Images::PortfolioService.images_for_portfolio(portfolio) }
   expose(:portfolio) { (params[:id].present? ? params[:id] : params[:portfolio_id]) || 'portfolio' }
 
   def show

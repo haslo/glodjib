@@ -1,5 +1,5 @@
 en:
-  flickr_images:
+  images:
     show:
       link_to_flickr: 'on Flickr'
       link_to_page: 'on page "%{title}"'

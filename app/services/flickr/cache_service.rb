@@ -145,13 +145,13 @@ module Flickr::CacheService
 
     def extract_size_info(flickr_image, api_sizes)
       fields_from_api = %w(label width height source url media)
-      flickr_image.flickr_image_sizes.destroy_all
+      flickr_image.image_sizes.destroy_all
       api_sizes.each do |api_size|
-        flickr_image_size = FlickrImageSize.new(:flickr_image => flickr_image)
+        image_size = ImageSize.new(:image => flickr_image)
         fields_from_api.each do |field_from_api|
-          flickr_image_size.send("#{field_from_api}=", api_size[field_from_api])
+          image_size.send("#{field_from_api}=", api_size[field_from_api])
         end
-        flickr_image_size.save!
+        image_size.save!
       end
     end
     private :extract_size_info
