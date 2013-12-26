@@ -8,34 +8,40 @@ module Images::PortfolioService
       flickr_cache.flickr_tag.flickr_tag_images.where(:flickr_user_id => flickr_cache.flickr_user.id).sorted.map(&:flickr_image)
     end
 
-    def portfolios_for_image(flickr_image)
+    def portfolios_for_image(image)
       portfolios = []
-      flickr_image.flickr_tags.map(&:tag_name).each do |portfolio|
-        flickr_cache = Flickr::CacheService.find_cache(portfolio)
-        if flickr_cache.present? && (portfolio == 'portfolio' || Setting.portfolio_tags =~ Regexp.new(portfolio))
-          portfolios << portfolio
+      if image.flickr_image.present?
+        image.flickr_image.flickr_tags.map(&:tag_name).each do |portfolio|
+          flickr_cache = Flickr::CacheService.find_cache(portfolio)
+          if flickr_cache.present? && (portfolio == 'portfolio' || Setting.portfolio_tags =~ Regexp.new(portfolio))
+            portfolios << portfolio
+          end
         end
       end
       portfolios.uniq.sort
     end
 
-    def posts_with_portfolio_for_image(flickr_image)
+    def posts_with_portfolio_for_image(image)
       posts = []
-      flickr_image.flickr_tags.map(&:tag_name).each do |portfolio|
-        flickr_cache = Flickr::CacheService.find_cache(portfolio)
-        if flickr_cache.present?
-          posts += Post.without_pages.where("content like '%gallery=#{portfolio}%'").all
+      if image.flickr_image.present?
+        image.flickr_image.flickr_tags.map(&:tag_name).each do |portfolio|
+          flickr_cache = Flickr::CacheService.find_cache(portfolio)
+          if flickr_cache.present?
+            posts += Post.without_pages.where("content like '%gallery=#{portfolio}%'").all
+          end
         end
       end
       posts.uniq.sort{|a,b| a.title <=> b.title}
     end
 
-    def pages_with_portfolio_for_image(flickr_image)
+    def pages_with_portfolio_for_image(image)
       pages = []
-      flickr_image.flickr_tags.map(&:tag_name).each do |portfolio|
-        flickr_cache = Flickr::CacheService.find_cache(portfolio)
-        if flickr_cache.present?
-          pages += Post.only_pages.where("content like '%gallery=#{portfolio}%'").all
+      if image.flickr_image.present?
+        image.flickr_image.flickr_tags.map(&:tag_name).each do |portfolio|
+          flickr_cache = Flickr::CacheService.find_cache(portfolio)
+          if flickr_cache.present?
+            pages += Post.only_pages.where("content like '%gallery=#{portfolio}%'").all
+          end
         end
       end
       pages.uniq.sort{|a,b| a.title <=> b.title}

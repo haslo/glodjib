@@ -11,7 +11,7 @@ class ImagesController < ApplicationController
   expose(:portfolio) { params[:portfolio] }
 
   def show
-    redirect_to(root_path) unless image.present?
+    redirect_to(root_path) and return unless image.present?
     @title_parameter = image.image_title
   end
 
