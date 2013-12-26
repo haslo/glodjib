@@ -4,16 +4,16 @@
       .row
         .col-md-12
           #full_image
-            - if previous_flickr_image.present?
+            - if previous_image.present?
               .previous_image
-                = link_to(flickr_image_path(:id => previous_flickr_image.id, :portfolio => portfolio)) do
+                = link_to(image_path(:id => previous_image.id, :portfolio => portfolio)) do
                   ᑅ
-            - if next_flickr_image.present?
+            - if next_image.present?
               .next_image
-                = link_to(flickr_image_path(:id => next_flickr_image.id, :portfolio => portfolio)) do
+                = link_to(image_path(:id => next_image.id, :portfolio => portfolio)) do
                   ᑀ
-            = link_to(Flickr::ImageService.get_url_from_image(flickr_image, 'Original'), :class => 'lightbox') do
-              %img{ :src => Flickr::ImageService.get_url_from_image(flickr_image, 'Large') }
+            = link_to(Images::ImageService.get_url_from_image(image, 'Original'), :class => 'lightbox') do
+              %img{ :src => Images::ImageService.get_url_from_image(image, 'Large') }
 
         .col-md-12
           %h2.image_title
@@ -22,23 +22,23 @@
 
           .row.image-description
             .col-md-8
-              %p= flickr_image.image_description
-              - Blog::ImageLinkService.pages_with_images(flickr_image.id).each do |page|
+              %p= image.image_description
+              - Blog::ImageLinkService.pages_with_images(image.id).each do |page|
                 %p= link_to(fa_icon('link', :text => t('.link_to_page', :title => page.title)), page_path(:id => page.shorthand))
-              - Blog::ImageLinkService.blog_posts_with_images(flickr_image.id).each do |post|
+              - Blog::ImageLinkService.blog_posts_with_images(image.id).each do |post|
                 %p= link_to(fa_icon('link', :text => t('.link_to_post', :title => post.title, :date => l(post.published_at, :format => :short))), post_path(:id => post.shorthand))
-              - Flickr::PortfolioService.portfolios_for_image(flickr_image).each do |portfolio|
+              - Flickr::PortfolioService.portfolios_for_image(image).each do |portfolio|
                 %p= link_to(fa_icon('picture-o', :text => t('.link_to_portfolio', :portfolio => portfolio.humanize)), portfolio_path(:id => portfolio))
-              - Flickr::PortfolioService.pages_with_portfolio_for_image(flickr_image).each do |page|
+              - Flickr::PortfolioService.pages_with_portfolio_for_image(image).each do |page|
                 %p= link_to(fa_icon('sitemap', :text => t('.link_to_portfolio_page', :title => page.title)), page_path(:id => page.shorthand))
-              - Flickr::PortfolioService.posts_with_portfolio_for_image(flickr_image).each do |post|
+              - Flickr::PortfolioService.posts_with_portfolio_for_image(image).each do |post|
                 %p= link_to(fa_icon('sitemap', :text => t('.link_to_portfolio_post', :title => post.title)), post_path(:id => post.shorthand))
-              %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), flickr_image.full_flickr_url)
+              %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), image.full_flickr_url)
 
             .col-md-4
               %table.table.table-striped.table-bordered.table-condensed
                 - %w(camera focal_length aperture shutter iso date_taken date_posted).each do |field|
-                  - value = flickr_image.send(field.to_sym)
+                  - value = image.send(field.to_sym)
                   - if value.present?
                     %tr
                       %td= t(".#{field}")

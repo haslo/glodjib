@@ -19,7 +19,7 @@ Glodjib::Application.routes.draw do
     patch :sort
     get :check_reset
   end
-  resources :flickr_images, :path => 'image', :only => [:show]
+  resources :images, :only => [:show]
   resources :post_tags, :path => 'tags', :only => [:show]
 
   # admin stuff

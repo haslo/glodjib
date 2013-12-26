@@ -1,4 +1,4 @@
-module Flickr::CacheService
+module Images::CacheService
   class << self
 
     def find_or_create_cache(tag)

@@ -15,7 +15,7 @@ en:
     post_comments:
       leave_reply: Leave a reply
       create: '%{title_parameter}'
-    flickr_images:
+    images:
       show: '%{title_parameter}'
     portfolios:
       edit: 'Edit Portfolio: %{title_parameter}'

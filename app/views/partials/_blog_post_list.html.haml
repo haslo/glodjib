@@ -7,7 +7,7 @@
     = Blog::PostService.sanitized_blog_content(post, false)
     - if portfolios[post.id].present?
       %div{:id => "post-gallery-#{post.id}"}
-        = render :partial => 'portfolios/gallery', :locals => {:flickr_images => Flickr::PortfolioService.images_for_portfolio(portfolios[post.id]), :portfolio => portfolios[post.id]}
+        = render :partial => 'portfolios/gallery', :locals => {:images => Images::PortfolioService.images_for_portfolio(portfolios[post.id]), :portfolio => portfolios[post.id]}
       = render :partial => 'portfolios/gallery_js', :locals => {:gallery_name => "post-gallery-#{post.id}", :row_height => 100, :justify_last_row => true}
     - if post.content.include?(Setting.post_more_separator)
       %p= link_to(t('.read_more'), "#{post_path(:id => post.shorthand, :anchor => "more-#{post.id}")}")
