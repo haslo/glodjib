@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131209201424) do
+ActiveRecord::Schema.define(version: 20131226004318) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,18 +22,6 @@ ActiveRecord::Schema.define(version: 20131209201424) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "reset_pending",  default: false
-  end
-
-  create_table "flickr_image_sizes", force: true do |t|
-    t.integer  "flickr_image_id"
-    t.string   "label"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "source"
-    t.string   "url"
-    t.string   "media"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "flickr_images", force: true do |t|
@@ -70,6 +58,33 @@ ActiveRecord::Schema.define(version: 20131209201424) do
 
   create_table "flickr_users", force: true do |t|
     t.text     "username"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "image_sizes", force: true do |t|
+    t.integer  "linked_image_id"
+    t.string   "label"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "source"
+    t.string   "url"
+    t.string   "media"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "linked_image_type"
+  end
+
+  create_table "images", force: true do |t|
+    t.string   "image_title"
+    t.text     "image_description"
+    t.string   "aperture"
+    t.string   "shutter"
+    t.string   "iso"
+    t.string   "focal_length"
+    t.string   "camera"
+    t.datetime "date_taken"
+    t.integer  "flickr_image_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
