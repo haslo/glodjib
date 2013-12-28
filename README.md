@@ -32,6 +32,7 @@ The application uses state-of-the-art frameworks and technology. Among them:
 * [JustifiedGallery](http://miromannino.com/projects/justified-gallery/)
 * [Colorbox](http://www.jacklmoore.com/colorbox/)
 * [SpinKit](https://github.com/tobiasahlin/SpinKit)
+* [BestInPlace](http://bernatfarrero.com/in-place-editing-with-javascript-jquery-and-rails-3/)
 
 It seamlessly integrates with Flickr through the [Flickr API](http://www.flickr.com/services/api/).
 
