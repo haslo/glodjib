@@ -2,6 +2,8 @@ class PortfoliosController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
 
+  expose(:gallery) { Images::PortfolioService }
+
   expose(:images) { Images::PortfolioService.images_for_portfolio(portfolio) }
   expose(:portfolio) { (params[:id].present? ? params[:id] : params[:portfolio_id]) || 'portfolio' }
 
@@ -11,6 +13,12 @@ class PortfoliosController < ApplicationController
 
   def edit
     @title_parameter = portfolio
+  end
+
+  def update
+    respond_to do |format|
+
+    end
   end
 
   def sort

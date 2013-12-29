@@ -1,10 +1,9 @@
 include ActionView::Helpers::SanitizeHelper
 
 class Post < ActiveRecord::Base
+  include Concerns::ModelWithShorthand
 
-  validates :title, :content, :shorthand, :presence => true
-  validates :shorthand, :uniqueness =>  true
-  validate :shorthand_starts_with_character
+  validates :title, :content, :presence => true
 
   has_and_belongs_to_many :post_tags
   has_many :post_comments
@@ -27,16 +26,6 @@ class Post < ActiveRecord::Base
       unless read_attribute(:custom_shorthand)
         write_attribute(:shorthand, auto_shorthand(read_attribute(:title)))
       end
-    end
-  end
-
-  def shorthand=(value)
-    if value.blank?
-      write_attribute(:custom_shorthand, false)
-      write_attribute(:shorthand, auto_shorthand(read_attribute(:title)))
-    else
-      write_attribute(:custom_shorthand, true)
-      write_attribute(:shorthand, auto_shorthand(value))
     end
   end
 
@@ -67,24 +56,6 @@ class Post < ActiveRecord::Base
 
   def published_at
     created_at
-  end
-
-private
-
-  def auto_shorthand(original_value)
-    added_index = 0
-    current_shorthand = generated_shorthand = original_value.blank? ? nil : original_value.strip.downcase.gsub(' ', '_').gsub(/[^0-9a-z_]/i, '')
-    while Post.where(:shorthand => current_shorthand).any?{|post| post.id != id}
-      current_shorthand = "#{generated_shorthand}_#{added_index}"
-      added_index += 1
-    end
-    current_shorthand
-  end
-
-  def shorthand_starts_with_character
-    if read_attribute(:shorthand).blank? || !(read_attribute(:shorthand)[0] =~ /[a-z]/i)
-      errors.add(:shorthand, I18n.t('errors.custom_messages.shorthand_start_with_character'))
-    end
   end
 
 end
