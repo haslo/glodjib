@@ -4,12 +4,13 @@ module Concerns::ModelWithShorthand
   included do
     validates :shorthand, :uniqueness =>  true, :presence => true
     validate :shorthand_first_character
-    
+
     scope :with_id_or_shorthand, lambda { |id_or_shorthand|
+      puts "scoped by #{id_or_shorthand}"
       if id_or_shorthand.to_s.is_i?
-        Gallery.where(:id => id_or_shorthand).first
+        self.where(:id => id_or_shorthand).first
       else
-        Gallery.where(:shorthand => id_or_shorthand).first
+        self.where(:shorthand => id_or_shorthand).first
       end
     }
   end
