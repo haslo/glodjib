@@ -1,6 +1,8 @@
 module Flickr::CacheService
   class << self
 
+    # TODO revamp completely
+
     def find_or_create_cache(tag)
       flickr_user = Flickr::ParameterService.flickr_user
       flickr_tag = FlickrTag.where("tag_name = ?", tag).first_or_create!(:tag_name => tag)
