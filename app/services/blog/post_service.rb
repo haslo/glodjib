@@ -25,8 +25,8 @@ module Blog::PostService
       post_content.scan(Regexp.new("\\[image#{position}=\\d+\\]")).each do |matching_tag|
         # TODO replace with partial rendering
         image_id = matching_tag[/\d+/]
-        image_path = Images::ImageService.get_url_from_id(image_id, 'Small 320')
-        gallery_page_path = "/image/#{image_id}"
+        image_path = Images::ImageUrlService.get_url_from_id(image_id, 'Small 320')
+        gallery_page_path = "/images/#{image_id}"
         float_with_image = "<div class='blog-float-image pull-#{position}'><a href='#{gallery_page_path}'><img src='#{image_path}'/></a></div><p>"
         new_post_content = new_post_content.gsub(matching_tag, float_with_image)
       end
@@ -39,8 +39,8 @@ module Blog::PostService
       post_content.scan(Regexp.new("\\[imagecenter=.*\\]")).each do |matching_tag|
         # TODO replace with partial rendering
         image_id = matching_tag[/\d+/]
-        image_path = Images::ImageService.get_url_from_id(image_id, 'Large')
-        gallery_page_path = "/image/#{image_id}"
+        image_path = Images::ImageUrlService.get_url_from_id(image_id, 'Large')
+        gallery_page_path = "/images/#{image_id}"
         center_with_image = "<div class='blog-image-center center-block'><div><a href='#{gallery_page_path}'><img src='#{image_path}'/></a></div></div><p>"
         new_post_content = new_post_content.gsub(matching_tag, center_with_image)
       end

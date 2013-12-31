@@ -12,8 +12,8 @@
               .next_image
                 = link_to(image_path(:id => next_image.id, :portfolio => portfolio)) do
                   ᑀ
-            = link_to(Images::ImageService.get_url_from_image(image, 'Original'), :class => 'lightbox') do
-              %img{ :src => Images::ImageService.get_url_from_image(image, 'Large') }
+            = link_to(Images::ImageUrlService.get_url_from_image(image, 'Original'), :class => 'lightbox') do
+              %img{ :src => Images::ImageUrlService.get_url_from_image(image, 'Large') }
 
         .col-md-12
           %h2.image_title
@@ -23,15 +23,15 @@
           .row.image-description
             .col-md-8
               %p= image.image_description
-              - Blog::ImageLinkService.pages_with_images(image.id).each do |page|
+              - Images::ImageLinkService.pages_with_images(image.id).each do |page|
                 %p= link_to(fa_icon('link', :text => t('.link_to_page', :title => page.title)), page_path(:id => page.shorthand))
-              - Blog::ImageLinkService.blog_posts_with_images(image.id).each do |post|
+              - Images::ImageLinkService.blog_posts_with_images(image.id).each do |post|
                 %p= link_to(fa_icon('link', :text => t('.link_to_post', :title => post.title, :date => l(post.published_at, :format => :short))), post_path(:id => post.shorthand))
-              - Images::PortfolioService.portfolios_for_image(image).each do |portfolio|
+              - Images::GalleryLinkService.portfolios_for_image(image).each do |portfolio|
                 %p= link_to(fa_icon('picture-o', :text => t('.link_to_portfolio', :portfolio => portfolio.humanize)), portfolio_path(:id => portfolio))
-              - Images::PortfolioService.pages_with_portfolio_for_image(image).each do |page|
+              - Images::GalleryLinkService.page_portfolio_links(image).each do |page|
                 %p= link_to(fa_icon('sitemap', :text => t('.link_to_portfolio_page', :title => page.title)), page_path(:id => page.shorthand))
-              - Images::PortfolioService.posts_with_portfolio_for_image(image).each do |post|
+              - Images::GalleryLinkService.post_portfolio_links(image).each do |post|
                 %p= link_to(fa_icon('sitemap', :text => t('.link_to_portfolio_post', :title => post.title)), post_path(:id => post.shorthand))
               %p= link_to(fa_icon('flickr', :text => t('.link_to_flickr')), image.full_flickr_url)
 

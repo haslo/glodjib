@@ -1,4 +1,4 @@
-module Images::ImageService
+module Images::ImageUrlService
   class << self
 
     def get_url_from_id(image_id, size)
