@@ -5,6 +5,6 @@
   - images.each do |image|
     %tr{:id => image.id}
       %td.image-container
-        %img{:src => Images::ImageService.get_url_from_image(image, 'Thumbnail')}
+        %img{:src => Images::ImageUrlService.get_url_from_image(image, 'Thumbnail')}
       %td
         = image.image_title

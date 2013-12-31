@@ -1,4 +1,4 @@
-module Blog::ImageLinkService
+module Images::ImageLinkService
   class << self
 
     def blog_posts_with_images(image_ids)

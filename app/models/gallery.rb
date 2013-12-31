@@ -5,5 +5,6 @@ class Gallery < ActiveRecord::Base
   has_many :images, :through => :gallery_images
 
   scope :sorted, lambda { order(:position => :asc).order(:created_at => :desc) }
+  scope :only_portfolios, lambda { where(:is_portfolio =>  true) }
 
 end

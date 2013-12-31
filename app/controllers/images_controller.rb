@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
 
-  expose(:images) { Images::PortfolioService.images_for_portfolio(portfolio) }
+  expose(:images) { Images::GalleryLinkService.images_for_gallery(portfolio) }
   expose(:image) { Image.where(:id => params[:id]).first }
   expose(:previous_image) { portfolio.present? ? images[images.find_index(image) - 1] : nil }
   expose(:next_image) { portfolio.present? ? (images[images.find_index(image) + 1] || images[0]) : nil }
