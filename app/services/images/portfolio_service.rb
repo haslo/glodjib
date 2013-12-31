@@ -1,7 +1,7 @@
 module Images::PortfolioService
   class << self
 
-    # TODO change
+    # TODO revamp completely
 
     def images_for_portfolio(portfolio)
       flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)

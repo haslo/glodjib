@@ -4,10 +4,7 @@ class FlickrImage < ActiveRecord::Base
 
   scope :sorted, lambda { order(:position) }
 
-  belongs_to :flickr_user
   has_one :image
-  has_many :flickr_tag_images
-  has_many :flickr_tags, :through => :flickr_tag_images
   has_many :image_sizes, :as => :linked_image
 
   def size_for(label)
