@@ -12,13 +12,6 @@ class Post < ActiveRecord::Base
   scope :only_pages, lambda { where(:is_page => true) }
 
   scope :sorted, lambda { order(:created_at => :desc) }
-  scope :with_id_or_shorthand, lambda { |id_or_shorthand|
-    if id_or_shorthand.to_s.is_i?
-      Post.where(:id => id_or_shorthand).first
-    else
-      Post.where(:shorthand => id_or_shorthand).first
-    end
-  }
 
   def title=(value)
     write_attribute(:title, value)

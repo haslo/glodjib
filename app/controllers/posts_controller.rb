@@ -43,7 +43,7 @@ class PostsController < ApplicationController
 
   def get_or_build_post
     if params[:id].present?
-      post = Post.with_id_or_shorthand(params[:id])
+      post = Post.get_with_id_or_shorthand(params[:id])
       post || build_post
     else
       build_post

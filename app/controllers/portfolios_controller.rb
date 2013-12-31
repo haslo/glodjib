@@ -2,10 +2,10 @@ class PortfoliosController < ApplicationController
 
   before_filter :authenticate_user!, :except => [:show]
 
-  expose(:gallery) { Images::PortfolioService }
-
-  expose(:images) { Images::PortfolioService.images_for_portfolio(portfolio) }
-  expose(:portfolio) { (params[:id].present? ? params[:id] : params[:portfolio_id]) || 'portfolio' }
+  expose(:galleries) { Gallery.sorted }
+  expose(:portfolio) { params[:portfolio_id] || params[:id] || 'portfolio' }
+  expose(:gallery) { Gallery.get_with_id_or_shorthand(portfolio) }
+  expose(:images) { gallery.images }
 
   def show
     @title_parameter = [I18n.t('titles.portfolios.portfolio'), portfolio.humanize].uniq.join(': ')

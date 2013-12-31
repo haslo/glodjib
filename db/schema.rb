@@ -11,18 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131231143023) do
+ActiveRecord::Schema.define(version: 20131231150054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "flickr_caches", force: true do |t|
-    t.integer  "flickr_user_id"
-    t.integer  "flickr_tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "reset_pending",  default: false
-  end
 
   create_table "flickr_images", force: true do |t|
     t.string   "image_title"
@@ -41,27 +33,6 @@ ActiveRecord::Schema.define(version: 20131231143023) do
     t.datetime "date_posted"
   end
 
-  create_table "flickr_tag_images", force: true do |t|
-    t.integer  "flickr_image_id"
-    t.integer  "flickr_tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "position"
-    t.integer  "flickr_user_id"
-  end
-
-  create_table "flickr_tags", force: true do |t|
-    t.text     "tag_name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "flickr_users", force: true do |t|
-    t.text     "username"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "galleries", force: true do |t|
     t.string   "title"
     t.string   "shorthand"
@@ -69,11 +40,15 @@ ActiveRecord::Schema.define(version: 20131231143023) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "custom_shorthand", default: false
+    t.integer  "position"
   end
 
-  create_table "galleries_images", id: false, force: true do |t|
-    t.integer "gallery_id"
-    t.integer "image_id"
+  create_table "galleries_images", force: true do |t|
+    t.integer  "gallery_id"
+    t.integer  "image_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "image_sizes", force: true do |t|

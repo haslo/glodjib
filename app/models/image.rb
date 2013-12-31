@@ -2,7 +2,8 @@ class Image < ActiveRecord::Base
 
   validates :image_title, :presence => true
 
-  has_and_belongs_to_many :galleries
+  has_many :gallery_images
+  has_many :galleries, :through => :gallery_images
   belongs_to :flickr_image
   has_many :image_sizes, :as => :linked_image
 
