@@ -1,0 +1,6 @@
+- if Gallery.only_portfolios.any?
+  %ul.nav.nav-tabs
+    %li{:class => params[:controller] == 'admin/settings' ? 'active' : ''}
+      = link_to(t('.parameters'), admin_settings_path)
+    %li{:class => params[:controller] == 'admin/galleries' ? 'active' : ''}
+      = link_to(t('.galleries'), admin_galleries_path)

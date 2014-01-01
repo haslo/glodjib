@@ -3,16 +3,11 @@ en:
     login: login
     logout: logout
     admin: admin
-    admin_tabs:
-      parameters: Parameters
-      images: Image Caches
 
   links:
     page:
       edit: Edit Page
       destroy: Delete Page
-    setting:
-      save: Save Settings
 
   buttons:
     post:

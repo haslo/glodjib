@@ -1,0 +1,7 @@
+en:
+  admin:
+    galleries:
+      index:
+        title: Title
+        shorthand: Shorthand
+        number_of_images: '# Images'

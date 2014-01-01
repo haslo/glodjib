@@ -1,0 +1,12 @@
+= render 'admin/settings/tabs'
+%table.table.table-striped.table-bordered.table-condensed
+  %tr
+    %tr
+      %th= t('.title')
+      %th= t('.shorthand')
+      %th= t('.number_of_images')
+  - Gallery.sorted.each do |gallery|
+    %tr
+      %td= gallery.title
+      %td= gallery.shorthand
+      %td= gallery.images.count
