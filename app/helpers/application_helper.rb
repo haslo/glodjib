@@ -13,7 +13,7 @@ module ApplicationHelper
   end
 
   def page_title
-    [t("titles.#{controller.controller_name}.#{controller.action_name}", :title_parameter => @title_parameter), Setting.page_title].reject{|item| item.blank?}.join(' - ')
+    [t("titles.#{controller.controller_path.gsub('/', '.')}.#{controller.action_name}", :title_parameter => @title_parameter), Setting.page_title].reject{|item| item.blank?}.join(' - ')
   end
 
   def active_class(nav_item)

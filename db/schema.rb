@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140101140148) do
+ActiveRecord::Schema.define(version: 20140101141806) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,7 @@ ActiveRecord::Schema.define(version: 20140101140148) do
     t.boolean  "custom_shorthand", default: false
     t.integer  "position"
     t.string   "special_usage"
+    t.integer  "pending_updates",  default: 0,     null: false
   end
 
   create_table "galleries_images", force: true do |t|
