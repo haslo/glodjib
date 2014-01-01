@@ -29,32 +29,32 @@ class GalleriesController < ApplicationController
   end
 
   def check_reset
-    flickr_cache = Flickr::CacheService.find_or_create_cache(portfolio)
+    flickr_cache = Flickr::APIService.find_or_create_cache(portfolio)
     puts "pending? #{flickr_cache.reset_pending?} (for #{portfolio})"
     render :json => !(flickr_cache.reset_pending?)
   end
 
 
   def reset_cache
-    updated_caches = Flickr::CacheService.reset_caches_by_tag(params[:tag])
+    updated_caches = Flickr::APIService.reset_caches_by_tag(params[:tag])
     flash[:notice] = I18n.t('notices.settings.cache_update_queued')
     redirect_to images_settings_path(:updated_caches => updated_caches.join(','))
   end
 
   def reset_caches
-    updated_caches = Flickr::CacheService.reset_all_caches
+    updated_caches = Flickr::APIService.reset_all_caches
     flash[:notice] = I18n.t('notices.settings.cache_update_queued')
     redirect_to images_settings_path(:updated_caches => updated_caches.join(','))
   end
 
   def destroy_cache
-    Flickr::CacheService.destroy_caches_by_tag(params[:tag])
+    Flickr::APIService.destroy_caches_by_tag(params[:tag])
     flash[:notice] = I18n.t('notices.settings.cache_updated')
     redirect_to images_settings_path
   end
 
   def destroy_caches
-    Flickr::CacheService.destroy_all_caches
+    Flickr::APIService.destroy_all_caches
     flash[:notice] = I18n.t('notices.settings.cache_updated')
     if all_tags_with_caches.empty?
       redirect_to settings_path
@@ -64,7 +64,7 @@ class GalleriesController < ApplicationController
   end
 
   def cleanup_caches
-    Flickr::CacheService.cleanup_caches
+    Flickr::APIService.cleanup_caches
   end
   private :cleanup_caches
 

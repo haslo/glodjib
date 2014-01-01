@@ -9,12 +9,8 @@ module Flickr::ParameterService
       @shared_secret ||= Setting.flickr_shared_secret
     end
 
-    def flickr_username
-      @flickr_username ||= Setting.flickr_user
-    end
-
     def flickr_user
-      @flickr_user ||= FlickrUser.where("username = ?", flickr_username).first_or_create!(:username => flickr_username)
+      @flickr_username ||= Setting.flickr_user
     end
 
   end
