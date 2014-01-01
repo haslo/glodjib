@@ -31,4 +31,4 @@ en:
         index: Parameters Admin
       galleries:
         index: Galleries Admin
-        edit: 'Edit Portfolio: %{title_parameter}'
+        edit: 'Edit Gallery: %{title_parameter}'

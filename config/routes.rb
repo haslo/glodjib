@@ -24,7 +24,7 @@ Glodjib::Application.routes.draw do
   devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'}
 
   namespace :admin do
-    resources :galleries do
+    resources :galleries, :except => [:view] do
       post :import, :path => 'import/:source'
       patch :reorder
       get :is_updated
