@@ -25,8 +25,10 @@ en:
       show: 'Posts with tag "%{title_parameter}"'
     sessions:
       new: Login
-    settings:
-      parameters: Parameters Admin
-      images: Image Cache Admin
     home:
       index: ''
+    admin:
+      settings:
+        index: Parameters Admin
+      galleries:
+        index: Galleries Admin

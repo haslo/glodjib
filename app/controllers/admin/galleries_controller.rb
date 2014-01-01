@@ -5,19 +5,19 @@ module Admin
     expose(:gallery) { Gallery.get_with_id_or_shorthand(params[:id]) }
     expose(:images) { gallery.images }
 
-    # TODO revamp and update, the stuff below was copied together from SettingsController and PortfoliosController
+    # TODO implement RESTful actions, including JSON responses for BestInPlace
 
     def update
       respond_to do |format|
-
+        # TODO add responses
       end
     end
 
     def edit
-      @title_parameter = portfolio
+      @title_parameter = gallery.title
     end
 
-    def sort
+    def reorder
       params['positions'].each do |id, position|
         FlickrImage.where(:id => id).each do |image|
           image.flickr_tag_images.where(:flickr_user => image.flickr_user).each do |tag_link|
@@ -26,48 +26,14 @@ module Admin
           end
         end
       end
+      # TODO add return value in JSON
       render :nothing => true
     end
 
-    def check_reset
-      flickr_cache = Flickr::APIService.find_or_create_cache(portfolio)
-      puts "pending? #{flickr_cache.reset_pending?} (for #{portfolio})"
-      render :json => !(flickr_cache.reset_pending?)
+    def is_updated
+      # TODO add context for JSON
+      render :json => (gallery.pending_updates <= 0)
     end
-
-
-    def reset_cache
-      updated_caches = Flickr::APIService.reset_caches_by_tag(params[:tag])
-      flash[:notice] = I18n.t('notices.settings.cache_update_queued')
-      redirect_to admin_galleries_path(:updated_caches => updated_caches.join(','))
-    end
-
-    def reset_caches
-      updated_caches = Flickr::APIService.reset_all_caches
-      flash[:notice] = I18n.t('notices.settings.cache_update_queued')
-      redirect_to admin_galleries_path(:updated_caches => updated_caches.join(','))
-    end
-
-    def destroy_cache
-      Flickr::APIService.destroy_caches_by_tag(params[:tag])
-      flash[:notice] = I18n.t('notices.settings.cache_updated')
-      redirect_to admin_galleries_path
-    end
-
-    def destroy_caches
-      Flickr::APIService.destroy_all_caches
-      flash[:notice] = I18n.t('notices.settings.cache_updated')
-      if all_tags_with_caches.empty?
-        redirect_to admin_settings_path
-      else
-        redirect_to admin_galleries_path
-      end
-    end
-
-    def cleanup_caches
-      Flickr::APIService.cleanup_caches
-    end
-    private :cleanup_caches
 
   end
 end
