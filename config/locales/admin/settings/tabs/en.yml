@@ -1,0 +1,6 @@
+en:
+  admin:
+    settings:
+      tabs:
+        parameters: Parameters
+        galleries: Galleries

@@ -1,8 +1,8 @@
-= render 'tabs'
-= simple_form_for(Setting.singleton) do |f|
+= render 'admin/settings/tabs'
+= simple_form_for([:admin, Setting.singleton]) do |f|
   .form-inputs
     = f.error_notification
     - (Setting::STANDARD_KEYS + Setting::KEYS_FOR_AUTHENTICATION).each do |key|
       = f.input key, :input_html => { :class => 'input-block-level' }
   .form-actions
-    = f.button :submit, :value => I18n.t('links.setting.save')
+    = f.button :submit, :value => I18n.t('.save')
