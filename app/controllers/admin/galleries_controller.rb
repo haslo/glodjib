@@ -2,8 +2,8 @@ module Admin
   class GalleriesController < ApplicationController
 
     expose(:galleries) { Gallery.sorted }
-    expose(:gallery) { Gallery.get_with_id_or_shorthand(params[:id]) }
-    expose(:images) { gallery.images }
+    expose(:gallery) { Gallery.get_with_id_or_shorthand(params[:gallery_id] || params[:id]) }
+    expose(:images) { gallery.gallery_images.sorted.map(&:image) }
 
     # TODO implement RESTful actions, including JSON responses for BestInPlace
 
@@ -19,10 +19,12 @@ module Admin
 
     def reorder
       params['positions'].each do |id, position|
-        FlickrImage.where(:id => id).each do |image|
-          image.flickr_tag_images.where(:flickr_user => image.flickr_user).each do |tag_link|
-            tag_link.position = position
-            tag_link.save!
+        puts "at position #{position}"
+        Image.where(:id => id).each do |image|
+          puts "image #{image} with id #{id}"
+          image.gallery_images.where(:gallery_id => gallery.id).each do |gallery_image|
+            gallery_image.position = position
+            gallery_image.save!
           end
         end
       end

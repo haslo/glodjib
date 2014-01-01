@@ -24,11 +24,18 @@
   - if user_signed_in?
     .management_functionality
       %p
-        = link_to(t('.edit_post'), edit_post_path(:id => post.id))
-        = link_to(t('.destroy_post'), post_path(:id => post.id), :data => {:confirm => t('.destroy_confirmation')}, :method => :delete)
+        = link_to [:edit, post] do
+          = fa_icon 'pencil'
+          = t('.edit_post')
+        = link_to [post], :data => {:confirm => t('.destroy_confirmation')}, :method => :delete do
+          = fa_icon 'trash-o'
+          = t('.destroy_post')
 
 = will_paginate posts, :renderer => BootstrapPagination::Rails
 
 - if user_signed_in?
   .management_functionality
-    %p= link_to(t('.new_post'), new_post_path)
+    %p
+      = link_to new_post_path do
+        = fa_icon 'magic'
+        = t('.new_post')

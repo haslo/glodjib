@@ -5,3 +5,6 @@ en:
         title: Title
         shorthand: Shorthand
         number_of_images: '# Images'
+        actions: Actions
+        edit: Edit
+        destroy: Delete
