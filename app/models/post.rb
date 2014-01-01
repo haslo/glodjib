@@ -10,17 +10,7 @@ class Post < ActiveRecord::Base
 
   scope :without_pages, lambda { where(:is_page => false) }
   scope :only_pages, lambda { where(:is_page => true) }
-
   scope :sorted, lambda { order(:created_at => :desc) }
-
-  def title=(value)
-    write_attribute(:title, value)
-    if value
-      unless read_attribute(:custom_shorthand)
-        write_attribute(:shorthand, auto_shorthand(read_attribute(:title)))
-      end
-    end
-  end
 
   def content=(value)
     write_attribute(:content, sanitize(value))
