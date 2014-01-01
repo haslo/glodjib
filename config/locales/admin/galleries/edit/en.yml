@@ -1,0 +1,6 @@
+en:
+  admin:
+    galleries:
+      edit:
+        image: Image
+        title: Image Title

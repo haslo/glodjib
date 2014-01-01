@@ -18,7 +18,6 @@ en:
     images:
       show: '%{title_parameter}'
     portfolios:
-      edit: 'Edit Portfolio: %{title_parameter}'
       show: '%{title_parameter}'
       portfolio: 'Portfolio'
     post_tags:
@@ -32,3 +31,4 @@ en:
         index: Parameters Admin
       galleries:
         index: Galleries Admin
+        edit: 'Edit Portfolio: %{title_parameter}'

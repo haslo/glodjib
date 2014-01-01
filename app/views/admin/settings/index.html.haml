@@ -5,4 +5,4 @@
     - (Setting::STANDARD_KEYS + Setting::KEYS_FOR_AUTHENTICATION).each do |key|
       = f.input key, :input_html => { :class => 'input-block-level' }
   .form-actions
-    = f.button :submit, :value => I18n.t('.save')
+    = f.button :submit, :value => t('.save')

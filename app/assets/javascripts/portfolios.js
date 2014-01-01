@@ -1,24 +1,24 @@
 $(document).ready(function(){
-  $('#portfolio-images').sortable({
+  $('#gallery-images').sortable({
     axis: 'y',
     cursor: 'crosshair',
     items: 'tr',
     opacity: 0.4,
     scroll: true,
     update: function(){
-      var imagesTable = $('#portfolio-images');
+      var imagesTable = $('#gallery-images');
       var data = {};
       imagesTable.find('tr').each(function(index){
         var id = $(this).attr('id');
         data[id] = index;
       });
       $.ajax({
-        url: '/gallery/' + imagesTable.data('portfolio') + '/sort',
+        url: '/admin/galleries/' + imagesTable.data('gallery') + '/reorder',
         type: 'patch',
         data: {positions: data},
         dataType: 'script',
-        complete: function(request){
-          $('#portfolio-images').effect('highlight');
+        complete: function(response){
+          $('#gallery-images').effect('highlight');
         }
       });
     }
@@ -30,7 +30,7 @@ $(document).ready(function(){
     var cacheTag = $(this).data('cache');
     var triggerTimeout = function(cacheId){
       $.ajax({
-        url: '/gallery/' + cacheTag + '/check_reset',
+        url: '/admin/galleries/' + cacheTag + '/is_updated',
         type: 'get',
         dataType: 'script',
         complete: function(response){

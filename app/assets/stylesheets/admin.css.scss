@@ -3,19 +3,12 @@
 
   a {
     background-color: rgba(200, 200, 200, 0.5);
-    border: 1px solid white;
     padding: 5px;
+    margin: 2px;
 
     font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
     font-size: 15px !important;
     font-weight: bold !important;
-
-    &:before {
-      content: '<  ';
-    }
-    &:after {
-      content: '  >';
-    }
   }
 }
 

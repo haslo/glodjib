@@ -46,8 +46,12 @@
           - if user_signed_in?
             .management_functionality
               %p
-                = link_to(t('.post_comment.spam'), post_comment_spam_path(post_comment), :data => {:confirm => t('.spam_post_comment')}, :method => :delete)
-                = link_to(t('.post_comment.destroy'), post_comment_path(post_comment), :data => {:confirm => t('.destroy_post_comment')}, :method => :delete)
+                = link_to [post_comment, :spam], :data => {:confirm => t('.spam_post_comment')}, :method => :delete do
+                  = fa_icon 'exclamation-triangle'
+                  = t('.post_comment.spam')
+                = link_to [post_comment], :data => {:confirm => t('.destroy_post_comment')}, :method => :delete do
+                  = fa_icon 'trash-o'
+                  = t('.post_comment.destroy')
 
     .blog_post_comment_form{:name => (post.post_comments.size > 0) ? 'comments' : nil}
       %h3= t('titles.post_comments.leave_reply')

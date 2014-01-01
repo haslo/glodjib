@@ -9,5 +9,9 @@
   - if user_signed_in?
     .management_functionality
       %p
-        = link_to(I18n.t('links.page.edit'), edit_page_path(:id => post.id))
-        = link_to(I18n.t('links.page.destroy'), page_path(:id => post.id), :data => {:confirm => I18n.t('link_confirmations.destroy_post')}, :method => :delete)
+        = link_to [:edit, post] do
+          = fa_icon 'pencil'
+          = t('.edit')
+        = link_to [post], :data => {:confirm => I18n.t('link_confirmations.destroy_post')}, :method => :delete do
+          = fa_icon 'trash-o'
+          = t('.destroy')
