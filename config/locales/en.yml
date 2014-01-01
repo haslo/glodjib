@@ -2,7 +2,6 @@ en:
   navigation:
     login: login
     logout: logout
-    admin: admin
 
   links:
     page:
