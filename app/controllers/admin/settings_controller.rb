@@ -1,6 +1,8 @@
 module Admin
   class SettingsController < ApplicationController
 
+    before_filter :authenticate_user!
+
     expose(:all_caches) { FlickrCache.all.uniq.sort{|a,b| a.flickr_tag.tag_name <=> b.flickr_tag.tag_name} }
     expose(:caches_to_refresh) { params[:updated_caches].present? ? params[:updated_caches].split(',').map{|cache_id|FlickrCache.find(cache_id)} : [] }
 

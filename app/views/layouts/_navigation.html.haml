@@ -17,9 +17,9 @@
         = link_to(t('.home'), posts_path)
       %li{:class => active_class('portfolio:portfolio')}
         = link_to(t('.portfolio'), portfolio_path(:id => 'portfolio'))
-      - (Setting.portfolio_tags || '').split(',').map(&:strip).each do |portfolio_tag|
-        %li{:class => active_class("portfolio:#{portfolio_tag}")}
-          = link_to(portfolio_tag.humanize, portfolio_path(:id => portfolio_tag))
+      - displayed_portfolios.each do |portfolio|
+        %li{:class => active_class("portfolio:#{portfolio.shorthand}")}
+          = link_to(portfolio.title, portfolio_path(:id => portfolio.shorthand))
       - Post.only_pages.sorted.each do |page|
         %li{:class => active_class("page:#{page.shorthand}")}
           = link_to(page.title, page_path(:id => page.shorthand))

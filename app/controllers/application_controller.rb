@@ -5,4 +5,6 @@ class ApplicationController < ActionController::Base
     strategy DecentExposure::StrongParametersStrategy
   end
 
+  expose(:displayed_portfolios) { Gallery.only_portfolios.sorted }
+
 end

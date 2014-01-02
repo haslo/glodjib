@@ -5,19 +5,21 @@
       %th= t('.title')
       %th= t('.shorthand')
       %th= t('.number_of_images')
+      %th= t('.show_as_portfolio')
       %th= t('.actions')
   - Gallery.sorted.each do |gallery|
     %tr
       %td= best_in_place(gallery, :title, :path => [:admin, gallery])
       %td= best_in_place(gallery, :shorthand, :path => [:admin, gallery])
       %td= gallery.images.count
+      %td= best_in_place(gallery, :is_portfolio, :type => :checkbox, :path => [:admin, gallery])
       %td.management_functionality
         = link_to portfolio_path(:id => gallery.shorthand) do
           = fa_icon 'eye'
           = t('.view')
         = link_to [:edit, :admin, gallery] do
-          = fa_icon 'pencil'
+          = fa_icon 'sort-amount-desc'
           = t('.edit')
-        = link_to [:admin, gallery], :method => :delete do
+        = link_to [:admin, gallery], :data => {:confirm => t('.destroy_confirmation')}, :method => :delete do
           = fa_icon 'trash-o'
           = t('.destroy')

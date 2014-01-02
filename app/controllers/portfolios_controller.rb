@@ -7,7 +7,7 @@ class PortfoliosController < ApplicationController
   expose(:images) { gallery.gallery_images.sorted.map(&:image) }
 
   def show
-    @title_parameter = [I18n.t('titles.portfolios.portfolio'), portfolio.humanize].uniq.join(': ')
+    @title_parameter = [I18n.t('titles.portfolios.portfolio'), gallery.title].uniq.join(': ')
   end
 
 end
