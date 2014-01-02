@@ -1,35 +1,29 @@
 module Flickr::APIService
   class << self
 
-    def fetch_image_by_id(target_gallery, remote_image_id)
-      ActiveRecord::Base.transaction do
-        target_gallery.pending_udates += 1
-        target_gallery.save
-      end
+    def fetch_image_by_id(target_gallery_id, remote_image_id)
+      target_gallery = Gallery.find(target_gallery_id)
       ActiveRecord::Base.transaction do
         assure_connection
-        add_gallery_image(remote_image_id)
+        add_gallery_image(target_gallery, remote_image_id)
         target_gallery.updated_at = Time.now
-        target_gallery.pending_udates -= 1
+        target_gallery.pending_updates -= 1
         target_gallery.save
       end
     end
 
-    def fetch_images_by_tag(target_gallery, tag_name)
-      ActiveRecord::Base.transaction do
-        target_gallery.pending_udates += 1
-        target_gallery.save
-      end
+    def fetch_images_by_tag(target_gallery_id, tag_name)
+      target_gallery = Gallery.find(target_gallery_id)
       ActiveRecord::Base.transaction do
         assure_connection
         images_from_remote = flickr.photos.search(:user_id => Flickr::ParameterService.flickr_user, :tags => tag_name)
         if images_from_remote.count > 0
           images_from_remote.each do |image_from_api|
-            add_gallery_image(image_from_api.id, image_from_api.secret)
+            add_gallery_image(target_gallery, image_from_api.id, image_from_api.secret)
           end
         end
         target_gallery.updated_at = Time.now
-        target_gallery.pending_udates -= 1
+        target_gallery.pending_updates -= 1
         target_gallery.save
       end
     end
@@ -45,7 +39,7 @@ module Flickr::APIService
       if image.nil?
         image = Image.new
         image.flickr_image = flickr_image
-        image.title = flickr_image.title
+        image.image_title = flickr_image.image_title
         image.save
       end
       target_gallery.images << image unless target_gallery.images.include?(image)
@@ -85,7 +79,7 @@ module Flickr::APIService
       fields_from_api = %w(label width height source url media)
       flickr_image.image_sizes.destroy_all
       api_sizes.each do |api_size|
-        image_size = ImageSize.new(:image => flickr_image)
+        image_size = ImageSize.new(:linked_image => flickr_image)
         fields_from_api.each do |field_from_api|
           image_size.send("#{field_from_api}=", api_size[field_from_api])
         end

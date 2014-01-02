@@ -10,7 +10,11 @@ module Admin
     def create
       if gallery.update(gallery_params)
         if gallery.flickr_tag.present?
-          Flickr::APIService.fetch_images_by_tag(gallery, gallery.flickr_tag) # TODO use QueueClassic
+          ActiveRecord::Base.transaction do
+            target_gallery.pending_updates += 1
+            target_gallery.save
+          end
+          QC.enqueue('Flickr::APIService.fetch_images_by_tag', gallery.id, gallery.flickr_tag)
         end
         redirect_to :action => :index
       else
