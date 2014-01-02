@@ -13,7 +13,7 @@ gem 'flickraw'
 gem 'tinymce-rails'
 gem 'devise'
 gem 'decent_exposure'
-gem 'best_in_place'
+gem 'best_in_place', :git => 'https://github.com/aaronchi/best_in_place.git'
 
 # delayed jobs
 gem 'queue_classic'
