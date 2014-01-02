@@ -1,6 +1,8 @@
 module Admin
   class GalleriesController < ApplicationController
 
+    before_filter :authenticate_user!
+
     expose(:galleries) { Gallery.sorted }
     expose(:gallery, :attributes => :gallery_params) { Gallery.get_with_id_or_shorthand(params[:gallery_id] || params[:id]) }
     expose(:images) { gallery.gallery_images.sorted.map(&:image) }
@@ -11,12 +13,17 @@ module Admin
 
     def update
       respond_to do |format|
-        if gallery.update_attributes(params[:user])
+        if gallery.update(gallery_params)
           format.json { respond_with_bip(gallery) }
         else
           format.json { respond_with_bip(gallery) }
         end
       end
+    end
+
+    def destroy
+      gallery.destroy
+      redirect_to :action => :index
     end
 
     def reorder
