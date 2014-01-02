@@ -19,6 +19,9 @@ $(document).ready(function(){
         dataType: 'script',
         complete: function(response){
           $('#sortable-table').effect('highlight');
+          if (!(imagesTable.data('callback').toString() == 'undefined')){
+            eval(imagesTable.data('callback').toString());
+          }
         }
       });
     }

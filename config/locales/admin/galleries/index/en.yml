@@ -10,3 +10,5 @@ en:
         edit: Edit
         destroy: Delete
         destroy_confirmation: Are you certain that you want to delete this gallery?
+        show_as_portfolio: Show as Portfolio
+        reload_warning: 'Some of your changes require a <a href="javascript:location.reload();">reload</a> before they are reflected in the menu.'
