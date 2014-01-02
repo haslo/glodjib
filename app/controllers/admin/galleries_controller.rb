@@ -10,7 +10,7 @@ module Admin
     def create
       if gallery.update(gallery_params)
         if gallery.flickr_tag.present?
-          # TODO
+          Flickr::APIService.fetch_images_by_tag(gallery, gallery.flickr_tag) # TODO use QueueClassic
         end
         redirect_to :action => :index
       else
