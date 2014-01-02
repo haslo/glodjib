@@ -7,7 +7,7 @@ class CreateGalleriesFromFlickrCaches < ActiveRecord::Migration
       gallery = Gallery.new
       gallery.shorthand = tag_name
       gallery.title = tag_name.humanize
-      gallery.is_portfolio = Setting.portfolio_tags.include?(tag_name)
+      gallery.is_portfolio = Setting.portfolio_tags.present? && Setting.portfolio_tags.include?(tag_name)
       gallery.save!
       flickr_cache.flickr_tag.flickr_images.map(&:image).uniq.each do |image|
         gallery.images << image
