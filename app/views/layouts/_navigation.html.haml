@@ -15,8 +15,6 @@
     %ul.nav.navbar-nav
       %li{:class => active_class(:home)}
         = link_to(t('.home'), posts_path)
-      %li{:class => active_class('portfolio:portfolio')}
-        = link_to(t('.portfolio'), portfolio_path(:id => 'portfolio'))
       - displayed_portfolios.each do |portfolio|
         %li{:class => active_class("portfolio:#{portfolio.shorthand}")}
           = link_to(portfolio.title, portfolio_path(:id => portfolio.shorthand))
