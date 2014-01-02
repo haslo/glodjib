@@ -1,5 +1,5 @@
 = render 'admin/settings/tabs'
-%table#sortable-table.table.table-striped.table-bordered.table-condensed.sortable{:data => {:update_url => '/admin/galleries/reorder_galleries'}}
+%table#sortable-table.table.table-striped.table-bordered.table-condensed.sortable{:data => {:update_url => '/admin/galleries/reorder_galleries', :callback => "$('#reload-warning').show()"}}
   %tr
     %tr
       %th= t('.title')
@@ -23,3 +23,8 @@
         = link_to [:admin, gallery], :data => {:confirm => t('.destroy_confirmation')}, :method => :delete do
           = fa_icon 'trash-o'
           = t('.destroy')
+
+#reload-warning{:style => 'display:none'}
+  %p= t('.reload_warning').html_safe
+:javascript
+  $('.best_in_place').bind("ajax:success", function(){ $('#reload-warning').show(); });
