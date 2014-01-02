@@ -1,4 +1,4 @@
-%table#gallery-images.table.table-striped.table-bordered.table-condensed.sortable{:data => {:gallery => gallery.id}}
+%table#sortable-table.table.table-striped.table-bordered.table-condensed.sortable{:data => {:update_url => "/admin/galleries/#{gallery.id}/reorder_images"}}
   %tr
     %th= t('.image')
     %th= t('.title')

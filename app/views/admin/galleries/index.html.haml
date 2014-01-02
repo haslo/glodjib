@@ -1,5 +1,5 @@
 = render 'admin/settings/tabs'
-%table.table.table-striped.table-bordered.table-condensed
+%table#sortable-table.table.table-striped.table-bordered.table-condensed.sortable{:data => {:update_url => '/admin/galleries/reorder_galleries'}}
   %tr
     %tr
       %th= t('.title')
@@ -8,7 +8,7 @@
       %th= t('.show_as_portfolio')
       %th= t('.actions')
   - Gallery.sorted.each do |gallery|
-    %tr
+    %tr{:id => gallery.id}
       %td= best_in_place(gallery, :title, :path => [:admin, gallery])
       %td= best_in_place(gallery, :shorthand, :path => [:admin, gallery])
       %td= gallery.images.count
