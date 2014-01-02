@@ -1,10 +1,10 @@
-.management_functionality {
+.management-functionality {
   padding-top: 15px;
 
   a {
     background-color: rgba(200, 200, 200, 0.5);
-    padding: 5px;
-    margin: 2px;
+    padding: 5px 10px;
+    margin: 2px 10px 2px 2px;
 
     font-family: "museo-slab","Helvetica Neue","Helvetica","Arial",sans-serif !important;
     font-size: 15px !important;
@@ -18,5 +18,16 @@
   }
   .image-container {
     text-align: center;
+  }
+}
+
+#reload-warning {
+  background-color: #ffffcc;
+  border: 1px solid #cccccc;
+  padding: 3px 6px;
+  margin-top: 20px;
+
+  p {
+    margin: 0;
   }
 }

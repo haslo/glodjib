@@ -13,16 +13,24 @@
       %td= best_in_place(gallery, :shorthand, :path => [:admin, gallery])
       %td= gallery.images.count
       %td= best_in_place(gallery, :is_portfolio, :type => :checkbox, :path => [:admin, gallery])
-      %td.management_functionality
+      %td.management-functionality
         = link_to portfolio_path(:id => gallery.shorthand) do
           = fa_icon 'eye'
           = t('.view')
         = link_to [:edit, :admin, gallery] do
           = fa_icon 'sort-amount-desc'
           = t('.edit')
+        = link_to [:admin, gallery, :add_images] do
+          = fa_icon 'picture-o'
+          = t('.add_images')
         = link_to [:admin, gallery], :data => {:confirm => t('.destroy_confirmation')}, :method => :delete do
           = fa_icon 'trash-o'
           = t('.destroy')
+
+.management-functionality
+  = link_to new_admin_gallery_path do
+    = fa_icon 'magic'
+    = t('.new_gallery')
 
 #reload-warning{:style => 'display:none'}
   %p= t('.reload_warning').html_safe

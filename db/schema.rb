@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140101141806) do
+ActiveRecord::Schema.define(version: 20140102195728) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140101141806) do
     t.integer  "position"
     t.string   "special_usage"
     t.integer  "pending_updates",  default: 0,     null: false
+    t.string   "flickr_tag"
   end
 
   create_table "galleries_images", force: true do |t|

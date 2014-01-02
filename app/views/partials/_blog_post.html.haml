@@ -44,7 +44,7 @@
                 = link_to(post_comment.name, post_comment.url, :rel => 'nofollow')
             = post_comment.comment
           - if user_signed_in?
-            .management_functionality
+            .management-functionality
               %p
                 = link_to [post_comment, :spam], :data => {:confirm => t('.spam_post_comment')}, :method => :delete do
                   = fa_icon 'exclamation-triangle'

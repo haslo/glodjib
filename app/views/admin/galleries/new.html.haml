@@ -1,0 +1,9 @@
+= simple_form_for(gallery, :url => [:admin, gallery]) do |f|
+  .form-inputs
+    = f.error_notification
+    = display_base_errors gallery
+    = f.input :title, :input_html => { :class => 'input-block-level' }
+    = f.input :flickr_tag, :input_html => { :class => 'input-block-level' }
+    = f.input :is_portfolio, :input_html => { :class => 'input-block-level' }
+  .form-actions
+    = f.button :submit, t('.create')

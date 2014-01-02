@@ -4,8 +4,19 @@ module Admin
     before_filter :authenticate_user!
 
     expose(:galleries) { Gallery.sorted }
-    expose(:gallery, :attributes => :gallery_params) { Gallery.get_with_id_or_shorthand(params[:gallery_id] || params[:id]) }
+    expose(:gallery, :attributes => :gallery_params) { Gallery.get_with_id_or_shorthand(params[:gallery_id] || params[:id]) || Gallery.new }
     expose(:images) { gallery.gallery_images.sorted.map(&:image) }
+
+    def create
+      if gallery.update(gallery_params)
+        if gallery.flickr_tag.present?
+          # TODO
+        end
+        redirect_to :action => :index
+      else
+        render :new
+      end
+    end
 
     def edit
       @title_parameter = gallery.title
@@ -24,6 +35,12 @@ module Admin
     def destroy
       gallery.destroy
       redirect_to :action => :index
+    end
+
+    def add_images
+      if request.post?
+        # TODO
+      end
     end
 
     def reorder_galleries
@@ -55,7 +72,7 @@ module Admin
 
 
     def gallery_params
-      params.require(:gallery).permit(:title, :shorthand, :is_portfolio)
+      params.require(:gallery).permit(:title, :shorthand, :is_portfolio, :flickr_tag)
     end
     private :gallery_params
 
