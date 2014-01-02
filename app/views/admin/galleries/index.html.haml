@@ -8,8 +8,8 @@
       %th= t('.actions')
   - Gallery.sorted.each do |gallery|
     %tr
-      %td= gallery.title
-      %td= gallery.shorthand
+      %td= best_in_place(gallery, :title, :path => [:admin, gallery])
+      %td= best_in_place(gallery, :shorthand, :path => [:admin, gallery])
       %td= gallery.images.count
       %td.management_functionality
         = link_to portfolio_path(:id => gallery.shorthand) do
