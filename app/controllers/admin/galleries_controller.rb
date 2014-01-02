@@ -26,18 +26,25 @@ module Admin
       redirect_to :action => :index
     end
 
-    def reorder
+    def reorder_galleries
       params['positions'].each do |id, position|
-        puts "at position #{position}"
-        Image.where(:id => id).each do |image|
-          puts "image #{image} with id #{id}"
+        Gallery.find(id).tap do |gallery|
+          gallery.position = position
+          gallery.save!
+        end
+      end
+      render :nothing => true
+    end
+
+    def reorder_images
+      params['positions'].each do |id, position|
+        Image.find(id).tap do |image|
           image.gallery_images.where(:gallery_id => gallery.id).each do |gallery_image|
             gallery_image.position = position
             gallery_image.save!
           end
         end
       end
-      # TODO add return value in JSON
       render :nothing => true
     end
 

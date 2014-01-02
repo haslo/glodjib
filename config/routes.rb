@@ -26,7 +26,8 @@ Glodjib::Application.routes.draw do
   namespace :admin do
     resources :galleries, :except => [:view] do
       post :import, :path => 'import/:source'
-      patch :reorder
+      patch :reorder_galleries, :on => :collection
+      patch :reorder_images
       get :is_updated
     end
     resources :settings, :only => [:index, :update]

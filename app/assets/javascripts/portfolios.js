@@ -1,24 +1,24 @@
 $(document).ready(function(){
-  $('#gallery-images').sortable({
+  $('#sortable-table').sortable({
     axis: 'y',
     cursor: 'crosshair',
     items: 'tr',
     opacity: 0.4,
     scroll: true,
     update: function(){
-      var imagesTable = $('#gallery-images');
+      var imagesTable = $('#sortable-table');
       var data = {};
       imagesTable.find('tr').each(function(index){
         var id = $(this).attr('id');
         data[id] = index;
       });
       $.ajax({
-        url: '/admin/galleries/' + imagesTable.data('gallery') + '/reorder',
+        url: imagesTable.data('updateUrl'),
         type: 'patch',
         data: {positions: data},
         dataType: 'script',
         complete: function(response){
-          $('#gallery-images').effect('highlight');
+          $('#sortable-table').effect('highlight');
         }
       });
     }
