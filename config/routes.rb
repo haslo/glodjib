@@ -31,6 +31,7 @@ Glodjib::Application.routes.draw do
       get :add_images
       post :add_images
       get :is_updated
+      delete :clear
     end
     resources :settings, :only => [:index, :update]
   end

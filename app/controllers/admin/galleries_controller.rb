@@ -36,6 +36,11 @@ module Admin
       end
     end
 
+    def clear
+      gallery.images.clear
+      redirect_to :action => :index
+    end
+
     def destroy
       gallery.destroy
       redirect_to :action => :index
@@ -80,9 +85,12 @@ module Admin
     end
 
     def is_updated
-      render :json => (gallery.pending_updates <= 0)
+      if gallery.pending_updates <= 0
+        render :json => {:is_updated => true, :number_of_images => gallery.images.count, :current_timestamp => I18n.l(gallery.updated_at, :format => :long)}
+      else
+        render :json => {:is_updated => false}
+      end
     end
-
 
     def gallery_params
       params.require(:gallery).permit(:title, :shorthand, :is_portfolio, :flickr_tag)
