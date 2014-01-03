@@ -34,3 +34,4 @@ en:
         new: 'New Gallery'
         create: 'New Gallery'
         edit: 'Edit Gallery: %{title_parameter}'
+        add_images: Add Images from Flickr

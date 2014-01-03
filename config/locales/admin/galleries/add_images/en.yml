@@ -1,0 +1,6 @@
+en:
+  admin:
+    galleries:
+      add_images:
+        flickr_id: Flickr Image ID (from URL)
+        flickr_tag: Flickr Tag

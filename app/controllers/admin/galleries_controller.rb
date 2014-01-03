@@ -42,8 +42,18 @@ module Admin
     end
 
     def add_images
-      if request.post?
-        # TODO
+      if request.post? && params[:flickr_tag].present? || params[:flickr_id].present?
+        ActiveRecord::Base.transaction do
+          gallery.pending_updates += 1
+          gallery.save
+        end
+        if params[:flickr_tag].present?
+          QC.enqueue('Flickr::APIService.fetch_images_by_tag', gallery.id, params[:flickr_tag])
+        end
+        if params[:flickr_id].present?
+          QC.enqueue('Flickr::APIService.fetch_image_by_id', gallery.id, params[:flickr_id])
+        end
+        redirect_to :action => :index
       end
     end
 
@@ -70,7 +80,6 @@ module Admin
     end
 
     def is_updated
-      # TODO add context for JSON
       render :json => (gallery.pending_updates <= 0)
     end
 

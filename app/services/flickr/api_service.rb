@@ -3,28 +3,37 @@ module Flickr::APIService
 
     def fetch_image_by_id(target_gallery_id, remote_image_id)
       target_gallery = Gallery.find(target_gallery_id)
-      ActiveRecord::Base.transaction do
-        assure_connection
-        add_gallery_image(target_gallery, remote_image_id)
-        target_gallery.updated_at = Time.now
-        target_gallery.pending_updates -= 1
-        target_gallery.save
-      end
-    end
-
-    def fetch_images_by_tag(target_gallery_id, tag_name)
-      target_gallery = Gallery.find(target_gallery_id)
-      ActiveRecord::Base.transaction do
-        assure_connection
+      fetch_images_with_block(target_gallery) do
         images_from_remote = flickr.photos.search(:user_id => Flickr::ParameterService.flickr_user, :tags => tag_name)
         if images_from_remote.count > 0
           images_from_remote.each do |image_from_api|
             add_gallery_image(target_gallery, image_from_api.id, image_from_api.secret)
           end
         end
-        target_gallery.updated_at = Time.now
-        target_gallery.pending_updates -= 1
-        target_gallery.save
+      end
+    end
+
+    def fetch_images_by_tag(target_gallery_id, tag_name)
+      target_gallery = Gallery.find(target_gallery_id)
+      fetch_images_with_block(target_gallery) do
+        add_gallery_image(target_gallery, remote_image_id)
+      end
+    end
+
+    def fetch_images_with_block(target_gallery, &block)
+      begin
+        ActiveRecord::Base.transaction do
+          assure_connection
+          yield
+          target_gallery.updated_at = Time.now
+          target_gallery.pending_updates = [target_gallery.pending_updates - 1, 0].max
+          target_gallery.save
+        end
+      rescue
+        ActiveRecord::Base.transaction do
+          target_gallery.pending_updates = [target_gallery.pending_updates - 1, 0].max
+          target_gallery.save
+        end
       end
     end
 
