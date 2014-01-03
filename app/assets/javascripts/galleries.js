@@ -30,24 +30,29 @@ $(document).ready(function(){
 
 $(document).ready(function(){
   $('.loading-spinner').each(function(){
-    var cacheTag = $(this).data('cache');
-    var triggerTimeout = function(cacheId){
+    var galleryId = $(this).data('gallery');
+    var triggerTimeout = function(galleryId){
       $.ajax({
-        url: '/admin/galleries/' + cacheTag + '/is_updated',
+        url: '/admin/galleries/' + galleryId + '/is_updated',
         type: 'get',
         dataType: 'script',
         complete: function(response){
-          if (response.responseText == 'true'){
-            $('#spinner-' + cacheTag).hide();
-            $('#success-' + cacheTag).show();
+          var responseData = JSON.parse(response.responseText);
+          console.log(responseData);
+          if (responseData.is_updated){
+            $('#spinner-' + galleryId).hide();
+            $('#success-' + galleryId).show();
+            $('#image-count-' + galleryId).html(responseData.number_of_images);
+            $('#updated-at-' + galleryId).html(responseData.current_timestamp);
+            $('#' + galleryId + ' td').effect('highlight');
           }
           else{
-            setTimeout(function(){triggerTimeout(cacheTag);}, 2000);
+            setTimeout(function(){triggerTimeout(galleryId);}, 500);
           }
         }
       });
     };
-    triggerTimeout(cacheTag);
+    triggerTimeout(galleryId);
   });
 });
 

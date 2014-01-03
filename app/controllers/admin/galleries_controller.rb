@@ -4,8 +4,23 @@ module Admin
     before_filter :authenticate_user!
 
     expose(:galleries) { Gallery.sorted }
-    expose(:gallery, :attributes => :gallery_params) { Gallery.get_with_id_or_shorthand(params[:gallery_id] || params[:id]) }
+    expose(:gallery, :attributes => :gallery_params) { Gallery.get_with_id_or_shorthand(params[:gallery_id] || params[:id]) || Gallery.new }
     expose(:images) { gallery.gallery_images.sorted.map(&:image) }
+
+    def create
+      if gallery.update(gallery_params)
+        if gallery.flickr_tag.present?
+          ActiveRecord::Base.transaction do
+            target_gallery.pending_updates += 1
+            target_gallery.save
+          end
+          QC.enqueue('Flickr::APIService.fetch_images_by_tag', gallery.id, gallery.flickr_tag)
+        end
+        redirect_to :action => :index
+      else
+        render :new
+      end
+    end
 
     def edit
       @title_parameter = gallery.title
@@ -21,9 +36,30 @@ module Admin
       end
     end
 
+    def clear
+      gallery.images.clear
+      redirect_to :action => :index
+    end
+
     def destroy
       gallery.destroy
       redirect_to :action => :index
+    end
+
+    def add_images
+      if request.post? && params[:flickr_tag].present? || params[:flickr_id].present?
+        ActiveRecord::Base.transaction do
+          gallery.pending_updates += 1
+          gallery.save
+        end
+        if params[:flickr_tag].present?
+          QC.enqueue('Flickr::APIService.fetch_images_by_tag', gallery.id, params[:flickr_tag])
+        end
+        if params[:flickr_id].present?
+          QC.enqueue('Flickr::APIService.fetch_image_by_id', gallery.id, params[:flickr_id])
+        end
+        redirect_to :action => :index
+      end
     end
 
     def reorder_galleries
@@ -49,13 +85,15 @@ module Admin
     end
 
     def is_updated
-      # TODO add context for JSON
-      render :json => (gallery.pending_updates <= 0)
+      if gallery.pending_updates <= 0
+        render :json => {:is_updated => true, :number_of_images => gallery.images.count, :current_timestamp => I18n.l(gallery.updated_at, :format => :long)}
+      else
+        render :json => {:is_updated => false}
+      end
     end
 
-
     def gallery_params
-      params.require(:gallery).permit(:title, :shorthand, :is_portfolio)
+      params.require(:gallery).permit(:title, :shorthand, :is_portfolio, :flickr_tag)
     end
     private :gallery_params
 

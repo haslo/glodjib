@@ -2,27 +2,43 @@
 %table#sortable-table.table.table-striped.table-bordered.table-condensed.sortable{:data => {:update_url => '/admin/galleries/reorder_galleries', :callback => "$('#reload-warning').show()"}}
   %tr
     %tr
+      %th= t('.status')
       %th= t('.title')
       %th= t('.shorthand')
       %th= t('.number_of_images')
       %th= t('.show_as_portfolio')
+      %th= t('.updated_at')
       %th= t('.actions')
   - Gallery.sorted.each do |gallery|
     %tr{:id => gallery.id}
+      %td
+        - if gallery.pending_updates > 0
+          %span.loading-spinner{:id => "spinner-#{gallery.id}", :data => {:gallery => gallery.id}}
+            %i{:class => 'fa fa-spinner fa-spin'}
+          %span{:id => "success-#{gallery.id}", :style => 'display:none'}
+            = fa_icon 'check'
+        - else
+          = fa_icon 'check'
       %td= best_in_place(gallery, :title, :path => [:admin, gallery])
       %td= best_in_place(gallery, :shorthand, :path => [:admin, gallery])
-      %td= gallery.images.count
+      %td
+        %div{:id => "image-count-#{gallery.id}"}
+          = gallery.images.count
       %td= best_in_place(gallery, :is_portfolio, :type => :checkbox, :path => [:admin, gallery])
-      %td.management_functionality
-        = link_to portfolio_path(:id => gallery.shorthand) do
-          = fa_icon 'eye'
-          = t('.view')
-        = link_to [:edit, :admin, gallery] do
-          = fa_icon 'sort-amount-desc'
-          = t('.edit')
-        = link_to [:admin, gallery], :data => {:confirm => t('.destroy_confirmation')}, :method => :delete do
-          = fa_icon 'trash-o'
-          = t('.destroy')
+      %td
+        %div{:id => "updated-at-#{gallery.id}"}
+          = l(gallery.updated_at, :format => :long)
+      %td.management-functionality
+        = link_to fa_icon('eye'), portfolio_path(:id => gallery.shorthand)
+        = link_to fa_icon('sort-amount-desc'), [:edit, :admin, gallery]
+        = link_to fa_icon('flickr'), [:admin, gallery, :add_images]
+        = link_to fa_icon('file-o'), [:admin, gallery, :clear], :data => {:confirm => t('.clear_confirmation')}, :method => :delete
+        = link_to fa_icon('trash-o'), [:admin, gallery], :data => {:confirm => t('.destroy_confirmation')}, :method => :delete
+
+.management-functionality
+  = link_to new_admin_gallery_path do
+    = fa_icon 'magic'
+    = t('.new_gallery')
 
 #reload-warning{:style => 'display:none'}
   %p= t('.reload_warning').html_safe

@@ -28,7 +28,10 @@ Glodjib::Application.routes.draw do
       post :import, :path => 'import/:source'
       patch :reorder_galleries, :on => :collection
       patch :reorder_images
+      get :add_images
+      post :add_images
       get :is_updated
+      delete :clear
     end
     resources :settings, :only => [:index, :update]
   end

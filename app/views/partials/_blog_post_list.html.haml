@@ -22,7 +22,7 @@
       - else
         = link_to(t('.comment'), post_path(:id => post.shorthand, :anchor => 'comments'))
   - if user_signed_in?
-    .management_functionality
+    .management-functionality
       %p
         = link_to [:edit, post] do
           = fa_icon 'pencil'
@@ -34,7 +34,7 @@
 = will_paginate posts, :renderer => BootstrapPagination::Rails
 
 - if user_signed_in?
-  .management_functionality
+  .management-functionality
     %p
       = link_to new_post_path do
         = fa_icon 'magic'

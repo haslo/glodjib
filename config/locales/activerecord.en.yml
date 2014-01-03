@@ -28,3 +28,8 @@ en:
         email: Email
         url: URL
         comment: Comment
+      gallery:
+        title: Title
+        shorthand: Shorthand
+        is_portfolio: Display as Portfolio
+        flickr_tag: Flickr Tag (for Import)

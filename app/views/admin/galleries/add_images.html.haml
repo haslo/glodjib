@@ -1,0 +1,7 @@
+= form_tag do
+  = text_field_tag :flickr_tag, gallery.flickr_tag, :class => 'input-block-level'
+  = button_tag t('.flickr_tag')
+
+= form_tag do
+  = text_field_tag :flickr_id, nil, :class => 'input-block-level'
+  = button_tag t('.flickr_id')
