@@ -10,8 +10,6 @@ class PortfoliosController < ApplicationController
   expose(:all_caches) { FlickrCache.all.uniq.sort{|a,b| a.flickr_tag.tag_name <=> b.flickr_tag.tag_name} }
   expose(:caches_to_refresh) { params[:updated_caches].present? ? params[:updated_caches].split(',').map{|cache_id|FlickrCache.find(cache_id)} : [] }
 
-  before_filter :cleanup_caches
-
   def index
     redirect_to settings_path if all_caches.empty?
   end
@@ -47,10 +45,5 @@ class PortfoliosController < ApplicationController
       redirect_to images_settings_path
     end
   end
-
-  def cleanup_caches
-    Flickr::CacheService.cleanup_caches
-  end
-  private :cleanup_caches
 
 end
