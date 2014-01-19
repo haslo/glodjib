@@ -34,6 +34,7 @@ The application uses state-of-the-art frameworks and technology. Among them:
 * [SpinKit](https://github.com/tobiasahlin/SpinKit)
 * [BestInPlace](http://bernatfarrero.com/in-place-editing-with-javascript-jquery-and-rails-3/)
 * [DropzoneJS](https://github.com/ncuesta/dropzonejs-rails)
+* [Paperclip](https://github.com/thoughtbot/paperclip)
 
 It seamlessly integrates with Flickr through the [Flickr API](http://www.flickr.com/services/api/).
 

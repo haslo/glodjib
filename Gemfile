@@ -14,7 +14,7 @@ gem 'tinymce-rails'
 gem 'devise'
 gem 'decent_exposure'
 gem 'best_in_place', :git => 'https://github.com/aaronchi/best_in_place.git'
-gem 'paperclip'
+gem 'paperclip', '~> 3.0'
 gem 'dropzonejs-rails'
 
 # delayed jobs

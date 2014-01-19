@@ -40,3 +40,5 @@ Glodjib::Application.config.middleware.use ExceptionNotification::Rack,
     :exception_recipients => %w{haslo@haslo.ch},
     :normalize_subject => true
   }
+
+Paperclip.options[:command_path] = "/usr/local/bin/"

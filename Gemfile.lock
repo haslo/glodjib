@@ -275,7 +275,7 @@ DEPENDENCIES
   launchy
   mini_magick
   nokogiri
-  paperclip
+  paperclip (~> 3.0)
   pg (~> 0.17.0)
   poltergeist
   queue_classic
