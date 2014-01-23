@@ -34,6 +34,7 @@ Glodjib::Application.routes.draw do
       delete :clear
     end
     resources :settings, :only => [:index, :update]
+    resources :images, :only => [:index, :create, :update, :destroy]
   end
 
 end

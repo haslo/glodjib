@@ -7,6 +7,8 @@ class Image < ActiveRecord::Base
   belongs_to :flickr_image
   has_many :image_sizes, :as => :linked_image
 
+  has_attached_file :image_file, :styles => Hash[ImageSize::FLICKR_SIZES.map{|size| [size[:name], "#{size[:max_size]}x#{size[:max_size]}>"]}]
+
   def size_for(label)
     if flickr_image.present? && flickr_image.size_for(label).present?
       flickr_image.size_for(label)
